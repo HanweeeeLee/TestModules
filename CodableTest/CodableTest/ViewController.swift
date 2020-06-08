@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let encoder = JSONEncoder()
@@ -19,9 +19,18 @@ class ViewController: UIViewController {
         let jsonData = try? encoder.encode(hanwe)
         if let jsonData = jsonData, let jsonString = String(data:jsonData, encoding: .utf8) {
             print(jsonString)
+            /* 이상 인코딩*/
+            let decoder = JSONDecoder()
+            let data = jsonString.data(using: .utf8)
+            
+            if let data = data, let myPerson = try? decoder.decode(Person.self, from: data) {
+                print(myPerson.name)
+                print(myPerson.age)
+            }
+            
         }
     }
-
-
+    
+    
 }
 
