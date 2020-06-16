@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wqd-g4-Z6c">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="3nR-rI-0we"/>
+                                    <constraint firstAttribute="width" constant="240" id="x89-TT-ikJ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVB-Wc-jB1">
+                                <rect key="frame" x="0.0" y="522" width="414" height="30"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="getCatImgAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tf2-8f-Vaw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wqd-g4-Z6c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5fc-wP-XGN"/>
+                            <constraint firstItem="wqd-g4-Z6c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BLL-5e-Kke"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OVB-Wc-jB1" secondAttribute="trailing" id="ESh-Vs-pXB"/>
+                            <constraint firstItem="OVB-Wc-jB1" firstAttribute="top" secondItem="wqd-g4-Z6c" secondAttribute="bottom" constant="10" id="MLY-uZ-xRj"/>
+                            <constraint firstItem="OVB-Wc-jB1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lQi-T2-7Vt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="wqd-g4-Z6c" id="vJW-EA-kIz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="127"/>
+        </scene>
+    </scenes>
+</document>
