@@ -1,0 +1,11 @@
+framework module SwiftFrameworkObjCAppRunTest {
+  umbrella header "SwiftFrameworkObjCAppRunTest.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftFrameworkObjCAppRunTest.Swift {
+    header "SwiftFrameworkObjCAppRunTest-Swift.h"
+    requires objc
+}
