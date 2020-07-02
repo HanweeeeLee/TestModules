@@ -6,7 +6,7 @@
 //  Copyright © 2020 hanwe. All rights reserved.
 //
 
-import LibraryInFrameworkTest
+import OpenSSL
 
 public class MyFramework {
     public func test() {
