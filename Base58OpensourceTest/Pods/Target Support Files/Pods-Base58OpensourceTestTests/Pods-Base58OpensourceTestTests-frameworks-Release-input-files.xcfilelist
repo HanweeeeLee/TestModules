@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-Base58OpensourceTestTests/Pods-Base58OpensourceTestTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Base58Swift/Base58Swift.framework
+${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework

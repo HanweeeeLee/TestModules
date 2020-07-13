@@ -1,0 +1,6 @@
+framework module Pods_Base58OpensourceTest_Base58OpensourceTestUITests {
+  umbrella header "Pods-Base58OpensourceTest-Base58OpensourceTestUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

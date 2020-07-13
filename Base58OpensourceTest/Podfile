@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Base58OpensourceTest' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Base58OpensourceTest
+
+  target 'Base58OpensourceTestTests' do
+    inherit! :search_paths
+    # Pods for testing
+pod "Base58Swift"
+  end
+
+  target 'Base58OpensourceTestUITests' do
+    # Pods for testing
+  end
+
+end

@@ -1,0 +1,20 @@
+PODS:
+  - Base58Swift (2.1.10):
+    - BigInt (~> 5.0.0)
+  - BigInt (5.0.0)
+
+DEPENDENCIES:
+  - Base58Swift
+
+SPEC REPOS:
+  trunk:
+    - Base58Swift
+    - BigInt
+
+SPEC CHECKSUMS:
+  Base58Swift: 53d551f0b33d9478fa63b3445e453a772d6b31a7
+  BigInt: 74b4d88367b0e819d9f77393549226d36faeb0d8
+
+PODFILE CHECKSUM: 956ab66bc26a731635b8db6c7a764d91bb286fac
+
+COCOAPODS: 1.9.1
