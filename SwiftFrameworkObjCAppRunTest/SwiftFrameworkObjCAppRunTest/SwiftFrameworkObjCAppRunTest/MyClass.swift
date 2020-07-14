@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum RegistrationError: Error {
+    case test
+}
+
 public class MyClass: NSObject {
     @objc(test)
     public func test() {
@@ -32,5 +36,16 @@ public class MyClass: NSObject {
             newA.append(newB[i])
         }
         print("mergeArr :\(newA)")
+    }
+    
+    @objc(clousureTestIsSuccess:completeHandler:failrueHanlder:)
+    public func clousureTest(isSuceess:Bool,completeHandler:@escaping () -> (), failureHandler:@escaping (Error) -> ()) {
+        
+        if isSuceess {
+            completeHandler()
+        }
+        else {
+            failureHandler(RegistrationError.test)
+        }
     }
 }

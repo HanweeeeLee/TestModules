@@ -27,6 +27,11 @@
     NSArray *arr1 = [[NSArray alloc] initWithObjects:@"1",@"2", nil];
     NSArray *arr2 = [[NSArray alloc] initWithObjects:@"3",@"4", nil];
     [obj mergeArrayA:arr1 B:arr2];
+    [obj clousureTestIsSuccess:NO completeHandler:^{
+        NSLog(@"성공");
+    } failrueHanlder:^(NSError * err) {
+        NSLog(@"실패:%ld",(long)err.code);
+    }];
     
 }
 

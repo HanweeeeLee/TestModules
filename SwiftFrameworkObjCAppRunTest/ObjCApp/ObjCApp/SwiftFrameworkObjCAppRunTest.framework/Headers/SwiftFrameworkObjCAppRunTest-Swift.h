@@ -211,6 +211,7 @@ SWIFT_CLASS("_TtC28SwiftFrameworkObjCAppRunTest7MyClass")
 - (void)addA:(NSInteger)A B:(NSInteger)B;
 - (void)addStringA:(NSString * _Nonnull)A B:(NSString * _Nonnull)B;
 - (void)mergeArrayA:(NSArray<NSString *> * _Nonnull)A B:(NSArray<NSString *> * _Nonnull)B;
+- (void)clousureTestIsSuccess:(BOOL)isSuceess completeHandler:(void (^ _Nonnull)(void))completeHandler failrueHanlder:(void (^ _Nonnull)(NSError * _Nonnull))failureHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
