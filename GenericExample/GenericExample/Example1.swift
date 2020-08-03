@@ -42,4 +42,6 @@ class Example1: NSObject {
         return nil
     }
     
+    func testFunc() {
+    }
 }
