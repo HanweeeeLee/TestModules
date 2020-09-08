@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-SwipeTransitionTest/Pods-SwipeTransitionTest-frameworks.sh
+${BUILT_PRODUCTS_DIR}/SwipeTransition/SwipeTransition.framework
+${BUILT_PRODUCTS_DIR}/SwipeTransitionAutoSwipeBack/SwipeTransitionAutoSwipeBack.framework

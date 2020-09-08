@@ -1,0 +1,21 @@
+PODS:
+  - SwipeTransition (0.4.2)
+  - SwipeTransitionAutoSwipeBack (0.4.2):
+    - SwipeTransition (~> 0.4.2)
+
+DEPENDENCIES:
+  - SwipeTransition
+  - SwipeTransitionAutoSwipeBack
+
+SPEC REPOS:
+  trunk:
+    - SwipeTransition
+    - SwipeTransitionAutoSwipeBack
+
+SPEC CHECKSUMS:
+  SwipeTransition: 03f6f995646bdff37946af75c442692b011cb348
+  SwipeTransitionAutoSwipeBack: 64605a9e0d9bef917ba23f26f23bbe3ce8af4158
+
+PODFILE CHECKSUM: e30f1f2f003477a4b0785daafb004c67436bcf98
+
+COCOAPODS: 1.9.1
