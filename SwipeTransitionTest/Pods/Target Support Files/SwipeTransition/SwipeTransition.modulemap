@@ -1,0 +1,6 @@
+framework module SwipeTransition {
+  umbrella header "SwipeTransition-umbrella.h"
+
+  export *
+  module * { export * }
+}
