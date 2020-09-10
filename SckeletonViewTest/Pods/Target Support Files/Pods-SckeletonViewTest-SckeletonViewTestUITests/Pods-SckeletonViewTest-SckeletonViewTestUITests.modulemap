@@ -1,0 +1,6 @@
+framework module Pods_SckeletonViewTest_SckeletonViewTestUITests {
+  umbrella header "Pods-SckeletonViewTest-SckeletonViewTestUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

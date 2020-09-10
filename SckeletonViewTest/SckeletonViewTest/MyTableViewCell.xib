@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyTableViewCell" rowHeight="156" id="KGk-i7-Jjw" customClass="MyTableViewCell" customModule="SckeletonViewTest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="407" height="156"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="407" height="156"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJw-Sz-AXe">
+                        <rect key="frame" x="10" y="63" width="30" height="30"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat" translatesAutoresizingMaskIntoConstraints="NO" id="o2b-Q4-z8c">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="o2b-Q4-z8c" firstAttribute="leading" secondItem="MJw-Sz-AXe" secondAttribute="leading" id="05Y-Cd-uXm"/>
+                            <constraint firstAttribute="width" constant="30" id="CuW-5V-erE"/>
+                            <constraint firstAttribute="bottom" secondItem="o2b-Q4-z8c" secondAttribute="bottom" id="Rda-YA-tCY"/>
+                            <constraint firstAttribute="trailing" secondItem="o2b-Q4-z8c" secondAttribute="trailing" id="Tf0-GO-eD3"/>
+                            <constraint firstAttribute="height" constant="30" id="Ys0-zL-mpa"/>
+                            <constraint firstItem="o2b-Q4-z8c" firstAttribute="top" secondItem="MJw-Sz-AXe" secondAttribute="top" id="eMf-fr-RZm"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqU-uj-bAq">
+                        <rect key="frame" x="50" y="67.5" width="327" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="aqU-uj-bAq" secondAttribute="trailing" constant="10" id="ELP-1P-mvj"/>
+                    <constraint firstItem="MJw-Sz-AXe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dH7-dP-NI2"/>
+                    <constraint firstItem="aqU-uj-bAq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dIO-Bg-ENu"/>
+                    <constraint firstItem="aqU-uj-bAq" firstAttribute="leading" secondItem="MJw-Sz-AXe" secondAttribute="trailing" constant="10" id="jLG-RB-T0a"/>
+                    <constraint firstItem="MJw-Sz-AXe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="q2x-c3-O7U"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="contentsView" destination="H2p-sc-9uM" id="to7-Pe-lOz"/>
+                <outlet property="imgView" destination="o2b-Q4-z8c" id="12B-he-uLz"/>
+                <outlet property="label" destination="aqU-uj-bAq" id="Ife-cv-Ps0"/>
+            </connections>
+            <point key="canvasLocation" x="200.72463768115944" y="190.17857142857142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="cat" width="726" height="409"/>
+    </resources>
+</document>
