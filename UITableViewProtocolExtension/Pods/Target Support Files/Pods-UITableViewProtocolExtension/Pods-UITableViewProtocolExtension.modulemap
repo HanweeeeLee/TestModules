@@ -1,0 +1,6 @@
+framework module Pods_UITableViewProtocolExtension {
+  umbrella header "Pods-UITableViewProtocolExtension-umbrella.h"
+
+  export *
+  module * { export * }
+}
