@@ -1,0 +1,6 @@
+framework module Pods_reactorkitExample {
+  umbrella header "Pods-reactorkitExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
