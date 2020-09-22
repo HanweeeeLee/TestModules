@@ -27,6 +27,7 @@ class ViewController: UIViewController,StoryboardView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reactor = self.viewModel
+        self.myTextView.delegate = self
     }
     
     func bind(reactor: ViewModel) {
@@ -50,5 +51,16 @@ class ViewController: UIViewController,StoryboardView {
     @IBAction func testAction(_ sender: Any) {
     }
 
+}
+
+extension ViewController : UITextViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > self.myTextView.frame.maxY + 30 { //대충 맞춤
+            print("call")
+            self.reactor?.mutate(action: .startTestquery).subscribe(onNext:{
+                print("test\($0)")
+            })
+        }
+    }
 }
 
