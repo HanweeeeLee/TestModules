@@ -1,0 +1,6 @@
+framework module Pods_ReactorKitRestfulExample {
+  umbrella header "Pods-ReactorKitRestfulExample-umbrella.h"
+
+  export *
+  module * { export * }
+}

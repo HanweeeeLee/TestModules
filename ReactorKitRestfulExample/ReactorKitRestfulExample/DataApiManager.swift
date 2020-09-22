@@ -45,7 +45,7 @@ class DataApiManager: NSObject {
         }
         let dataRequest:DataRequest = AF.request(strURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: httpHeaders).validate().responseJSON { (responseObject) -> Void in
             //print(responseObject)
-            usleep(3 * 1000 * 1000) //테스트를 위한 타이머
+            usleep(5 * 100 * 1000) //테스트를 위한 타이머
             switch responseObject.result {
             case .success(let value):
                 //                print("value :\(value)")

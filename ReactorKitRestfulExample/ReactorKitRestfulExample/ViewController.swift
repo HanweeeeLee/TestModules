@@ -31,6 +31,17 @@ class ViewController: UIViewController,StoryboardView {
     
     func bind(reactor: ViewModel) {
         reactor.action.onNext(.startTestquery)
+        
+        reactor.state.map{
+            $0.infoData
+        }.distinctUntilChanged() // 이거 호출해도 상관없는지는 모르겠음....
+        .subscribe(onNext: { value in
+            self.myTextView.text = value
+        }).disposed(by: disposeBag)
+        
+        self.testBtn.rx.tap.map{
+            Reactor.Action.startTestquery
+        }.bind(to: reactor.action).disposed(by: disposeBag)
     }
     
     //MARK: func
@@ -38,9 +49,6 @@ class ViewController: UIViewController,StoryboardView {
     //MARK: action
     @IBAction func testAction(_ sender: Any) {
     }
-    
-   
-
 
 }
 

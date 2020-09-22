@@ -31,20 +31,21 @@ class ViewModel: Reactor {
     
     struct State {
         var isLoading:Bool = false
+        var infoData:String = ""
     }
     
     let initialState: State = State()
     
     
-    func mutate(action: Action) -> Observable<Mutation> { //뭔가 로직은 이쪽에서 처리하는게 맞는듯
+    func mutate(action: Action) -> Observable<Mutation> { 
         switch action {
         case .startTestquery:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
                 self.query().map {
                     Mutation.query($0)
-                }, // 쿼리를 어떻게 호출해줘야할까..
-                Observable.just(Mutation.setLoading(false)) // 쿼리가 다 끝난다음 호출을 해주고싶음
+                },
+                Observable.just(Mutation.setLoading(false))
             ])
         }
     }
@@ -60,8 +61,9 @@ class ViewModel: Reactor {
                 print("로딩 끝")
             }
             newState.isLoading = isLoading
-        case .query:
-            print("?")
+        case let .query(json):
+//            print("test:\(json)")
+            newState.infoData = json.rawString()!
             break
         }
         return newState
@@ -69,12 +71,8 @@ class ViewModel: Reactor {
     
     //MARK: func
     func query() -> Observable<JSON> {
-        
-        print("qiodhqodjoiq")
         return DataApiManager.requestGETURLRx(testUrl, headers: nil)
-            .map{ json in json
-                
-            }.observeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
     }
     
     func display(text:String) {
