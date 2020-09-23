@@ -57,9 +57,7 @@ extension ViewController : UITextViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > self.myTextView.frame.maxY + 30 { //대충 맞춤
             print("call")
-            self.reactor?.mutate(action: .startTestquery).subscribe(onNext:{
-                print("test\($0)")
-            })
+            self.reactor?.action.onNext(.startTestquery)
         }
     }
 }
