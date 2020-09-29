@@ -44,20 +44,23 @@ class HWTableView: UIView {
     
     //MARK: public property
     
-    weak var delegate:HWTableViewDelegate?
-    weak var dataSource:HWTableViewDatasource?
+    public weak var delegate:HWTableViewDelegate?
+    public weak var dataSource:HWTableViewDatasource?
     
     public lazy var tableView:UITableView = UITableView(frame: self.bounds)
-    var isShowDisplayAnimation:Bool = false
-    var reloadFlag:Bool = false
-    lazy var separatorStype:UITableViewCell.SeparatorStyle = self.tableView.separatorStyle {
+    public var isShowDisplayAnimation:Bool = false
+    public var reloadFlag:Bool = false
+    public lazy var separatorStype:UITableViewCell.SeparatorStyle = self.tableView.separatorStyle {
         didSet {
             self.tableView.separatorStyle = self.separatorStype
         }
     }
+    
     //MARK: private property
-    let defaultCellHeight:CGFloat = 100
+    private let defaultCellHeight:CGFloat = 100
     private var numberOfRows:UInt = 0
+    private var noResultView:UIView?
+    
     //MARK: lifeCycle
     
     override func awakeFromNib() {
@@ -69,42 +72,9 @@ class HWTableView: UIView {
         super.layoutSubviews()
     }
     
-    //MARK: func
+    //MARK: private func
     
-
-    
-    func showSkeletonViewAndInit() {
-        self.isShowDisplayAnimation = false
-        self.tableView.isSkeletonable = true
-        self.showAnimatedGradientSkeleton()
-        self.startSkeletonAnimation()
-        
-    }
-
-    func hideSkeletonViewAndConnectMyCustomProtocol() {
-        print("true set")
-        self.isShowDisplayAnimation = true
-        self.stopSkeletonAnimation()
-        self.hideSkeleton()
-        self.tableView.reloadData() //리로드를 안해주면 데이터가 이상하게 set된다 ㅡㅡ; skeletonview 버그인듯
-        self.reloadFlag = true
-    }
-    
-    func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
-        self.tableView.register(nib, forCellReuseIdentifier: identifier)
-    }
-    
-    func reloadData() {
-        self.tableView.reloadData()
-    }
-    
-    func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
-        return self.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-    }
-    
-    //MARK: action
-    
-    func initUI() {
+    private func initUI() {
         self.tableView.backgroundColor = .clear
         self.addSubview(self.tableView)
         self.tableView.snp.makeConstraints{ (make) in
@@ -116,6 +86,68 @@ class HWTableView: UIView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.isSkeletonable = true
+    }
+    
+    //MARK: public func
+    public func showSkeletonHW() {
+        self.isShowDisplayAnimation = false
+        self.tableView.isSkeletonable = true
+        self.showAnimatedGradientSkeleton()
+        self.startSkeletonAnimation()
+    }
+
+    public func hideSkeletonHW() {
+        print("true set")
+        self.isShowDisplayAnimation = true
+        self.stopSkeletonAnimation()
+        self.hideSkeleton()
+        self.tableView.reloadData() //리로드를 안해주면 데이터가 이상하게 set된다 ㅡㅡ; skeletonview 버그인듯
+        self.reloadFlag = true
+    }
+    
+    public func addNoResultView(_ view:UIView) {
+        self.noResultView = view
+        guard let subView = self.noResultView else { return }
+        self.addSubview(subView)
+        subView.superview?.bringSubviewToFront(subView)
+        subView.snp.makeConstraints{ (make) in
+            make.leading.equalTo(self.snp.leading).offset(0)
+            make.trailing.equalTo(self.snp.trailing).offset(0)
+            make.top.equalTo(self.snp.top).offset(0)
+            make.bottom.equalTo(self.snp.bottom).offset(0)
+        }
+        subView.isHidden = true
+    }
+    
+    public func removeNoResultView() {
+        self.noResultView = nil
+    }
+    
+    public func showNoResultView() {
+        DispatchQueue.main.async {
+            self.noResultView?.isHidden = false
+        }
+    }
+    
+    public func hideNoResultView() {
+        DispatchQueue.main.async {
+            self.noResultView?.isHidden = true
+        }
+        
+    }
+    
+    //MARK: public func for tableView
+    
+    public func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
+        self.tableView.register(nib, forCellReuseIdentifier: identifier)
+    }
+    
+    public func reloadData() {
+        self.tableView.reloadData()
+    }
+    
+    public func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+        return self.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 
 }

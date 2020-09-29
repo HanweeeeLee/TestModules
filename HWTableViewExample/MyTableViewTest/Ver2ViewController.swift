@@ -23,7 +23,7 @@ class Ver2ViewController: UIViewController {
     }
     @IBAction func testStartAction(_ sender: Any) {
         print("start")
-        self.myTableView.showSkeletonViewAndInit()
+        self.myTableView.showSkeletonHW()
         DispatchQueue.global().async {
             
             usleep(1 * 1000 * 1000)
@@ -32,7 +32,7 @@ class Ver2ViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 print("end")
-                self.myTableView.hideSkeletonViewAndConnectMyCustomProtocol()
+                self.myTableView.hideSkeletonHW()
             }
             
         }
