@@ -11,7 +11,7 @@ import SkeletonView
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var tableView: HWTableView!
+    @IBOutlet weak var tableView: HWTableViewOld!
     
     var list:Array<String> = Array()
     
@@ -39,7 +39,13 @@ class ViewController: UIViewController {
         }
     }
     
-
+    @IBAction func nextPageAction(_ sender: Any) {
+        let mainStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+        if let vc = mainStoryboard.instantiateViewController(withIdentifier: "Ver2ViewController") as? Ver2ViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
 
 extension ViewController: UITableViewDelegate,UITableViewDataSource, SkeletonTableViewDataSource {

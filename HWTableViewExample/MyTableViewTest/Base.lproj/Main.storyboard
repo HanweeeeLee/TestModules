@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ahQ-lF-2mz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ahQ-lF-2mz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-im-oqp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-im-oqp">
                                 <rect key="frame" x="184" y="98" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Emt-8A-gbp"/>
@@ -25,24 +27,33 @@
                                     <action selector="testStartAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4S1-fM-nAt"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hc7-oU-5aR" customClass="HWTableView" customModule="MyTableViewTest" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hc7-oU-5aR" customClass="HWTableViewOld" customModule="MyTableViewTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBv-eG-5It">
+                                <rect key="frame" x="358" y="98" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="nextPageAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yIL-TS-ib8"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Hc7-oU-5aR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DFU-VQ-ZgM"/>
                             <constraint firstItem="ebh-im-oqp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="LY2-ea-537"/>
                             <constraint firstItem="ebh-im-oqp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UnS-OU-eIj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Hc7-oU-5aR" secondAttribute="bottom" id="Wgb-ad-hWl"/>
+                            <constraint firstItem="kBv-eG-5It" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Zxx-mk-3Oy"/>
                             <constraint firstItem="Hc7-oU-5aR" firstAttribute="top" secondItem="ebh-im-oqp" secondAttribute="bottom" constant="10" id="bJW-dg-LjL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kBv-eG-5It" secondAttribute="trailing" constant="10" id="bof-OC-NOG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hc7-oU-5aR" secondAttribute="trailing" id="qwz-f7-7vW"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -72,5 +83,53 @@
             </objects>
             <point key="canvasLocation" x="151" y="783"/>
         </scene>
+        <!--Ver2 View Controller-->
+        <scene sceneID="zzp-Jx-LYC">
+            <objects>
+                <viewController storyboardIdentifier="Ver2ViewController" id="GTu-md-Jf6" customClass="Ver2ViewController" customModule="MyTableViewTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RPE-Gk-Lk6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2H-tL-vll" customClass="HWTableView" customModule="MyTableViewTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="84" width="414" height="778"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziY-cG-5aX">
+                                <rect key="frame" x="10" y="54" width="394" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="testStartAction:" destination="GTu-md-Jf6" eventType="touchUpInside" id="56r-r6-flB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lzj-3f-EpE"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                        <constraints>
+                            <constraint firstItem="o2H-tL-vll" firstAttribute="trailing" secondItem="lzj-3f-EpE" secondAttribute="trailing" id="075-hb-sVv"/>
+                            <constraint firstItem="o2H-tL-vll" firstAttribute="leading" secondItem="lzj-3f-EpE" secondAttribute="leading" id="LiG-y4-9YT"/>
+                            <constraint firstItem="ziY-cG-5aX" firstAttribute="top" secondItem="lzj-3f-EpE" secondAttribute="top" constant="10" id="SGv-wC-gR9"/>
+                            <constraint firstItem="o2H-tL-vll" firstAttribute="top" secondItem="ziY-cG-5aX" secondAttribute="bottom" id="UT5-sC-slW"/>
+                            <constraint firstItem="lzj-3f-EpE" firstAttribute="trailing" secondItem="ziY-cG-5aX" secondAttribute="trailing" constant="10" id="YTS-13-mZW"/>
+                            <constraint firstItem="ziY-cG-5aX" firstAttribute="leading" secondItem="lzj-3f-EpE" secondAttribute="leading" constant="10" id="jy5-cM-R9p"/>
+                            <constraint firstItem="o2H-tL-vll" firstAttribute="bottom" secondItem="lzj-3f-EpE" secondAttribute="bottom" id="yMj-Uw-WJb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myTableView" destination="o2H-tL-vll" id="kvp-UU-fia"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuV-iO-Nek" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644.9275362318842" y="782.8125"/>
+        </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

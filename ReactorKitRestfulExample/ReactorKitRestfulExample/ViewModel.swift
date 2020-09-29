@@ -32,6 +32,7 @@ class ViewModel: Reactor {
     struct State {
         var isLoading:Bool = false
         var infoData:String = ""
+        var emptyState:String = "empty"
     }
     
     let initialState: State = State()

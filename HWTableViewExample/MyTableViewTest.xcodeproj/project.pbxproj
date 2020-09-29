@@ -15,7 +15,9 @@
 		4F2C626D250B0EA500A6D4D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C626B250B0EA500A6D4D5 /* LaunchScreen.storyboard */; };
 		4F2C6276250B0F7200A6D4D5 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C6274250B0F7200A6D4D5 /* MyTableViewCell.swift */; };
 		4F2C6277250B0F7200A6D4D5 /* MyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C6275250B0F7200A6D4D5 /* MyTableViewCell.xib */; };
-		4F6FFAD325105B2E00F44983 /* HWTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6FFAD225105B2E00F44983 /* HWTableView.swift */; };
+		4F6FFAD325105B2E00F44983 /* HWTableViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6FFAD225105B2E00F44983 /* HWTableViewOld.swift */; };
+		4F7452AC2522D0E4001BDF10 /* HWTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7452AB2522D0E4001BDF10 /* HWTableView.swift */; };
+		4F7452B42522D52D001BDF10 /* Ver2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7452B32522D52D001BDF10 /* Ver2ViewController.swift */; };
 		60269897E4A8DFCB5C2F01AD /* Pods_MyTableViewTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A6946126B024D9B4583D07 /* Pods_MyTableViewTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +33,9 @@
 		4F2C626E250B0EA500A6D4D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F2C6274250B0F7200A6D4D5 /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		4F2C6275250B0F7200A6D4D5 /* MyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTableViewCell.xib; sourceTree = "<group>"; };
-		4F6FFAD225105B2E00F44983 /* HWTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HWTableView.swift; sourceTree = "<group>"; };
+		4F6FFAD225105B2E00F44983 /* HWTableViewOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HWTableViewOld.swift; sourceTree = "<group>"; };
+		4F7452AB2522D0E4001BDF10 /* HWTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HWTableView.swift; sourceTree = "<group>"; };
+		4F7452B32522D52D001BDF10 /* Ver2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ver2ViewController.swift; sourceTree = "<group>"; };
 		927EDF295D0BD43E62C96DD4 /* Pods-MyTableViewTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTableViewTest.debug.xcconfig"; path = "Target Support Files/Pods-MyTableViewTest/Pods-MyTableViewTest.debug.xcconfig"; sourceTree = "<group>"; };
 		D4A6946126B024D9B4583D07 /* Pods_MyTableViewTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTableViewTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -78,7 +82,9 @@
 				4F2C626E250B0EA500A6D4D5 /* Info.plist */,
 				4F2C6274250B0F7200A6D4D5 /* MyTableViewCell.swift */,
 				4F2C6275250B0F7200A6D4D5 /* MyTableViewCell.xib */,
-				4F6FFAD225105B2E00F44983 /* HWTableView.swift */,
+				4F6FFAD225105B2E00F44983 /* HWTableViewOld.swift */,
+				4F7452B32522D52D001BDF10 /* Ver2ViewController.swift */,
+				4F7452AB2522D0E4001BDF10 /* HWTableView.swift */,
 			);
 			path = MyTableViewTest;
 			sourceTree = "<group>";
@@ -219,7 +225,9 @@
 				4F2C6265250B0EA300A6D4D5 /* ViewController.swift in Sources */,
 				4F2C6276250B0F7200A6D4D5 /* MyTableViewCell.swift in Sources */,
 				4F2C6261250B0EA300A6D4D5 /* AppDelegate.swift in Sources */,
-				4F6FFAD325105B2E00F44983 /* HWTableView.swift in Sources */,
+				4F7452B42522D52D001BDF10 /* Ver2ViewController.swift in Sources */,
+				4F7452AC2522D0E4001BDF10 /* HWTableView.swift in Sources */,
+				4F6FFAD325105B2E00F44983 /* HWTableViewOld.swift in Sources */,
 				4F2C6263250B0EA300A6D4D5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

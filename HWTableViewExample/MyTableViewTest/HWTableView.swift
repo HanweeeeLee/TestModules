@@ -1,113 +1,129 @@
 //
-//  MyTableView.swift
-//  TableViewOverride
+//  HWTableViewVer2.swift
+//  MyTableViewTest
 //
-//  Created by hanwe lee on 2020/09/15.
+//  Created by hanwe lee on 2020/09/29.
 //  Copyright © 2020 hanwe. All rights reserved.
 //
 
 import UIKit
 import SkeletonView
+import SnapKit
 
-class HWTableView: UITableView {
-    var obj:HWTableViewDelegate = HWTableViewDelegate()
-    override var delegate: UITableViewDelegate? {
+@objc protocol HWTableViewDelegate:class {
+    @objc optional func hwTableView(_ hwTableVIew: HWTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    @objc optional func hwTableView(_ hwTableVIew: HWTableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    @objc optional func hwTableView(_ hwTableVIew: HWTableView, didSelectRowAt indexPath: IndexPath)
+    @objc optional func scrollViewDidScroll(_ scrollView: UIScrollView)
+    @objc optional func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
+    @objc optional func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    @objc optional func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+    @objc optional func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    @objc optional func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    @objc optional func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
+    @objc optional func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool
+    @objc optional func scrollViewDidScrollToTop(_ scrollView: UIScrollView)
+    
+}
+
+@objc protocol HWTableViewDatasource:class {
+    func hwTableView(_ hwTableView: HWTableView, numberOfRowsInSection section: Int) -> Int
+    func hwTableView(_ hwTableView: HWTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func hwTableViewSekeletonViewCellIdentifier(_ hwTableView: HWTableView) -> String
+    func hwTableViewSekeletonViewCount(_ hwTableView: HWTableView) -> Int
+    @objc optional func hwTableView(_ hwtableView: HWTableView, heightForRowAt indexPath:IndexPath) -> CGFloat
+    @objc optional func numberOfSections(in hwtableView: HWTableView) -> Int
+    @objc optional func hwTableView(_ hwtableView: HWTableView, viewForHeaderInSection section: Int) -> UIView?
+    @objc optional func hwTableView(_ hwtableView: HWTableView, heightForHeaderInSection section: Int) -> CGFloat
+    @objc optional func hwTableView(_ hwtableView: HWTableView, viewForFooterInSection section: Int) -> UIView?
+    @objc optional func hwTableView(_ hwtableView: HWTableView, heightForFooterInSection section: Int) -> CGFloat
+    
+}
+
+class HWTableView: UIView {
+    
+    //MARK: public property
+    
+    weak var delegate:HWTableViewDelegate?
+    weak var dataSource:HWTableViewDatasource?
+    
+    public lazy var tableView:UITableView = UITableView(frame: self.bounds)
+    var isShowDisplayAnimation:Bool = false
+    var reloadFlag:Bool = false
+    lazy var separatorStype:UITableViewCell.SeparatorStyle = self.tableView.separatorStyle {
         didSet {
-            if delegate !== self.obj {
-                self.obj.originDelegate = self.delegate
-            }
+            self.tableView.separatorStyle = self.separatorStype
         }
+    }
+    //MARK: private property
+    let defaultCellHeight:CGFloat = 100
+    private var numberOfRows:UInt = 0
+    //MARK: lifeCycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        initUI()
     }
     
-    override var dataSource: UITableViewDataSource? {
-        didSet {
-            if dataSource !== self.obj {
-                self.obj.originDataSource = self.dataSource
-            }
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
+    
+    //MARK: func
+    
+
     
     func showSkeletonViewAndInit() {
-        self.isSkeletonable = true
-        self.obj.tableView = self
-        self.delegate = self.obj.originDelegate
-        self.dataSource = self.obj.originDataSource
+        self.isShowDisplayAnimation = false
+        self.tableView.isSkeletonable = true
         self.showAnimatedGradientSkeleton()
         self.startSkeletonAnimation()
-        self.obj.isShowDisplayAnimation = true
-        self.obj.isShownFirstHWTableViewDisplay = false
+        
     }
-    
+
     func hideSkeletonViewAndConnectMyCustomProtocol() {
+        print("true set")
+        self.isShowDisplayAnimation = true
         self.stopSkeletonAnimation()
         self.hideSkeleton()
-        self.delegate = self.obj
-        self.dataSource = self.obj
+        self.tableView.reloadData() //리로드를 안해주면 데이터가 이상하게 set된다 ㅡㅡ; skeletonview 버그인듯
+        self.reloadFlag = true
     }
     
-//    override func reloadData() {
-//        super.reloadData()
-//    }
+    func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
+        self.tableView.register(nib, forCellReuseIdentifier: identifier)
+    }
     
+    func reloadData() {
+        self.tableView.reloadData()
+    }
+    
+    func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+        return self.tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+    }
+    
+    //MARK: action
+    
+    func initUI() {
+        self.tableView.backgroundColor = .clear
+        self.addSubview(self.tableView)
+        self.tableView.snp.makeConstraints{ (make) in
+            make.leading.equalTo(self.snp.leading).offset(0)
+            make.trailing.equalTo(self.snp.trailing).offset(0)
+            make.top.equalTo(self.snp.top).offset(0)
+            make.bottom.equalTo(self.snp.bottom).offset(0)
+        }
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.isSkeletonable = true
+    }
+
 }
 
-class HWTableViewDelegate:NSObject {
-    weak var originDelegate:UITableViewDelegate? = nil
-    weak var originDataSource:UITableViewDataSource? = nil
-    weak var tableView:UITableView? = nil
-    
-    let defaultCellHeight:CGFloat = 100
-    
-    var isShowDisplayAnimation:Bool = false
-    var isShownFirstHWTableViewDisplay:Bool = false
-}
-
-extension HWTableViewDelegate:UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.originDataSource?.tableView(tableView, numberOfRowsInSection: section) ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.originDataSource?.tableView(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
-//        cell.stopSkeletonAnimation()
-//        cell.hideSkeleton() 이거 호출하면 셀이 이상하게 호출됨 흠....
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return self.originDataSource?.numberOfSections?(in: tableView) ?? 1
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        self.originDataSource?.tableView?(tableView, commit: editingStyle, forRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return self.originDataSource?.tableView?(tableView, canEditRowAt: indexPath) ?? false
-    }
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return self.originDataSource?.tableView?(tableView, canMoveRowAt: indexPath) ?? falseå
-    }
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return self.originDataSource?.tableView?(tableView, titleForFooterInSection: section) ?? nil
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.originDataSource?.tableView?(tableView, titleForHeaderInSection: section) ?? nil
-    }
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return self.originDataSource?.tableView?(tableView, sectionForSectionIndexTitle: title, at: index) ?? 0
-    }
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        self.originDataSource?.tableView?(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
-    }
-    
-}
-
-extension HWTableViewDelegate:UITableViewDelegate {
-    
+extension HWTableView:UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        self.isShownFirstHWTableViewDisplay = true
-        if isShowDisplayAnimation {
+//        print("willDisplay")
+        if self.isShowDisplayAnimation {
             cell.transform = CGAffineTransform(translationX: 0, y: 100 * 1.0)
             cell.alpha = 0
             UIView.animate(
@@ -119,172 +135,107 @@ extension HWTableViewDelegate:UITableViewDelegate {
                     cell.alpha = 1
             })
         }
-        self.originDelegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+        self.delegate?.hwTableView?(self, willDisplay: cell, forRowAt: indexPath)
     }
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if self.isShownFirstHWTableViewDisplay {
+//        print("didEndDisplay")
+        if reloadFlag {
             if self.isShowDisplayAnimation {
                 self.isShowDisplayAnimation = false
+                self.reloadFlag = false
             }
         }
-        self.originDelegate?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, didSelectRowAt:indexPath)
-    }
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, didDeselectRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, didHighlightRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        self.originDelegate?.tableView?(tableView, didEndEditingRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, didUnhighlightRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        return self.originDelegate?.tableView?(tableView, canFocusRowAt: indexPath) ?? false
-    }
-    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, willBeginEditingRowAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.originDelegate?.tableView?(tableView, heightForRowAt: indexPath) ?? self.defaultCellHeight
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return self.originDelegate?.tableView?(tableView, viewForFooterInSection: section) ?? nil
-    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.originDelegate?.tableView?(tableView, viewForHeaderInSection: section) ?? nil
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.originDelegate?.tableView?(tableView, heightForFooterInSection: section) ?? 0
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.originDelegate?.tableView?(tableView, heightForHeaderInSection: section) ?? 0
-    }
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return self.originDelegate?.tableView?(tableView, shouldHighlightRowAt: indexPath) ?? false
-    }
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return self.originDelegate?.tableView?(tableView, willSelectRowAt: indexPath) ?? nil
-    }
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, accessoryButtonTappedForRowWith: indexPath)
-    }
-    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return self.originDelegate?.tableView?(tableView, shouldIndentWhileEditingRowAt: indexPath) ?? false
-    }
-    func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
-        return self.originDelegate?.tableView?(tableView, indentationLevelForRowAt: indexPath) ?? 0
-    }
-    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        return self.originDelegate?.tableView?(tableView, willDeselectRowAt: indexPath) ?? nil
-    }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.originDelegate?.tableView?(tableView, estimatedHeightForRowAt: indexPath) ?? 0
-    }
-    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        return self.originDelegate?.tableView?(tableView, estimatedHeightForFooterInSection: section) ?? 0
-    }
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return self.originDelegate?.tableView?(tableView, estimatedHeightForHeaderInSection: section) ?? 0
-    }
-    func tableView(_ tableView: UITableView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
-        self.originDelegate?.tableView?(tableView, didBeginMultipleSelectionInteractionAt: indexPath)
-    }
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        self.originDelegate?.tableView?(tableView, willDisplayFooterView: view, forSection: section)
-    }
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        self.originDelegate?.tableView?(tableView, willDisplayHeaderView: view, forSection: section)
-    }
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return self.originDelegate?.tableView?(tableView, editingStyleForRowAt: indexPath) ?? UITableViewCell.EditingStyle.none
-    }
-    func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        self.originDelegate?.tableView?(tableView, didEndDisplayingFooterView: view, forSection: section)
-    }
-    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        self.originDelegate?.tableView?(tableView, didEndDisplayingHeaderView: view, forSection: section)
-    }
-    func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
-        return self.originDelegate?.tableView?(tableView, shouldUpdateFocusIn: context) ?? false
-    }
-    func tableView(_ tableView: UITableView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
-        return self.originDelegate?.tableView?(tableView, shouldBeginMultipleSelectionInteractionAt: indexPath) ?? false
-    }
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return self.originDelegate?.tableView?(tableView, titleForDeleteConfirmationButtonForRowAt: indexPath) ?? nil
-    }
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        return self.originDelegate?.tableView?(tableView, leadingSwipeActionsConfigurationForRowAt: indexPath) ?? nil
-    }
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        return self.originDelegate?.tableView?(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath) ?? nil
-    }
-    func tableView(_ tableView: UITableView, shouldSpringLoadRowAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
-        return self.originDelegate?.tableView?(tableView, shouldSpringLoadRowAt: indexPath, with: context) ?? false
-    }
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        return self.originDelegate?.tableView?(tableView, contextMenuConfigurationForRowAt: indexPath, point: point) ?? nil
-    }
-    func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        self.originDelegate?.tableView?(tableView, didUpdateFocusIn: context, with: coordinator)
-    }
-    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return self.originDelegate?.tableView?(tableView, previewForDismissingContextMenuWithConfiguration: configuration) ?? nil
-    }
-    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return self.originDelegate?.tableView?(tableView, previewForHighlightingContextMenuWithConfiguration: configuration) ?? nil
-    }
-    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
-        self.originDelegate?.tableView?(tableView, willPerformPreviewActionForMenuWith: configuration, animator: animator)
-    }
-    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        return self.originDelegate?.tableView?(tableView, targetIndexPathForMoveFromRowAt: sourceIndexPath, toProposedIndexPath: proposedDestinationIndexPath) ?? IndexPath(row: 0, section: 0)
+        self.delegate?.hwTableView?(self, didEndDisplaying: cell, forRowAt: indexPath)
     }
     
-    //MARK: scroll view
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.hwTableView?(self, didSelectRowAt: indexPath)
+    }
+    
+    //여기서부터 구현
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewDidScroll?(scrollView)
+        self.delegate?.scrollViewDidScroll?(scrollView)
     }
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewDidZoom?(scrollView)
-    }
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewDidScrollToTop?(scrollView)
-    }
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewWillBeginDragging?(scrollView)
-    }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewDidEndDecelerating?(scrollView)
-    }
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewWillBeginDecelerating?(scrollView)
-    }
+    
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+        self.delegate?.scrollViewDidEndScrollingAnimation?(scrollView)
     }
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        return self.originDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? false
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.delegate?.scrollViewWillBeginDragging?(scrollView)
     }
-    func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
-        self.originDelegate?.scrollViewDidChangeAdjustedContentInset?(scrollView)
-    }
-    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        self.originDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
-    }
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.originDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
-    }
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        self.originDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
-    }
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.originDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+        self.delegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.delegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.delegate?.scrollViewDidEndDecelerating?(scrollView)
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        self.delegate?.scrollViewWillBeginDecelerating?(scrollView)
+    }
+    
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        return self.delegate?.scrollViewShouldScrollToTop?(scrollView) ?? false
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        self.delegate?.scrollViewDidScrollToTop?(scrollView)
+    }
+    
+}
+
+extension HWTableView:SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return self.dataSource?.hwTableViewSekeletonViewCellIdentifier(self) ?? ""
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataSource?.hwTableViewSekeletonViewCount(self) ?? 0
+    }
+}
+
+extension HWTableView:UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.dataSource?.numberOfSections?(in: self) ?? 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let ds = self.dataSource  else { return 0 }
+        self.numberOfRows = UInt(ds.hwTableView(self, numberOfRowsInSection: section))
+        return Int(self.numberOfRows)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.dataSource!.hwTableView(self, cellForRowAt: indexPath)
+//        cell.hideSkeleton()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.dataSource?.hwTableView?(self, heightForRowAt: indexPath) ?? self.defaultCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.dataSource?.hwTableView?(self, viewForHeaderInSection: section) ?? nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return self.dataSource?.hwTableView?(self, heightForHeaderInSection: section) ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return self.dataSource?.hwTableView?(self, viewForFooterInSection: section) ?? nil
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return self.dataSource?.hwTableView?(self, heightForFooterInSection: section) ?? 0
     }
 }

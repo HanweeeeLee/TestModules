@@ -37,8 +37,17 @@ class ViewController: UIViewController,StoryboardView {
             $0.infoData
         }.distinctUntilChanged() // 이거 호출해도 상관없는지는 모르겠음....
         .subscribe(onNext: { value in
+            print("infoData")
             self.myTextView.text = value
         }).disposed(by: disposeBag)
+        
+        reactor.state.map {
+            $0.emptyState
+        }
+//        .debounce(.seconds(1), scheduler: MainScheduler.instance)
+        .subscribe(onNext: { any in
+            print("any:\(any)")
+        }).disposed(by: self.disposeBag)
         
         self.testBtn.rx.tap.map{
             Reactor.Action.startTestquery

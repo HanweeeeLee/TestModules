@@ -8,5 +8,6 @@ target 'MyTableViewTest' do
   # Pods for MyTableViewTest
   pod "SkeletonView"
   pod 'Then'
+  pod 'SnapKit', '~> 5.0.0'
   
 end
