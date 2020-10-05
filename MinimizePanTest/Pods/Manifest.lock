@@ -1,0 +1,28 @@
+PODS:
+  - ARNTransitionAnimator (3.2.0)
+  - Hero (1.5.0)
+  - Movin (1.2.0)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - ARNTransitionAnimator
+  - Hero
+  - Movin
+  - SnapKit (~> 5.0.0)
+
+SPEC REPOS:
+  trunk:
+    - ARNTransitionAnimator
+    - Hero
+    - Movin
+    - SnapKit
+
+SPEC CHECKSUMS:
+  ARNTransitionAnimator: 6fea1fe318b251abfd3cbd06d91215deb374ae40
+  Hero: b7385b75e7259da62f4f85462f59a5082d66b058
+  Movin: 02a488d93913e46de77774d6a2cc2fa0eec83760
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: 73333ae5b1a1ebdb7d585b4f5013a15bf892b668
+
+COCOAPODS: 1.9.1

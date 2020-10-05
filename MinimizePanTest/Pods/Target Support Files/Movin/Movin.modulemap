@@ -1,0 +1,6 @@
+framework module Movin {
+  umbrella header "Movin-umbrella.h"
+
+  export *
+  module * { export * }
+}
