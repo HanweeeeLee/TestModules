@@ -31,11 +31,20 @@
                                             <constraint firstAttribute="height" constant="30" id="rav-Hc-f1I"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZ1-ej-3YS">
+                                        <rect key="frame" x="30" y="0.0" width="384" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="QMB-39-5Zj" firstAttribute="top" secondItem="TZM-Vh-dp2" secondAttribute="top" id="6NS-D6-p7B"/>
                                     <constraint firstItem="QMB-39-5Zj" firstAttribute="leading" secondItem="TZM-Vh-dp2" secondAttribute="leading" id="GRT-Wa-Xf6"/>
+                                    <constraint firstItem="JZ1-ej-3YS" firstAttribute="top" secondItem="TZM-Vh-dp2" secondAttribute="top" id="VEs-5Y-dqc"/>
+                                    <constraint firstAttribute="trailing" secondItem="JZ1-ej-3YS" secondAttribute="trailing" id="wNe-sa-Qxx"/>
+                                    <constraint firstItem="JZ1-ej-3YS" firstAttribute="leading" secondItem="QMB-39-5Zj" secondAttribute="trailing" id="wsc-qj-xhq"/>
                                     <constraint firstAttribute="height" constant="50" id="yc2-IU-A3a"/>
                                 </constraints>
                             </view>
@@ -54,6 +63,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5Nv-cM-syb"/>
                     <connections>
+                        <outlet property="myLabel" destination="JZ1-ej-3YS" id="hKy-Zb-YSh"/>
                         <outlet property="myNavi" destination="TZM-Vh-dp2" id="iXX-S9-xfF"/>
                         <outlet property="myView" destination="QMB-39-5Zj" id="hjF-uC-5GS"/>
                         <outlet property="tableView" destination="Sic-wB-IFh" id="ETx-6a-5Mf"/>

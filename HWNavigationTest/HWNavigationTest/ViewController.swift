@@ -14,6 +14,7 @@ class ViewController: UIViewController {
 //    @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWdith: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeIn])
+        myNavi.addEffect(object: myLabel, effets: [.labelFontSizeIncrease(minFontSize: 10, maxFontSize: 20)])
     }
 
 

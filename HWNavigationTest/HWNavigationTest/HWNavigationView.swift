@@ -133,9 +133,25 @@ class HWNavigationView: UIView {
                             }
                         }
                         break
-                    case .labelFontSizeIncrease:
+                    case .labelFontSizeIncrease(let minFontSize,let maxFontSize):
+                        if type(of: obj) != UILabel.self {
+                            print("only use UILabel")
+                            return
+                        }
+                        let label:UILabel = obj as! UILabel
+                        let gap:CGFloat = maxFontSize - minFontSize
+                        let size:CGFloat = gap * percent + minFontSize
+                        label.font = UIFont(name: label.font.fontName, size: size)
                         break
-                    case .labelFontSizeDecrease:
+                    case .labelFontSizeDecrease(let minFontSize,let maxFontSize):
+                        if type(of: obj) != UILabel.self {
+                            print("only use UILabel")
+                            return
+                        }
+                        let label:UILabel = obj as! UILabel
+                        let gap:CGFloat = maxFontSize - minFontSize
+                        let size:CGFloat = gap * (1 - percent) + minFontSize
+                        label.font = UIFont(name: label.font.fontName, size: size)
                         break
                     case .moveUp:
                         break
@@ -159,8 +175,16 @@ class HWNavigationView: UIView {
         self.effectObjects.append(obj)
     }
     
-    public func removeEffect(object:UIView) {
-        //일단 미구현
+    public func removeEffect(object:UIView) -> Bool {
+        var result:Bool = false
+        for i in 0..<self.effectObjects.count {
+            if self.effectObjects[i].obj === object {
+                self.effectObjects.remove(at: i)
+                result = true
+                break
+            }
+        }
+        return result
     }
     
     //MARK: action
