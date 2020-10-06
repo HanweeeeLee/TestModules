@@ -18,8 +18,8 @@ class HWNavigationView: UIView {
     enum HWNavigationEffectType:Equatable {
         case fadeIn
         case fadeOut
-        case viewSizeIncrease(minWdith:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
-        case viewSizeDecrease(minWdith:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
+        case viewSizeIncrease(minWidth:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
+        case viewSizeDecrease(minWidth:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
         case labelFontSizeIncrease(minFontSize:CGFloat,maxFontSize:CGFloat)
         case labelFontSizeDecrease(minFontSize:CGFloat,maxFontSize:CGFloat)
         case moveUp
@@ -169,9 +169,61 @@ class HWNavigationView: UIView {
     
     public func addEffect(object:UIView,effets:Array<HWNavigationEffectType>) {
         let obj:HWNavigationEffectObject = HWNavigationEffectObject(obj: object, effectArray: effets)
-        if effets.filter({ $0 == .fadeIn }).count > 0 {
-            object.alpha = 0
-        }
+        _ = effets.filter {
+            switch $0 {
+            case .fadeIn:
+                object.alpha = 0
+                break
+            case .fadeOut:
+                object.alpha = 1
+                break
+            case let .viewSizeIncrease(minWidth,_,minHeight,_):
+                let widthHeightLayouts:Array<NSLayoutConstraint> = object.constraints.filter({
+                    $0.firstAttribute == .width || $0.firstAttribute == .height
+                })
+                _ = widthHeightLayouts.map {
+                    if $0.firstAttribute == .width {
+                        $0.constant = minWidth
+                    }
+                    else {
+                        $0.constant = minHeight
+                    }
+                }
+                break
+            case let .viewSizeDecrease(_, maxWidth, _, maxHeight):
+                let widthHeightLayouts:Array<NSLayoutConstraint> = object.constraints.filter({
+                    $0.firstAttribute == .width || $0.firstAttribute == .height
+                })
+                _ = widthHeightLayouts.map {
+                    if $0.firstAttribute == .width {
+                        $0.constant = maxWidth
+                    }
+                    else {
+                        $0.constant = maxHeight
+                    }
+                }
+                break
+            case let .labelFontSizeIncrease(minFontSize,_):
+                if type(of: object) != UILabel.self {
+                    print("only use UILabel")
+                    break
+                }
+                let label:UILabel = object as! UILabel
+                label.font = UIFont(name: label.font.fontName, size: minFontSize)
+                break
+            case let .labelFontSizeDecrease(_,maxFontSize):
+                if type(of: object) != UILabel.self {
+                    print("only use UILabel")
+                    break
+                }
+                let label:UILabel = object as! UILabel
+                label.font = UIFont(name: label.font.fontName, size: maxFontSize)
+                break
+            case .moveUp:
+                break
+            }
+            return false
+         }
         self.effectObjects.append(obj)
     }
     

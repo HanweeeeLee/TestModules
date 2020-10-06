@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWdith: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeIn])
+        myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWidth: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeIn])
         myNavi.addEffect(object: myLabel, effets: [.labelFontSizeIncrease(minFontSize: 10, maxFontSize: 20)])
     }
 
