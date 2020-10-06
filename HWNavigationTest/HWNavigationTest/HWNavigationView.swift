@@ -57,6 +57,16 @@ class HWNavigationView: UIView {
             }
         }
     }
+    private var scrollVelocity:CGFloat = 0.0 {
+        didSet {
+            if self.scrollVelocity > 100 {
+                if showEffetOffset >= currentYOffset {
+                    let percent:CGFloat = 0
+                    showEffects(percent: percent)
+                }
+            }
+        }
+    }
     
     private var flagOf100percent:Bool = false
     private var effectObjects:Array = Array<HWNavigationEffectObject>()
@@ -165,6 +175,7 @@ class HWNavigationView: UIView {
     
     public func scrollViewDidScroll(_ scrollView:UIScrollView) {
         self.currentYOffset = scrollView.contentOffset.y
+        self.scrollVelocity = scrollView.panGestureRecognizer.velocity(in: self).y
     }
     
     public func addEffect(object:UIView,effets:Array<HWNavigationEffectType>) {
