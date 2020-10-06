@@ -1,0 +1,168 @@
+//
+//  HWNavigationView.swift
+//  HWNavigationTest
+//
+//  Created by hanwe lee on 2020/10/06.
+//
+
+import UIKit
+import SnapKit
+
+class HWNavigationView: UIView {
+    
+    struct HWNavigationEffectObject {
+        weak var obj:UIView?
+        var effectArray:Array = Array<HWNavigationEffectType>()
+    }
+    
+    enum HWNavigationEffectType:Equatable {
+        case fadeIn
+        case fadeOut
+        case viewSizeIncrease(minWdith:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
+        case viewSizeDecrease(minWdith:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
+        case labelFontSizeIncrease(minFontSize:CGFloat,maxFontSize:CGFloat)
+        case labelFontSizeDecrease(minFontSize:CGFloat,maxFontSize:CGFloat)
+        case moveUp
+    }
+    
+    //MARK: public property
+    
+    public var lineView:UIView = UIView()
+    public var showEffetOffset:CGFloat = 50.0
+    
+    
+    //MARK: private property
+    
+    private var currentYOffset:CGFloat = 0.0 {
+        didSet {
+            if showEffetOffset >= currentYOffset {
+                //                print("percent:\((self.currentYOffset/self.showEffetOffset) * 100 )")
+                let percent:CGFloat = self.currentYOffset/self.showEffetOffset
+                self.lineView.alpha = self.currentYOffset/self.showEffetOffset
+                self.flagOf100percent = false
+                if percent >= 0 {
+                    showEffects(percent: percent)
+                }
+            }
+            else if currentYOffset > showEffetOffset{
+                //                print("100%")
+                if !flagOf100percent {
+                    let percent:CGFloat = 1
+                    self.lineView.alpha = percent
+                    self.flagOf100percent = true
+                    if percent >= 0 {
+                        showEffects(percent: percent)
+                    }
+                }
+            }
+        }
+    }
+    
+    private var flagOf100percent:Bool = false
+    private var effectObjects:Array = Array<HWNavigationEffectObject>()
+    
+    
+    //MARK: lifeCycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        initUI()
+    }
+    
+    override func layoutSubviews() {
+        self.lineView.layer.shadowOpacity = 1
+        self.lineView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        self.lineView.layer.shadowRadius = 1
+        self.lineView.layer.shadowColor = UIColor(displayP3Red: 233/255, green: 233/255, blue: 233/255, alpha: 1).cgColor
+    }
+    
+    //MARK: private func
+    private func initUI() {
+        self.lineView.backgroundColor = UIColor(displayP3Red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
+        self.addSubview(self.lineView)
+        self.lineView.snp.makeConstraints({ make in
+            make.leading.equalTo(self.snp.leading).offset(0)
+            make.trailing.equalTo(self.snp.trailing).offset(0)
+            make.bottom.equalTo(self.snp.bottom).offset(-1)
+            make.height.equalTo(1)
+        })
+        self.lineView.alpha = 0
+    }
+    
+    private func showEffects(percent:CGFloat) {
+        print("percent:\(percent)")
+        for i in 0..<self.effectObjects.count {
+            let item:HWNavigationEffectObject = self.effectObjects[i]
+            if let obj = item.obj {
+                let effects:Array<HWNavigationEffectType> = item.effectArray
+                for j in 0..<effects.count {
+                    let effect = effects[j]
+                    switch effect {
+                    case .fadeIn:
+                        obj.alpha = percent
+                    case .fadeOut:
+                        obj.alpha = 1 - percent
+                        break
+                    case .viewSizeIncrease(let minWidth,let maxWidth, let minHeight, let maxHeight):
+                        let widthHeightLayouts:Array<NSLayoutConstraint> = obj.constraints.filter({
+                            $0.firstAttribute == .width || $0.firstAttribute == .height
+                        })
+                        let widthGap:CGFloat = maxWidth - minWidth
+                        let heightGap:CGFloat = maxHeight - minHeight
+                        _ = widthHeightLayouts.map {
+                            if $0.firstAttribute == .width {
+                                $0.constant = widthGap * percent + minWidth
+                            }
+                            else {
+                                $0.constant = heightGap * percent + minHeight
+                            }
+                        }
+                        break
+                    case .viewSizeDecrease(let minWidth,let maxWidth, let minHeight, let maxHeight):
+                        let widthHeightLayouts:Array<NSLayoutConstraint> = obj.constraints.filter({
+                            $0.firstAttribute == .width || $0.firstAttribute == .height
+                        })
+                        let widthGap:CGFloat = maxWidth - minWidth
+                        let heightGap:CGFloat = maxHeight - minHeight
+                        _ = widthHeightLayouts.map {
+                            if $0.firstAttribute == .width {
+                                $0.constant = widthGap * (1 - percent) + minWidth
+                            }
+                            else {
+                                $0.constant = heightGap * (1 - percent) + minHeight
+                            }
+                        }
+                        break
+                    case .labelFontSizeIncrease:
+                        break
+                    case .labelFontSizeDecrease:
+                        break
+                    case .moveUp:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK: public func
+    
+    public func scrollViewDidScroll(_ scrollView:UIScrollView) {
+        self.currentYOffset = scrollView.contentOffset.y
+    }
+    
+    public func addEffect(object:UIView,effets:Array<HWNavigationEffectType>) {
+        let obj:HWNavigationEffectObject = HWNavigationEffectObject(obj: object, effectArray: effets)
+        if effets.filter({ $0 == .fadeIn }).count > 0 {
+            object.alpha = 0
+        }
+        self.effectObjects.append(obj)
+    }
+    
+    public func removeEffect(object:UIView) {
+        //일단 미구현
+    }
+    
+    //MARK: action
+
+}

@@ -1,0 +1,6 @@
+framework module Pods_HWNavigationTest {
+  umbrella header "Pods-HWNavigationTest-umbrella.h"
+
+  export *
+  module * { export * }
+}
