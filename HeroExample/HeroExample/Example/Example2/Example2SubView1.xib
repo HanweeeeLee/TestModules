@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17156"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="Example2SubView1" id="iN0-l3-epB" customClass="Example2SubView1" customModule="HeroExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="782"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTX-jf-16u">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="782"/>
+                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="UTX-jf-16u" secondAttribute="bottom" id="5bT-sd-U6v"/>
+                <constraint firstAttribute="trailing" secondItem="UTX-jf-16u" secondAttribute="trailing" id="7MZ-q1-qz7"/>
+                <constraint firstItem="UTX-jf-16u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Z5M-Fl-Rva"/>
+                <constraint firstItem="UTX-jf-16u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lX1-CF-XGc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-230.43478260869566" y="184.82142857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
