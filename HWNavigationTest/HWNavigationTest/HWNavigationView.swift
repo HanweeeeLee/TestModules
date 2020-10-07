@@ -15,6 +15,11 @@ class HWNavigationView: UIView {
         var effectArray:Array = Array<HWNavigationEffectType>()
     }
     
+    struct HWNavigationFromTo:Equatable {
+        var from:CGFloat
+        var to:CGFloat
+    }
+    
     enum HWNavigationEffectType:Equatable {
         case fadeIn(minAlpha:CGFloat,maxAlpha:CGFloat)
         case fadeOut(minAlpha:CGFloat,maxAlpha:CGFloat)
@@ -22,7 +27,7 @@ class HWNavigationView: UIView {
         case viewSizeDecrease(minWidth:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
         case labelFontSizeIncrease(minFontSize:CGFloat,maxFontSize:CGFloat)
         case labelFontSizeDecrease(minFontSize:CGFloat,maxFontSize:CGFloat)
-        case moveUp
+        case replaceConstant(leading:HWNavigationFromTo?,trailling:HWNavigationFromTo?,top:HWNavigationFromTo?,bottom:HWNavigationFromTo?)
     }
     
     //MARK: public property
@@ -167,7 +172,34 @@ class HWNavigationView: UIView {
                         let size:CGFloat = gap * (1 - percent) + minFontSize
                         label.font = UIFont(name: label.font.fontName, size: size)
                         break
-                    case .moveUp:
+                    case .replaceConstant(leading: let leading, trailling: let trailling, top: let top, bottom: let bottom):
+                        if let leadingC = leading, let superView = obj.superview {
+                            let leadingLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                                $0.firstAttribute == .leading && $0.firstItem as! NSObject == obj
+                            })
+                            replaceConstant(object: obj, from: leadingC.from, to: leadingC.to, percent: percent, layouts: leadingLayouts)
+                        }
+                        
+                        if let traillingC = trailling, let superView = obj.superview {
+                            let traillingLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                                $0.firstAttribute == .trailing && $0.firstItem as! NSObject == obj
+                            })
+                            replaceConstant(object: obj, from: traillingC.from, to: traillingC.to, percent: percent, layouts: traillingLayouts)
+                        }
+                        
+                        if let topC = top, let superView = obj.superview {
+                            let topLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                                $0.firstAttribute == .top && $0.firstItem as! NSObject == obj
+                            })
+                            replaceConstant(object: obj, from: topC.from, to: topC.to, percent: percent, layouts: topLayouts)
+                        }
+                        
+                        if let bottomC = bottom, let superView = obj.superview {
+                            let bottomLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                                $0.firstAttribute == .bottom && $0.firstItem as! NSObject == obj
+                            })
+                            replaceConstant(object: obj, from: bottomC.from, to: bottomC.to, percent: percent, layouts: bottomLayouts)
+                        }
                         break
                     }
                 }
@@ -178,15 +210,19 @@ class HWNavigationView: UIView {
             let heightLayouts:Array<NSLayoutConstraint> = self.constraints.filter({
                 $0.firstAttribute == .height
             })
-            let isIncresase:Bool = to > from
-            let gap:CGFloat = isIncresase ? (to - from) : (from - to)
-            _ = heightLayouts.map {
-                if isIncresase {
-                    $0.constant = from + (gap * percent)
-                }
-                else {
-                    $0.constant = from - (gap * percent)
-                }
+            replaceConstant(object: self, from: from, to: to, percent: percent, layouts: heightLayouts)
+        }
+    }
+    
+    private func replaceConstant(object:UIView,from:CGFloat,to:CGFloat,percent:CGFloat,layouts:Array<NSLayoutConstraint>) {
+        let isIncresase:Bool = to > from
+        let gap:CGFloat = isIncresase ? (to - from) : (from - to)
+        _ = layouts.map {
+            if isIncresase {
+                $0.constant = from + (gap * percent)
+            }
+            else {
+                $0.constant = from - (gap * percent)
             }
         }
     }
@@ -249,7 +285,34 @@ class HWNavigationView: UIView {
                 let label:UILabel = object as! UILabel
                 label.font = UIFont(name: label.font.fontName, size: maxFontSize)
                 break
-            case .moveUp:
+            case .replaceConstant(leading: let leading, trailling: let trailling, top: let top, bottom: let bottom):
+                if let leadingC = leading, let superView = object.superview {
+                    let leadingLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                        $0.firstAttribute == .leading && $0.firstItem as! NSObject == object
+                    })
+                    replaceConstant(object: object, from: leadingC.from, to: leadingC.to, percent: 0, layouts: leadingLayouts)
+                }
+                
+                if let traillingC = trailling, let superView = object.superview {
+                    let traillingLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                        $0.firstAttribute == .trailing && $0.firstItem as! NSObject == object
+                    })
+                    replaceConstant(object: object, from: traillingC.from, to: traillingC.to, percent: 0, layouts: traillingLayouts)
+                }
+                
+                if let topC = top, let superView = object.superview {
+                    let topLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                        $0.firstAttribute == .top && $0.firstItem as! NSObject == object
+                    })
+                    replaceConstant(object: object, from: topC.from, to: topC.to, percent: 0, layouts: topLayouts)
+                }
+                
+                if let bottomC = bottom, let superView = object.superview {
+                    let bottomLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
+                        $0.firstAttribute == .bottom && $0.firstItem as! NSObject == object
+                    })
+                    replaceConstant(object: object, from: bottomC.from, to: bottomC.to, percent: 0, layouts: bottomLayouts)
+                }
                 break
             }
             return false
