@@ -6,21 +6,20 @@
 //
 
 import UIKit
-import SnapKit
 
-class HWNavigationView: UIView {
+public class HWNavigationView: UIView {
     
-    struct HWNavigationEffectObject {
+    public struct HWNavigationEffectObject {
         weak var obj:UIView?
         var effectArray:Array = Array<HWNavigationEffectType>()
     }
     
-    struct HWNavigationFromTo:Equatable {
+    public struct HWNavigationFromTo:Equatable {
         var from:CGFloat
         var to:CGFloat
     }
     
-    enum HWNavigationEffectType:Equatable {
+    public enum HWNavigationEffectType:Equatable {
         case fadeIn(minAlpha:CGFloat,maxAlpha:CGFloat)
         case fadeOut(minAlpha:CGFloat,maxAlpha:CGFloat)
         case viewSizeIncrease(minWidth:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
@@ -81,12 +80,12 @@ class HWNavigationView: UIView {
     
     //MARK: lifeCycle
     
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         initUI()
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         self.lineView.layer.shadowOpacity = 1
         self.lineView.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.lineView.layer.shadowRadius = 1
@@ -97,12 +96,11 @@ class HWNavigationView: UIView {
     private func initUI() {
         self.lineView.backgroundColor = UIColor(displayP3Red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
         self.addSubview(self.lineView)
-        self.lineView.snp.makeConstraints({ make in
-            make.leading.equalTo(self.snp.leading).offset(0)
-            make.trailing.equalTo(self.snp.trailing).offset(0)
-            make.bottom.equalTo(self.snp.bottom).offset(-1)
-            make.height.equalTo(1)
-        })
+        self.lineView.translatesAutoresizingMaskIntoConstraints = false
+        self.lineView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.lineView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.lineView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1).isActive = true
+        self.lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         self.lineView.alpha = 0
     }
     
