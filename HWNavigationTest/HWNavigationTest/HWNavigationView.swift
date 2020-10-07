@@ -16,8 +16,8 @@ class HWNavigationView: UIView {
     }
     
     enum HWNavigationEffectType:Equatable {
-        case fadeIn
-        case fadeOut
+        case fadeIn(minAlpha:CGFloat,maxAlpha:CGFloat)
+        case fadeOut(minAlpha:CGFloat,maxAlpha:CGFloat)
         case viewSizeIncrease(minWidth:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
         case viewSizeDecrease(minWidth:CGFloat,maxWidth:CGFloat,minHeight:CGFloat,maxHeight:CGFloat)
         case labelFontSizeIncrease(minFontSize:CGFloat,maxFontSize:CGFloat)
@@ -35,11 +35,18 @@ class HWNavigationView: UIView {
     
     private var currentYOffset:CGFloat = 0.0 {
         didSet {
-            if showEffetOffset >= currentYOffset {
+            if currentYOffset < 0 {
+                if !flagOf0percent {
+                    showEffects(percent: 0)
+                    flagOf0percent = true
+                }
+            }
+            else if showEffetOffset >= currentYOffset {
                 //                print("percent:\((self.currentYOffset/self.showEffetOffset) * 100 )")
                 let percent:CGFloat = self.currentYOffset/self.showEffetOffset
                 self.lineView.alpha = self.currentYOffset/self.showEffetOffset
                 self.flagOf100percent = false
+                self.flagOf0percent = false
                 if percent >= 0 {
                     showEffects(percent: percent)
                 }
@@ -57,19 +64,14 @@ class HWNavigationView: UIView {
             }
         }
     }
-    private var scrollVelocity:CGFloat = 0.0 {
-        didSet {
-            if self.scrollVelocity > 100 {
-                if showEffetOffset >= currentYOffset {
-                    let percent:CGFloat = 0
-                    showEffects(percent: percent)
-                }
-            }
-        }
-    }
+    
+    private var effectObjects:Array = Array<HWNavigationEffectObject>()
     
     private var flagOf100percent:Bool = false
-    private var effectObjects:Array = Array<HWNavigationEffectObject>()
+    private var flagOf0percent:Bool = false
+    
+    private var selfResizeHeightFrom:CGFloat? = nil
+    private var selfResizeHeightTo:CGFloat? = nil
     
     
     //MARK: lifeCycle
@@ -108,10 +110,12 @@ class HWNavigationView: UIView {
                 for j in 0..<effects.count {
                     let effect = effects[j]
                     switch effect {
-                    case .fadeIn:
-                        obj.alpha = percent
-                    case .fadeOut:
-                        obj.alpha = 1 - percent
+                    case .fadeIn(let minAlpha,let maxAlpha):
+                        let gap:CGFloat = maxAlpha - minAlpha
+                        obj.alpha = minAlpha + gap * percent
+                    case .fadeOut(let minAlpha,let maxAlpha):
+                        let gap:CGFloat = maxAlpha - minAlpha
+                        obj.alpha = minAlpha + (1 - gap * percent)
                         break
                     case .viewSizeIncrease(let minWidth,let maxWidth, let minHeight, let maxHeight):
                         let widthHeightLayouts:Array<NSLayoutConstraint> = obj.constraints.filter({
@@ -169,24 +173,39 @@ class HWNavigationView: UIView {
                 }
             }
         }
+        
+        if let from = self.selfResizeHeightFrom, let to = self.selfResizeHeightTo {
+            let heightLayouts:Array<NSLayoutConstraint> = self.constraints.filter({
+                $0.firstAttribute == .height
+            })
+            let isIncresase:Bool = to > from
+            let gap:CGFloat = isIncresase ? (to - from) : (from - to)
+            _ = heightLayouts.map {
+                if isIncresase {
+                    $0.constant = from + (gap * percent)
+                }
+                else {
+                    $0.constant = from - (gap * percent)
+                }
+            }
+        }
     }
     
     //MARK: public func
     
     public func scrollViewDidScroll(_ scrollView:UIScrollView) {
         self.currentYOffset = scrollView.contentOffset.y
-        self.scrollVelocity = scrollView.panGestureRecognizer.velocity(in: self).y
     }
     
     public func addEffect(object:UIView,effets:Array<HWNavigationEffectType>) {
         let obj:HWNavigationEffectObject = HWNavigationEffectObject(obj: object, effectArray: effets)
         _ = effets.filter {
             switch $0 {
-            case .fadeIn:
-                object.alpha = 0
+            case let .fadeIn(minAlpha,_):
+                object.alpha = minAlpha
                 break
-            case .fadeOut:
-                object.alpha = 1
+            case let .fadeOut(_,maxAlpha):
+                object.alpha = maxAlpha
                 break
             case let .viewSizeIncrease(minWidth,_,minHeight,_):
                 let widthHeightLayouts:Array<NSLayoutConstraint> = object.constraints.filter({
@@ -250,6 +269,20 @@ class HWNavigationView: UIView {
         return result
     }
     
-    //MARK: action
+    public func addNavigationResizableHeight(from:CGFloat,to:CGFloat) {
+        self.selfResizeHeightFrom = from
+        self.selfResizeHeightTo = to
+        let heightLayouts:Array<NSLayoutConstraint> = self.constraints.filter({
+            $0.firstAttribute == .height
+        })
+        _ = heightLayouts.map {
+            $0.constant = from
+        }
+    }
+    
+    public func removeNavigationResizableHeight() {
+        self.selfResizeHeightFrom = nil
+        self.selfResizeHeightTo = nil
+    }
 
 }
