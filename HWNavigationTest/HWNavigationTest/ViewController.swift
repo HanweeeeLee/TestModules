@@ -21,8 +21,9 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWidth: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeIn])
+        myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWidth: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeOut(minAlpha: 0, maxAlpha: 1)])
         myNavi.addEffect(object: myLabel, effets: [.labelFontSizeIncrease(minFontSize: 10, maxFontSize: 20)])
+        myNavi.addNavigationResizableHeight(from: 200, to: 100)
     }
 
 
@@ -34,7 +35,7 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = UITableViewCell()
+        let cell:UITableViewCell = UITableViewCell()
         if indexPath.row%2 == 0 {
 //            cell.contentView.backgroundColor = .brown
         }
@@ -45,9 +46,7 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print("scrollViewTest!!:\(scrollView.contentOffset.y)")
         myNavi.scrollViewDidScroll(scrollView)
-//        self.widthConstraint.constant += 1
     }
     
 }
