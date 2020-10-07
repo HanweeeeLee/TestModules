@@ -21,9 +21,9 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWidth: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeOut(minAlpha: 0, maxAlpha: 1)])
+        myNavi.addEffect(object: myView, effets: [.viewSizeIncrease(minWidth: self.widthConstraint.constant, maxWidth: self.widthConstraint.constant + 5, minHeight: self.widthConstraint.constant, maxHeight: self.widthConstraint.constant + 5),.fadeOut(minAlpha: 1, maxAlpha: 1),.replaceConstant(leading: HWNavigationView.HWNavigationFromTo(from: 10, to: 20), trailling: nil, top: HWNavigationView.HWNavigationFromTo(from: 0, to: 20), bottom: nil)])
         myNavi.addEffect(object: myLabel, effets: [.labelFontSizeIncrease(minFontSize: 10, maxFontSize: 20)])
-        myNavi.addNavigationResizableHeight(from: 200, to: 100)
+        myNavi.addNavigationResizableHeight(from: 100, to: 200)
     }
 
 
@@ -37,10 +37,10 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell()
         if indexPath.row%2 == 0 {
-//            cell.contentView.backgroundColor = .brown
+            cell.contentView.backgroundColor = .brown
         }
         else {
-//            cell.contentView.backgroundColor = .darkGray
+            cell.contentView.backgroundColor = .darkGray
         }
         return cell
     }
