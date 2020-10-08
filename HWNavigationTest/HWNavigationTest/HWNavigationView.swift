@@ -294,10 +294,10 @@ public class HWNavigationView: UIView {
         var offset:CGFloat = 0
         switch (to.rawValue() - from.rawValue()) {
         case -2:
-            offset = -((UIScreen.main.bounds.width/2 * percent - (halfWidth * percent)) * 2)
+            offset = -((UIScreen.main.bounds.width/2 * percent - (halfWidth * percent)) * 2) - (sourceOffset * percent) + (destinationOffset * percent)
             break
         case -1:
-            offset = -(UIScreen.main.bounds.width/2 * percent - (halfWidth * percent))
+            offset = -(UIScreen.main.bounds.width/2 * percent - (halfWidth * percent) - (sourceOffset * percent) + (destinationOffset * percent))
             break
         case 0:
             break
@@ -305,7 +305,7 @@ public class HWNavigationView: UIView {
             offset = (UIScreen.main.bounds.width/2 * percent - (halfWidth * percent) - (sourceOffset * percent) + (destinationOffset * percent))
             break
         case 2:
-            offset = (UIScreen.main.bounds.width/2 * percent - (halfWidth * percent)) * 2
+            offset = (UIScreen.main.bounds.width/2 * percent - (halfWidth * percent)) * 2 - (sourceOffset * percent) + (destinationOffset * percent)
             break
         default:
             print("unexpected error")
