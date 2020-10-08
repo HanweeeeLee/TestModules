@@ -19,6 +19,10 @@ public class HWNavigationView: UIView {
     }
     
     public struct HWNavigationFromTo:Equatable {
+        public init(from:CGFloat,to:CGFloat) {
+            self.from = from
+            self.to = to
+        }
         var from:CGFloat
         var to:CGFloat
     }
