@@ -64,6 +64,7 @@ public class HWNavigationView: UIView {
         didSet {
             if currentYOffset < 0 {
                 if !flagOf0percent {
+                    self.lineView.alpha = 0
                     showEffects(percent: 0)
                     flagOf0percent = true
                 }
@@ -171,26 +172,6 @@ public class HWNavigationView: UIView {
                             }
                         }
                         break
-                    case .labelFontSizeIncrease(let minFontSize,let maxFontSize):
-                        if type(of: obj) != UILabel.self {
-                            print("only use UILabel")
-                            return
-                        }
-                        let label:UILabel = obj as! UILabel
-                        let gap:CGFloat = maxFontSize - minFontSize
-                        let size:CGFloat = gap * percent + minFontSize
-                        label.font = UIFont(name: label.font.fontName, size: size)
-                        break
-                    case .labelFontSizeDecrease(let minFontSize,let maxFontSize):
-                        if type(of: obj) != UILabel.self {
-                            print("only use UILabel")
-                            return
-                        }
-                        let label:UILabel = obj as! UILabel
-                        let gap:CGFloat = maxFontSize - minFontSize
-                        let size:CGFloat = gap * (1 - percent) + minFontSize
-                        label.font = UIFont(name: label.font.fontName, size: size)
-                        break
                     case .replaceConstant(leading: let leading, trailling: let trailling, top: let top, bottom: let bottom):
                         if let leadingC = leading, let superView = obj.superview {
                             let leadingLayouts:Array<NSLayoutConstraint> = superView.constraints.filter({
@@ -229,6 +210,30 @@ public class HWNavigationView: UIView {
                                 $0.firstAttribute == .width
                             })
                             moveCenterXConstraint(object: obj, from: from, to: to, percent: percent, centerLayouts: centerLayouts,widthLayouts: widthLayouts)
+                        }
+                        break
+                    case .labelFontSizeIncrease(let minFontSize,let maxFontSize):
+                        if type(of: obj) != UILabel.self {
+                            print("only use UILabel")
+                            return
+                        }
+                        let label:UILabel = obj as! UILabel
+                        let gap:CGFloat = maxFontSize - minFontSize
+                        let size:Int = Int(gap * percent + minFontSize)
+                        if Int(label.font.pointSize) != size {
+                            label.font = UIFont(name: label.font.fontName, size: CGFloat(size))
+                        }
+                        break
+                    case .labelFontSizeDecrease(let minFontSize,let maxFontSize):
+                        if type(of: obj) != UILabel.self {
+                            print("only use UILabel")
+                            return
+                        }
+                        let label:UILabel = obj as! UILabel
+                        let gap:CGFloat = maxFontSize - minFontSize
+                        let size:Int = Int(gap * (1 - percent) + minFontSize)
+                        if Int(label.font.pointSize) != size {
+                            label.font = UIFont(name: label.font.fontName, size: CGFloat(size))
                         }
                         break
                     }
