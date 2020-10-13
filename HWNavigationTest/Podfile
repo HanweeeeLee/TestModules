@@ -6,6 +6,5 @@ target 'HWNavigationTest' do
   use_frameworks!
 
   # Pods for HWNavigationTest
-  pod 'SnapKit', '~> 5.0.0'
 
 end

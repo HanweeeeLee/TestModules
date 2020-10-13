@@ -7,17 +7,19 @@
 
 import UIKit
 
-class HWXMLEelement: NSObject {
-    weak var parentsElement:HWXMLEelement?
-    var childrenEelement:Array<HWXMLEelement> = Array()
-    var name:String
-    var value:String = ""
+public class HWXMLEelement: NSObject {
     
-    init(name:String) {
+    internal weak var parentsElement:HWXMLEelement?
+    internal var childrenEelement:Array<HWXMLEelement> = Array()
+    internal var name:String
+    internal var attributes:[String:String] = Dictionary()
+    internal var value:String = ""
+    
+    public init(name:String) {
         self.name = name
     }
     
-    convenience init(name:String,parentsElement:HWXMLEelement) {
+    public convenience init(name:String,parentsElement:HWXMLEelement) {
         self.init(name:name)
         self.parentsElement = parentsElement
     }

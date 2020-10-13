@@ -24,7 +24,12 @@ public class HWXMLParser:NSObject { //only supports utf-8 formmat
         let children:Array<HWXMLEelement> = element.childrenEelement
         for i in 0..<children.count {
             if children[i].childrenEelement.count == 0 {
-                dictionary[children[i].name] = children[i].value
+                if children[i].attributes.count > 0 {//todo attributes 적용
+                    dictionary[children[i].name] = children[i].value
+                }
+                else {
+                    dictionary[children[i].name] = children[i].value
+                }
             }
             else {
                 var newDictionary:[String:Any] = Dictionary()
@@ -160,11 +165,13 @@ extension HWXMLParser:XMLParserDelegate {
     public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if self.elementStack.count > 0 {
             let newElement:HWXMLEelement = HWXMLEelement.init(name: elementName, parentsElement: self.elementStack.last!)
+            newElement.attributes = attributeDict
             self.elementStack.last!.childrenEelement.append(newElement)
             self.elementStack.append(newElement)
         }
         else {
             let newElement:HWXMLEelement = HWXMLEelement.init(name: elementName)
+            newElement.attributes = attributeDict
             self.rootEelement = newElement
             self.elementStack.append(newElement)
         }
@@ -186,4 +193,5 @@ extension HWXMLParser:XMLParserDelegate {
             }
         }
     }
+    
 }
