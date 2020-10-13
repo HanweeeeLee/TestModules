@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class HWXMLParser:NSObject {
+public class HWXMLParser:NSObject { //only supports utf-8 formmat
     
     //MARK: private property
     private var parser:XMLParser? = nil
@@ -50,6 +50,51 @@ public class HWXMLParser:NSObject {
         }
     }
     
+    private func makeXMLElementFromDictionary(element:inout HWXMLEelement,dictionary:[String:Any]) {
+        let allKeys:Array<String> = Array(dictionary.keys)
+        for i in 0..<allKeys.count {
+            let key = allKeys[i]
+            if (dictionary[key] as? Array<[String:Any]>) != nil {
+                let array:Array<[String:Any]> = (dictionary[key] as! Array<[String:Any]>)
+                for j in 0..<array.count {
+                    var newElemnet:HWXMLEelement = HWXMLEelement(name: key, parentsElement: element)
+                    makeXMLElementFromDictionary(element: &newElemnet, dictionary: array[j])
+                    element.childrenEelement.append(newElemnet)
+                }
+            }
+            else if (dictionary[key] as? [String:Any]) != nil {
+                var newElement:HWXMLEelement = HWXMLEelement(name: key, parentsElement: element)
+                makeXMLElementFromDictionary(element: &newElement, dictionary: (dictionary[key] as! [String:Any]))
+                element.childrenEelement.append(newElement)
+            }
+            else if (dictionary[key] as? String) != nil {
+                let newElement:HWXMLEelement = HWXMLEelement(name: key, parentsElement: element)
+                newElement.value = (dictionary[key] as! String)
+                element.childrenEelement.append(newElement)
+            }
+            else {
+                //unexpected
+            }
+        }
+    }
+    
+    private func makeXMLStringFromXMLElement(element:HWXMLEelement,beforeString:String) -> String {
+        var returnString:String = beforeString
+        if element.childrenEelement.count > 0 {
+            returnString += "<\(element.name)>\n"
+            for i in 0..<element.childrenEelement.count {
+                let childElement:HWXMLEelement = element.childrenEelement[i]
+                returnString = makeXMLStringFromXMLElement(element: childElement, beforeString: returnString)
+                
+            }
+            returnString += "</\(element.name)>\n"
+        }
+        else {
+            returnString += "<\(element.name)>\(element.value)\("</\(element.name)>")\n"
+        }
+        return returnString
+    }
+    
     //MARK: public func
     
     public func parse(data:Data) -> HWXMLEelement? {
@@ -61,11 +106,11 @@ public class HWXMLParser:NSObject {
     
     public func toDictionary(element:HWXMLEelement) -> [String:Any]? {
         var returnValue:[String:Any]? = nil
-            var rootDic:[String:Any] = Dictionary()
-            var newDic:[String:Any] = Dictionary()
-            makeXMLtoDictionary(dictionary: &newDic, element: element)
-            rootDic[element.name] = newDic
-            returnValue = rootDic
+        var rootDic:[String:Any] = Dictionary()
+        var newDic:[String:Any] = Dictionary()
+        makeXMLtoDictionary(dictionary: &newDic, element: element)
+        rootDic[element.name] = newDic
+        returnValue = rootDic
         return returnValue
     }
     
@@ -81,6 +126,31 @@ public class HWXMLParser:NSObject {
             }
         }
         
+        return returnValue
+    }
+    
+    public func toXMLElement(dictionary:[String:Any]) -> HWXMLEelement? {
+        var returnValue:HWXMLEelement? = nil
+        let keys = Array(dictionary.keys)
+        for i in 0..<keys.count {
+            var element:HWXMLEelement = HWXMLEelement(name: keys[i])
+            if (dictionary[keys[i]] as? Array<[String:Any]>) != nil {
+                print("unexpected error")
+            }
+            else {
+                makeXMLElementFromDictionary(element: &element, dictionary: dictionary[keys[i]] as! [String : Any])
+                returnValue = element
+            }
+        }
+        return returnValue
+    }
+    
+    public func toXMLString(dictionary:[String:Any]) -> String? {
+        var returnValue:String? = nil
+        if let root:HWXMLEelement = toXMLElement(dictionary: dictionary) {
+            let header:String = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"
+            returnValue = makeXMLStringFromXMLElement(element: root, beforeString: header)
+        }
         return returnValue
     }
     
