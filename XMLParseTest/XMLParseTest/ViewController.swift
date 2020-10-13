@@ -15,7 +15,11 @@ class ViewController: UIViewController {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let parser = HWXMLParser()
-                print("test:\(String(describing: parser.parse(data:data)))")
+                let rootDic = parser.parse(data:data)
+                
+                print("json:\(String(describing: String(data: parser.toJson(element: rootDic!)!, encoding: .utf8)))")
+                print("break")
+                print("xml:\(parser.toXMLString(dictionary: parser.toDictionary(element: rootDic!)!)!)")
             } catch {
                 print("err")
             }
