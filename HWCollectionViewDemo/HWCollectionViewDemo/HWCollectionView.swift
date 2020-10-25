@@ -31,10 +31,6 @@ import SnapKit
     func hwCollectionView(_ collectionView: HWCollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
-//@objc protocol HWCollectionViewDelegateFlowLayout:class {
-//    func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-//}
-
 @objc protocol HWCollectionViewDelegateFlowLayout: HWCollectionViewDelegate {
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
@@ -48,7 +44,12 @@ class HWCollectionView: UIView {
     
     //MARK: public property
     
-    public weak var delegate: HWCollectionViewDelegate?
+    public weak var delegate: HWCollectionViewDelegate? {
+        willSet {
+            self.flowLayoutDelegate = newValue as? HWCollectionViewDelegateFlowLayout
+        }
+    }
+    
     public weak var dataSource: HWCollectionViewDatasource?
     
     public lazy var collectionView: UICollectionView = UICollectionView(frame: self.bounds, collectionViewLayout: UICollectionViewLayout())
@@ -73,6 +74,7 @@ class HWCollectionView: UIView {
     }
     
     //MARK: private property
+    private var flowLayoutDelegate:HWCollectionViewDelegateFlowLayout?
     private var isShowDisplayAnimation:Bool = true
     private var isShowingSkeletonView:Bool = false
     private var isOverMinimumSkeletionTimer:Bool = true
@@ -272,15 +274,18 @@ extension HWCollectionView: UICollectionViewDelegate {
 }
 
 extension HWCollectionView: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return self.delegate?.hwCollectionView?(self, layout: collectionViewLayout, sizeForItemAt: indexPath) ?? CGSize(width: 0, height: 0)
-//    }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        let edgeInsets:UIEdgeInsets = .init(top: 0,
-//                                            left: self.issuerCollectionViewLeftRightMargin,
-//                                            bottom: 0,
-//                                            right: self.issuerCollectionViewLeftRightMargin)
-//        return edgeInsets
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, sizeForItemAt: indexPath) ?? CGSize(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let edgeInsets:UIEdgeInsets = self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, insetForSectionAt: section) ?? .init(top: 0, left: 0, bottom: 0, right: 0)
+        return edgeInsets
+    }
+    
+    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
+    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
+    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize
 }
