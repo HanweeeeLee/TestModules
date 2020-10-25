@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-HWCollectionViewDemo/Pods-HWCollectionViewDemo-frameworks.sh
+${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
