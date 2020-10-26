@@ -284,8 +284,20 @@ extension HWCollectionView: UICollectionViewDelegateFlowLayout {
         return edgeInsets
     }
     
-    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
-    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
-    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
-    //@objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, minimumLineSpacingForSectionAt: section) ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: section) ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, referenceSizeForHeaderInSection: section) ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, referenceSizeForFooterInSection: section) ?? 0
+    }
+    
 }
