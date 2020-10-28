@@ -11,6 +11,34 @@ import SkeletonView
 import SnapKit
 
 @objc protocol HWCollectionViewDelegate: class {
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
+    @objc optional func hwCollectionView( _collectionView: HWCollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?)
+    @objc optional func hwCollectionViewDidEndMultipleSelectionInteraction(_ collectionView: HWCollectionView)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didSelectItemAt indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didDeselectItemAt indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didHighlightItemAt indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didUnhighlightItemAt indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, canEditItemAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, canFocusItemAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willEndContextMenuInteraction configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath
+//    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, transitionLayoutForOldLayout fromLayout: UICollectionViewLayout, newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout
     
     @objc optional func scrollViewDidScroll(_ scrollView: UIScrollView)
     @objc optional func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
@@ -26,12 +54,19 @@ import SnapKit
 }
 
 @objc protocol HWCollectionViewDatasource: class {
-//    func hwTableView(_ hwTableView: HWTableView, numberOfRowsInSection section: Int) -> Int
+    func hwCollectionViewSekeletonViewCellIdentifier(_ hwCollectionView: HWCollectionView) -> String
+    
     func hwCollectionView(_ collectionView: HWCollectionView, numberOfItemsInSection section: Int) -> Int
     func hwCollectionView(_ collectionView: HWCollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, canMoveItemAt indexPath: IndexPath) -> Bool
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    @objc optional func hwCollectionView(_ collectionView: HWCollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath
 }
 
 @objc protocol HWCollectionViewDelegateFlowLayout: HWCollectionViewDelegate {
+    
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
@@ -52,12 +87,13 @@ class HWCollectionView: UIView {
     
     public weak var dataSource: HWCollectionViewDatasource?
     
-    public lazy var collectionView: UICollectionView = UICollectionView(frame: self.bounds, collectionViewLayout: UICollectionViewLayout())
+    public lazy var collectionView: reloadHandlerCollectionView = reloadHandlerCollectionView(frame: self.bounds, collectionViewLayout: UICollectionViewLayout())
     
     public var callNextPageBeforeOffset: CGFloat = 150
     
-    public var minimumSkeletonSecond: CGFloat = 0.5
-    public var collectionViewLayout: UICollectionViewLayout = UICollectionViewLayout() {
+    public var minimumSkeletonSecond: CGFloat = 1.5
+    
+    public var collectionViewLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout() {
         didSet {
             self.collectionView.collectionViewLayout = self.collectionViewLayout
         }
@@ -108,17 +144,17 @@ class HWCollectionView: UIView {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.isSkeletonable = true
+        self.collectionView.isSkeletonable = true
+        self.showAnimatedGradientSkeleton()
         self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        self.collectionView.reloadCompleteHandler = { [weak self] in
+            if self != nil {
+                if !self!.isShowingSkeletonView && self!.isShowDisplayAnimation {
+                    self!.isShowDisplayAnimation = false
+                }
+            }
+        }
     }
-    
-//    private func getSkeletonCellBestCount(cellHeight:CGFloat) -> Int {
-//        var result:Int = 0
-//        result = Int(self.bounds.height/cellHeight)
-//        if self.bounds.height.truncatingRemainder(dividingBy: cellHeight) != 0 {
-//            result += 1
-//        }
-//        return result
-//    }
     
     @objc private func minimumSkeletionTimerCallback() {
         self.isOverMinimumSkeletionTimer = true
@@ -146,7 +182,6 @@ class HWCollectionView: UIView {
             DispatchQueue.main.async { [weak self] in
                 self?.stopSkeletonAnimation()
                 self?.hideSkeleton()
-                self?.collectionView.reloadData() //리로드를 안해주면 데이터가 이상하게 set된다 ㅡㅡ; skeletonview 버그인듯
                 self?.isShowingSkeletonView = false
                 self?.isShowDisplayAnimation = true
             }
@@ -222,9 +257,163 @@ extension HWCollectionView: UICollectionViewDataSource {
         return self.dataSource!.hwCollectionView(self, cellForItemAt: indexPath)
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return self.dataSource?.hwCollectionView?(self, viewForSupplementaryElementOfKind: kind, at: indexPath) ?? UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return self.dataSource?.hwCollectionView?(self, canMoveItemAt: indexPath) ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        self.dataSource?.hwCollectionView?(self, moveItemAt: sourceIndexPath, to: destinationIndexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+        return self.dataSource?.hwCollectionView?(self, indexPathForIndexTitle: title, at: index) ?? IndexPath()
+    }
+    
+}
+
+extension HWCollectionView:SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return self.dataSource?.hwCollectionViewSekeletonViewCellIdentifier(self) ?? ""
+    }
+    
+//    func collectionSkeletonView(_ skeletonView: UICollectionView, supplementaryViewIdentifierOfKind: String, at indexPath: IndexPath) -> ReusableCellIdentifier? {
+//
+//    }
+//
+//    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 1
+//    }
 }
 
 extension HWCollectionView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !self.isShowingSkeletonView && self.isShowDisplayAnimation {
+            cell.transform = CGAffineTransform(translationX: 0, y: 100 * 1.0)
+            cell.alpha = 0
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0 * Double(indexPath.row),
+                options: [.curveEaseInOut],
+                animations: {
+                    cell.transform = CGAffineTransform(translationX: 0, y: 0)
+                    cell.alpha = 1
+                })
+        }
+        self.delegate?.hwCollectionView?(self, willDisplay: cell, forItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(_collectionView: self, didEndDisplaying: cell, forItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+        self.delegate?.hwCollectionView?(self, willDisplayContextMenu: configuration, animator: animator)
+    }
+    
+    func collectionViewDidEndMultipleSelectionInteraction(_ collectionView: UICollectionView) {
+        self.delegate?.hwCollectionViewDidEndMultipleSelectionInteraction?(self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, didSelectItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, didDeselectItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, didHighlightItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, didUnhighlightItemAt: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, didBeginMultipleSelectionInteractionAt: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.hwCollectionView?(self, canEditItemAt: indexPath) ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.hwCollectionView?(self, canFocusItemAt: indexPath) ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.hwCollectionView?(self, shouldSelectItemAt: indexPath) ?? true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.hwCollectionView?(self, shouldDeselectItemAt: indexPath) ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.hwCollectionView?(self, shouldHighlightItemAt: indexPath) ?? true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.hwCollectionView?(self, shouldBeginMultipleSelectionInteractionAt: indexPath) ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
+        return self.delegate?.hwCollectionView?(self, shouldUpdateFocusIn: context) ?? false
+    }
+
+    func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        return self.delegate?.hwCollectionView?(self, targetContentOffsetForProposedContentOffset: proposedContentOffset) ?? CGPoint(x: 0, y: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willEndContextMenuInteraction configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+        self.delegate?.hwCollectionView?(self, willEndContextMenuInteraction: configuration, animator: animator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return self.delegate?.hwCollectionView?(self, previewForDismissingContextMenuWithConfiguration: configuration)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return self.delegate?.hwCollectionView?(self, previewForHighlightingContextMenuWithConfiguration: configuration)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        self.delegate?.hwCollectionView?(self, didUpdateFocusIn: context, with: coordinator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        self.delegate?.hwCollectionView?(self, willPerformPreviewActionForMenuWith: configuration, animator: animator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return self.delegate?.hwCollectionView?(self, contextMenuConfigurationForItemAt: indexPath, point: point)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
+        return self.delegate?.hwCollectionView?(self, shouldSpringLoadItemAt: indexPath, with: context) ?? false
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, willDisplaySupplementaryView: view, forElementKind: elementKind, at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        self.delegate?.hwCollectionView?(self, didEndDisplayingSupplementaryView: view, forElementOfKind: elementKind, at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+        return self.delegate?.hwCollectionView?(self, targetIndexPathForMoveFromItemAt: originalIndexPath, toProposedIndexPath: proposedIndexPath) ?? IndexPath()
+    }
+    
+    //        func collectionView(_ collectionView: UICollectionView, transitionLayoutForOldLayout fromLayout: UICollectionViewLayout, newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
+    //            return self.delegate?.hwCollectionView?(self, transitionLayoutForOldLayout: fromLayout, newLayout: toLayout)
+    //        }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.delegate?.scrollViewDidScroll?(scrollView)
@@ -285,19 +474,31 @@ extension HWCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, minimumLineSpacingForSectionAt: section) ?? 0
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, minimumLineSpacingForSectionAt: section) ?? self.collectionViewLayout.minimumLineSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: section) ?? 0
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: section) ?? self.collectionViewLayout.minimumInteritemSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, referenceSizeForHeaderInSection: section) ?? 0
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, referenceSizeForHeaderInSection: section) ?? CGSize(width: 0, height: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, referenceSizeForFooterInSection: section) ?? 0
+        return self.flowLayoutDelegate?.hwCollectionView?(self, layout: collectionViewLayout, referenceSizeForFooterInSection: section) ?? CGSize(width: 0, height: 0)
     }
     
+}
+
+class reloadHandlerCollectionView: UICollectionView {
+    //https://medium.com/@jongwonwoo/uicollectionview-reloaddata-%EA%B0%80-%EC%99%84%EB%A3%8C%EB%90%9C-%EC%8B%9C%EC%A0%90%EC%9D%84-%EC%95%8C%EC%95%84%EB%82%B4%EB%8A%94-%EC%95%88%EC%A0%84%ED%95%9C-%EB%B0%A9%EB%B2%95-fa9bac8d0a89
+    var reloadCompleteHandler: (() -> ())?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let closure = self.reloadCompleteHandler {
+            closure()
+        }
+    }
 }
