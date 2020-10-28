@@ -5,7 +5,6 @@
 //  Created by hanwe lee on 2020/10/16.
 //  Copyright © 2020 hanwe. All rights reserved.
 //
-
 import UIKit
 import SkeletonView
 import SnapKit
@@ -13,6 +12,7 @@ import SnapKit
 @objc protocol HWCollectionViewDelegate: class {
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
     @objc optional func hwCollectionView( _collectionView: HWCollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
+    @available(iOS 13.0, *)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?)
     @objc optional func hwCollectionViewDidEndMultipleSelectionInteraction(_ collectionView: HWCollectionView)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didSelectItemAt indexPath: IndexPath)
@@ -28,11 +28,16 @@ import SnapKit
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint
+    @available(iOS 13.0, *)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willEndContextMenuInteraction configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?)
+    @available(iOS 13.0, *)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?
+    @available(iOS 13.0, *)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator)
+    @available(iOS 13.0, *)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating)
+    @available(iOS 13.0, *)
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath)
@@ -59,6 +64,7 @@ import SnapKit
     func hwCollectionView(_ collectionView: HWCollectionView, numberOfItemsInSection section: Int) -> Int
     func hwCollectionView(_ collectionView: HWCollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     
+    @objc optional func numberOfSections(in collectionView: HWCollectionView) -> Int
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, canMoveItemAt indexPath: IndexPath) -> Bool
     @objc optional func hwCollectionView(_ collectionView: HWCollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
@@ -108,6 +114,11 @@ class HWCollectionView: UIView {
             self.collectionView.showsVerticalScrollIndicator = self.showsVerticalScrollIndicator
         }
     }
+    public var bounces:Bool = true {
+        didSet {
+            self.collectionView.bounces = self.bounces
+        }
+    }
     
     //MARK: private property
     private var flowLayoutDelegate:HWCollectionViewDelegateFlowLayout?
@@ -145,7 +156,6 @@ class HWCollectionView: UIView {
         self.collectionView.dataSource = self
         self.isSkeletonable = true
         self.collectionView.isSkeletonable = true
-        self.showAnimatedGradientSkeleton()
         self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         self.collectionView.reloadCompleteHandler = { [weak self] in
             if self != nil {
@@ -247,6 +257,10 @@ class HWCollectionView: UIView {
 }
 
 extension HWCollectionView: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return self.dataSource?.numberOfSections?(in: self) ?? 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let ds = self.dataSource  else { return 0 }
         self.numberOfItems = UInt(ds.hwCollectionView(self, numberOfItemsInSection: section))
@@ -311,6 +325,7 @@ extension HWCollectionView: UICollectionViewDelegate {
         self.delegate?.hwCollectionView?(_collectionView: self, didEndDisplaying: cell, forItemAt: indexPath)
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, willDisplayContextMenu configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
         self.delegate?.hwCollectionView?(self, willDisplayContextMenu: configuration, animator: animator)
     }
@@ -371,14 +386,17 @@ extension HWCollectionView: UICollectionViewDelegate {
         return self.delegate?.hwCollectionView?(self, targetContentOffsetForProposedContentOffset: proposedContentOffset) ?? CGPoint(x: 0, y: 0)
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, willEndContextMenuInteraction configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
         self.delegate?.hwCollectionView?(self, willEndContextMenuInteraction: configuration, animator: animator)
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return self.delegate?.hwCollectionView?(self, previewForDismissingContextMenuWithConfiguration: configuration)
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return self.delegate?.hwCollectionView?(self, previewForHighlightingContextMenuWithConfiguration: configuration)
     }
@@ -387,10 +405,12 @@ extension HWCollectionView: UICollectionViewDelegate {
         self.delegate?.hwCollectionView?(self, didUpdateFocusIn: context, with: coordinator)
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         self.delegate?.hwCollectionView?(self, willPerformPreviewActionForMenuWith: configuration, animator: animator)
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return self.delegate?.hwCollectionView?(self, contextMenuConfigurationForItemAt: indexPath, point: point)
     }
