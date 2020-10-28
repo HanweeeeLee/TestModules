@@ -22,8 +22,13 @@ class ViewController: UIViewController {
         self.collectionView.collectionViewLayout = layout
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.showsVerticalScrollIndicator = true
+        self.collectionView.showSkeletonHW()
     }
-
+    
+    @IBAction func testAction(_ sender: Any) {
+        
+    }
+    
 }
 
 extension ViewController: HWCollectionViewDelegate {
@@ -31,6 +36,10 @@ extension ViewController: HWCollectionViewDelegate {
 }
 
 extension ViewController: HWCollectionViewDatasource {
+    func hwCollectionViewSekeletonViewCellIdentifier(_ hwCollectionView: HWCollectionView) -> String {
+        return "MyCollectionViewCell"
+    }
+    
     func hwCollectionView(_ collectionView: HWCollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
     }

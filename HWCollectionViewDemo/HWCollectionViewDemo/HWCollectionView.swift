@@ -180,7 +180,7 @@ class HWCollectionView: UIView {
             self?.minimumSkeletionTimer = Timer.scheduledTimer(timeInterval: TimeInterval(self!.minimumSkeletonSecond), target: self!, selector: #selector(self!.minimumSkeletionTimerCallback), userInfo: nil, repeats: false)
             self?.isShowDisplayAnimation = false
             self?.collectionView.isSkeletonable = true
-            self?.showAnimatedGradientSkeleton()
+            self?.showAnimatedGradientSkeleton(transition: .crossDissolve(0.001))
             self?.startSkeletonAnimation()
             self?.isShowingSkeletonView = true
         }
