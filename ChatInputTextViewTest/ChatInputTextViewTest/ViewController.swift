@@ -24,7 +24,6 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification , object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification , object:nil)
         self.myTextView.delegate = self
-        self.myTextView.myDelegate = self
         self.originContainerViewHeight = self.containerViewHeightConstraint.constant
     }
         
@@ -53,7 +52,7 @@ extension ViewController: UITextViewDelegate, MyTestViewProtocol {
     }
 }
 
-protocol MyTestViewProtocol: class {
+protocol MyTestViewProtocol:UITextViewDelegate {
     func changeLine(view: MyTestView, line: UInt)
     func contentsSize(view: MyTestView, size:CGSize)
 }
@@ -75,11 +74,14 @@ class MyTestView: UITextView {
             guard newValue != self.totalLine else {
                 return
             }
-            self.myDelegate?.changeLine(view: self, line: newValue)
+//            self.myDelegate?.changeLine(view: self, line: newValue)
+            if let delegate = delegate as? MyTestViewProtocol {
+                delegate.changeLine(view: self, line: newValue)
+            }
         }
     }
     var accumulateValue:CGFloat = 0
-    weak var myDelegate: MyTestViewProtocol?
+//    weak var myDelegate: MyTestViewProtocol?
     
     required init(coder: NSCoder) {
         super.init(coder: coder)!
@@ -117,7 +119,10 @@ class MyTestView: UITextView {
         self.totalLine = self.currentEnterCnt + self.overTextCnt
         
         
-        self.myDelegate?.contentsSize(view: self, size: self.contentSize)
+//        self.myDelegate?.contentsSize(view: self, size: self.contentSize)
+        if let delegate = delegate as? MyTestViewProtocol {
+            delegate.contentsSize(view: self, size: self.contentSize)
+        }
     }
     
     func getOverTextLine(text: String) -> UInt { //n^2
