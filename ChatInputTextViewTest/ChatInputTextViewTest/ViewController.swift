@@ -43,14 +43,19 @@ class ViewController: UIViewController {
 
 
 extension ViewController: UITextViewDelegate, MyTestViewProtocol {
+    func contentsSize(view: MyTestView, size: CGSize) {
+        self.containerViewHeightConstraint.constant = size.height
+    }
+    
     func changeLine(view: MyTestView, line: UInt) {
         print("line:\(line)")
-        self.containerViewHeightConstraint.constant = self.originContainerViewHeight +  "1".getSizeString(font: self.myTextView.font!).height * CGFloat(line)
+//        self.containerViewHeightConstraint.constant = self.originContainerViewHeight +  "1".getSizeString(font: self.myTextView.font!).height * CGFloat(line)
     }
 }
 
 protocol MyTestViewProtocol: class {
     func changeLine(view: MyTestView, line: UInt)
+    func contentsSize(view: MyTestView, size:CGSize)
 }
 
 class MyTestView: UITextView {
@@ -110,6 +115,9 @@ class MyTestView: UITextView {
         }
         self.overTextCnt = UInt(overTextCnt)
         self.totalLine = self.currentEnterCnt + self.overTextCnt
+        
+        
+        self.myDelegate?.contentsSize(view: self, size: self.contentSize)
     }
     
     func getOverTextLine(text: String) -> UInt { //n^2
