@@ -1,0 +1,6 @@
+framework module Pods_QRSample {
+  umbrella header "Pods-QRSample-umbrella.h"
+
+  export *
+  module * { export * }
+}
