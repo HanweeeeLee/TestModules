@@ -51,7 +51,24 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let timeline = Timeline(entries: [SimpleEntry(date: Date(), configuration: ConfigurationIntent())], policy: .never)
+//        let timeline = Timeline(entries: [SimpleEntry(date: Date(), configuration: ConfigurationIntent())], policy: .never)
+//        completion(timeline)
+        
+        var entries: [SimpleEntry] = []
+        
+        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        let currentDate = Date()
+        for hourOffset in 0 ..< 5 {
+            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+            let entry = SimpleEntry(date: entryDate, configuration: ConfigurationIntent())
+            entries.append(entry)
+        }
+        
+        let timeline = Timeline(entries: entries, policy: .atEnd)
+        //policy - .atEnd, .never, .after(date:)
+        //atEnd : 타임라인의 마지막 날짜가 지난 후 WidgetKit에서 새 타임라인을 요청
+        //after(date:) : WidgetKit이 새 타임라인을 요청할 미래 날짜를 지정하는 policy
+        //never : 앱이 WidgetCenter를 사용하여 WidgetKit에 새 타임라인을 요청하도록 지시 할 때 까지 다른 timeline을 요청하지 않음
         completion(timeline)
     }
 }
