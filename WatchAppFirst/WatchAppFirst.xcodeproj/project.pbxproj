@@ -23,6 +23,7 @@
 		4F213589254FEC370004D6C1 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F213588254FEC370004D6C1 /* ComplicationController.swift */; };
 		4F21358B254FEC380004D6C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F21358A254FEC380004D6C1 /* Assets.xcassets */; };
 		4F360EE525590C3B007BC18B /* PasswordInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F360EE425590C3B007BC18B /* PasswordInterfaceController.swift */; };
+		4FA3DEED255BC01E007F0B2B /* IconTextTypeRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3DEEC255BC01E007F0B2B /* IconTextTypeRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		4F21358C254FEC380004D6C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F21358D254FEC380004D6C1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		4F360EE425590C3B007BC18B /* PasswordInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInterfaceController.swift; sourceTree = "<group>"; };
+		4FA3DEEC255BC01E007F0B2B /* IconTextTypeRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTextTypeRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		4F213581254FEC370004D6C1 /* WatchAppFirst WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4FA3DEEC255BC01E007F0B2B /* IconTextTypeRowController.swift */,
 				4F360EEC25591D73007BC18B /* Extension */,
 				4F213582254FEC370004D6C1 /* InterfaceController.swift */,
 				4F213584254FEC370004D6C1 /* ExtensionDelegate.swift */,
@@ -319,6 +322,7 @@
 			files = (
 				4F360EE525590C3B007BC18B /* PasswordInterfaceController.swift in Sources */,
 				4F213587254FEC370004D6C1 /* NotificationController.swift in Sources */,
+				4FA3DEED255BC01E007F0B2B /* IconTextTypeRowController.swift in Sources */,
 				4F213589254FEC370004D6C1 /* ComplicationController.swift in Sources */,
 				4F213585254FEC370004D6C1 /* ExtensionDelegate.swift in Sources */,
 				4F213583254FEC370004D6C1 /* InterfaceController.swift in Sources */,

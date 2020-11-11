@@ -147,7 +147,31 @@
                                 <segue destination="AgC-eL-Hgc" kind="push" id="fTG-eM-8eJ"/>
                             </connections>
                         </button>
+                        <button width="1" alignment="left" title="Button" id="IwS-wk-HQu">
+                            <connections>
+                                <action selector="testAction" destination="erG-At-hPE" id="oDq-ek-V5H"/>
+                            </connections>
+                        </button>
+                        <table alignment="left" id="bc1-Oo-wGI">
+                            <items>
+                                <tableRow identifier="IconTextTypeRowController" id="utK-0d-zVp" customClass="IconTextTypeRowController" customModule="WatchAppFirst_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="Fah-6i-uaO">
+                                        <items>
+                                            <imageView width="0.29999999999999999" alignment="left" id="g7s-NB-7xO"/>
+                                            <label width="0.59999999999999998" height="1" alignment="left" text="Label" id="Zwd-RF-HCG"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imgView" destination="g7s-NB-7xO" id="9ny-Mx-eZD"/>
+                                        <outlet property="titleLabel" destination="Zwd-RF-HCG" id="gjx-So-sEe"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
                     </items>
+                    <connections>
+                        <outlet property="table" destination="bc1-Oo-wGI" id="Zea-A6-yGG"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="217" y="44"/>
