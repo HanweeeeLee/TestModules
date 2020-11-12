@@ -1,0 +1,16 @@
+PODS:
+  - EMTLoadingIndicator (4.0.0)
+
+DEPENDENCIES:
+  - EMTLoadingIndicator (~> 4.0.0)
+
+SPEC REPOS:
+  trunk:
+    - EMTLoadingIndicator
+
+SPEC CHECKSUMS:
+  EMTLoadingIndicator: 84b875fbe500606bb9a5e411885bc152ae9a371f
+
+PODFILE CHECKSUM: 11de8201ec72497fc12e5a14335b566f7d62fece
+
+COCOAPODS: 1.9.1

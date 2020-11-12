@@ -6,10 +6,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17035"/>
     </dependencies>
     <scenes>
-        <!--Password Interface Controller-->
+        <!--PasswordInterfaceController-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="PasswordInterfaceController" customModule="WatchAppFirst_WatchKit_Extension">
+                <controller identifier="PasswordInterfaceController" id="AgC-eL-Hgc" customClass="PasswordInterfaceController" customModule="WatchAppFirst_WatchKit_Extension">
                     <items>
                         <group width="1" height="0.25" alignment="left" id="Wwo-mC-jpr">
                             <items>
@@ -142,35 +142,57 @@
             <objects>
                 <controller id="erG-At-hPE" customClass="InterfaceController" customModule="WatchAppFirst_WatchKit_Extension">
                     <items>
-                        <button width="1" alignment="left" title="Button" id="L7q-6A-wEX">
-                            <connections>
-                                <segue destination="AgC-eL-Hgc" kind="push" id="fTG-eM-8eJ"/>
-                            </connections>
-                        </button>
-                        <button width="1" alignment="left" title="Button" id="IwS-wk-HQu">
-                            <connections>
-                                <action selector="testAction" destination="erG-At-hPE" id="oDq-ek-V5H"/>
-                            </connections>
-                        </button>
-                        <table alignment="left" id="bc1-Oo-wGI">
+                        <group width="1" alignment="left" layout="vertical" id="TKQ-2n-bQx">
                             <items>
-                                <tableRow identifier="IconTextTypeRowController" id="utK-0d-zVp" customClass="IconTextTypeRowController" customModule="WatchAppFirst_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="Fah-6i-uaO">
-                                        <items>
-                                            <imageView width="0.29999999999999999" alignment="left" id="g7s-NB-7xO"/>
-                                            <label width="0.59999999999999998" height="1" alignment="left" text="Label" id="Zwd-RF-HCG"/>
-                                        </items>
-                                    </group>
-                                    <connections>
-                                        <outlet property="imgView" destination="g7s-NB-7xO" id="9ny-Mx-eZD"/>
-                                        <outlet property="titleLabel" destination="Zwd-RF-HCG" id="gjx-So-sEe"/>
-                                    </connections>
-                                </tableRow>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="x6O-YL-8HL">
+                                    <items>
+                                        <button width="1" alignment="left" title="Button" id="L7q-6A-wEX">
+                                            <connections>
+                                                <segue destination="AgC-eL-Hgc" kind="push" id="fTG-eM-8eJ"/>
+                                            </connections>
+                                        </button>
+                                        <button width="1" alignment="left" title="Button" id="IwS-wk-HQu">
+                                            <connections>
+                                                <action selector="testAction" destination="erG-At-hPE" id="oDq-ek-V5H"/>
+                                            </connections>
+                                        </button>
+                                        <table alignment="left" id="bc1-Oo-wGI">
+                                            <items>
+                                                <tableRow identifier="IconTextTypeRowController" id="utK-0d-zVp" customClass="IconTextTypeRowController" customModule="WatchAppFirst_WatchKit_Extension">
+                                                    <group key="rootItem" width="1" alignment="left" id="Fah-6i-uaO">
+                                                        <items>
+                                                            <imageView width="0.29999999999999999" alignment="left" id="g7s-NB-7xO"/>
+                                                            <label width="0.59999999999999998" height="1" alignment="left" text="Label" id="Zwd-RF-HCG"/>
+                                                        </items>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="imgView" destination="g7s-NB-7xO" id="9ny-Mx-eZD"/>
+                                                        <outlet property="titleLabel" destination="Zwd-RF-HCG" id="gjx-So-sEe"/>
+                                                    </connections>
+                                                </tableRow>
+                                            </items>
+                                        </table>
+                                    </items>
+                                </group>
                             </items>
-                        </table>
+                        </group>
+                        <group width="1" height="1" alignment="left" layout="vertical" spacing="0.0" id="O7l-fk-avN">
+                            <items>
+                                <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="QPe-8Y-hjD">
+                                    <items>
+                                        <imageView width="40" height="40" alignment="center" id="Z6j-ET-2VG"/>
+                                        <label alignment="center" text="Label" textAlignment="center" id="WYz-of-2hD"/>
+                                    </items>
+                                </group>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
                     </items>
                     <connections>
+                        <outlet property="loadingImgViewGroup" destination="O7l-fk-avN" id="MvT-bW-OHk"/>
+                        <outlet property="mainContainerGroup" destination="x6O-YL-8HL" id="VSE-Bq-laL"/>
                         <outlet property="table" destination="bc1-Oo-wGI" id="Zea-A6-yGG"/>
+                        <outlet property="testLoadingImg" destination="Z6j-ET-2VG" id="4km-OP-lZN"/>
                     </connections>
                 </controller>
             </objects>

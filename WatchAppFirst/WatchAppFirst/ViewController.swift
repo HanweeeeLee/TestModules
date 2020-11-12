@@ -35,7 +35,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func synchronizationAction(_ sender: Any) {
-        try! self.mySession.updateApplicationContext(["syncData" : "this is synchronization 과연"])
+//        try! self.mySession.updateApplicationContext(["syncData" : "this is synchronization 과연"])
+        
+        mySession.activate()
     }
     
 }
@@ -81,7 +83,29 @@ extension ViewController: WCSessionDelegate{
     
     /** 도달 가능 상태가 변경되면 호출됨. */
     func sessionReachabilityDidChange(_ session: WCSession) {
-        
+        if session.activationState == .activated {
+            if session.isWatchAppInstalled {
+                if session.isPaired {
+                    print("isPaired")
+                    print("activationState :\(session.activationState)")
+                    if session.isReachable {
+                        print("isReachable")
+                    }
+                    else {
+                        print("so far")
+                    }
+                }
+                else {
+                    print("is not isPaired")
+                }
+            }
+        }
+        else if session.activationState == .inactive {
+            
+        }
+        else if session.activationState == .notActivated{
+            
+        }
     }
     
     /** 발신자가 sendMessage(_:replyHandler: errorHandler: )메서드 replyHanlder를 nil로 보낸 메시지가 수신됨. */

@@ -1,0 +1,28 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'WatchAppFirst' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for WatchAppFirst
+
+end
+
+target 'WatchAppFirst WatchKit App' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for WatchAppFirst WatchKit App
+
+end
+
+target 'WatchAppFirst WatchKit Extension' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  
+    pod 'EMTLoadingIndicator', '~> 4.0.0'
+  # Pods for WatchAppFirst WatchKit Extension
+
+end
+

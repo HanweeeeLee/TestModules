@@ -1,0 +1,6 @@
+framework module EMTLoadingIndicator {
+  umbrella header "EMTLoadingIndicator-umbrella.h"
+
+  export *
+  module * { export * }
+}

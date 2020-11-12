@@ -8,9 +8,12 @@
 import WatchKit
 import Foundation
 import WatchConnectivity
+import EMTLoadingIndicator
 
 
 class InterfaceController: WKInterfaceController {
+    @IBOutlet weak var testLoadingImg: WKInterfaceImage!
+    @IBOutlet weak var loadingImgViewGroup: WKInterfaceGroup!
     @IBOutlet weak var mainContainerGroup: WKInterfaceGroup!
     @IBOutlet weak var table: WKInterfaceTable!
     
@@ -18,12 +21,29 @@ class InterfaceController: WKInterfaceController {
     
     let numberOfRows: Int = 3
     
+    private var indicator: EMTLoadingIndicator?
+    
+    var isLoading:Bool = false {
+        didSet {
+            if isLoading {
+                self.loadingImgViewGroup.setHidden(false)
+                self.mainContainerGroup.setHidden(true)
+            }
+            else {
+                self.loadingImgViewGroup.setHidden(true)
+                self.mainContainerGroup.setHidden(false)
+            }
+        }
+    }
+    
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
         print("awake")
         wcSession.delegate = self
         wcSession.activate()
         print("context:\(String(describing: context))")
+        indicator = EMTLoadingIndicator(interfaceController: self, interfaceImage: testLoadingImg,
+                width: 40, height: 40, style: .dot)
     }
        
     override func willActivate() {
@@ -31,6 +51,12 @@ class InterfaceController: WKInterfaceController {
         print("willActivate")
         self.table.setNumberOfRows(self.numberOfRows, withRowType: "Cell")
         loadTableData()
+//        indicator = EMTLoadingIndicator(interfaceController: self, interfaceImage: testLoadingImg,
+//                width: 40, height: 40, style: .dot)
+        if !isLoading {
+            self.loadingImgViewGroup.setHidden(true)
+        }
+        
     }
     
     private func loadTableData() {
@@ -48,12 +74,25 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         print("didDeactivate")
-        
+        indicator?.prepareImagesForWait()
+        indicator?.showWait()
     }
     
     @IBAction func testAction() {
         print("testAction")
         print("동기화 메시지입니다 :\(wcSession.receivedApplicationContext)")
+//        self.presentController(withName: <#T##String#>, context: <#T##Any?#>)
+        indicator = EMTLoadingIndicator(interfaceController: self, interfaceImage: testLoadingImg,
+                width: 40, height: 40, style: .dot)
+        self.isLoading = true
+//        self.loadingImgViewGroup.setHeight(WKInterfaceDevice.current().screenBounds.height)
+//        self.set
+        
+        indicator?.prepareImagesForWait()
+        indicator?.showWait()
+//        self.loading
+//        self.mainContainerGroup.
+        
     }
     
 }

@@ -1,0 +1,6 @@
+framework module Pods_WatchAppFirst {
+  umbrella header "Pods-WatchAppFirst-umbrella.h"
+
+  export *
+  module * { export * }
+}
