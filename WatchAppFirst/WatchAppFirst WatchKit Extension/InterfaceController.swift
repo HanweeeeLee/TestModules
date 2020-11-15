@@ -26,6 +26,7 @@ class InterfaceController: WKInterfaceController {
     var isLoading:Bool = false {
         didSet {
             if isLoading {
+                
                 self.loadingImgViewGroup.setHidden(false)
                 self.mainContainerGroup.setHidden(true)
             }
@@ -35,6 +36,33 @@ class InterfaceController: WKInterfaceController {
             }
         }
     }
+    
+//    func clickAnimation(button: WKInterfaceButton,group: WKInterfaceGroup, complition:@escaping () -> ()) {
+//        self.isClickable = false
+//        let animationTime: useconds_t = 2
+//        DispatchQueue.main.async { [weak self] in
+//            self?.animate(withDuration: 0.1 * Double(animationTime), animations: {
+//                button.setRelativeWidth(0.4, withAdjustment: 0)
+//                group.setRelativeHeight(0.3, withAdjustment: 0)
+//            })
+//            DispatchQueue.global().async { [weak self] in
+//                usleep(animationTime * 100 * 1000)
+//                DispatchQueue.main.async {
+//                    self?.animate(withDuration: 0.1 * Double(animationTime), animations: {
+//                        button.setRelativeWidth(0.33, withAdjustment: 0)
+//                        group.setRelativeHeight(0.25, withAdjustment: 0)
+//                        DispatchQueue.global().async {
+//                            usleep(animationTime * 100 * 1000)
+//                            DispatchQueue.main.async { [weak self] in
+//                                self?.isClickable = true
+//                                complition()
+//                            }
+//                        }
+//                    })
+//                }
+//            }
+//        }
+//    }
     
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
