@@ -29,6 +29,7 @@ private struct Provider: TimelineProvider {
 //        let refreshDate = Calendar.current.date(byAdding: .second, value: 10, to: currentDate)!
         let refreshDate = Calendar.current.date(byAdding: .second, value: 30, to: currentDate)! //위젯 새로고침은 하루 최대한도가 있음. 시뮬레이터에서는 적용이 안되고 이게 구체적으로 몇회인지 알 수가 없음 ㅡㅡ;;;;;;;;
         // 테스트 결과 일단 최소 1분은 되어야 새로고침이 됨 흠......
+        // https://developer.apple.com/forums/thread/653265?answerId=619739022#619739022 애플에서 1분은 너무 공격적, 15분 마다 하란다..
         
 //        let entries = [
 ////            SimpleEntry(date: currentDate, displayDate: displayDate),
