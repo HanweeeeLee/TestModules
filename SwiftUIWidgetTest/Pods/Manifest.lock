@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (5.4.0)
+  - FlexibleModelProtocol (1.1.5)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - FlexibleModelProtocol (~> 1.1)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - FlexibleModelProtocol
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  FlexibleModelProtocol: 8af8ab4aca678b9f2a81ce80afe72810f301e785
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: 0e1a410bc14a64b25f0b69da41ca08c5d25eef9c
+
+COCOAPODS: 1.9.3

@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-WidgetTest/Pods-WidgetTest-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/FlexibleModelProtocol/FlexibleModelProtocol.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

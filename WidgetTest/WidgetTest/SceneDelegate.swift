@@ -46,7 +46,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        // 1
+        
+        print("22")
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity.webpageURL,
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            return false
+        }
+        return false
+    }
+    
+    
 
+    
 
 }
 

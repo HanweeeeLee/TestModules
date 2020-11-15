@@ -1,0 +1,6 @@
+framework module FlexibleModelProtocol {
+  umbrella header "FlexibleModelProtocol-umbrella.h"
+
+  export *
+  module * { export * }
+}
