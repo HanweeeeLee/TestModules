@@ -22,12 +22,13 @@ private struct Provider: TimelineProvider {
     
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
-        print("언제 호출되지")
         let currentDate = Date()
+        print("언제 호출되지:\(currentDate)")
 //        let warningDate = Calendar.current.date(byAdding: .second, value: 5, to: currentDate)!
 //        let displayDate = Calendar.current.date(byAdding: .second, value: 10, to: currentDate)!
 //        let refreshDate = Calendar.current.date(byAdding: .second, value: 10, to: currentDate)!
-        let refreshDate = Calendar.current.date(byAdding: .second, value: 10, to: currentDate)!
+        let refreshDate = Calendar.current.date(byAdding: .second, value: 30, to: currentDate)! //위젯 새로고침은 하루 최대한도가 있음. 시뮬레이터에서는 적용이 안되고 이게 구체적으로 몇회인지 알 수가 없음 ㅡㅡ;;;;;;;;
+        // 테스트 결과 일단 최소 1분은 되어야 새로고침이 됨 흠......
         
 //        let entries = [
 ////            SimpleEntry(date: currentDate, displayDate: displayDate),
@@ -46,11 +47,14 @@ private struct Provider: TimelineProvider {
 //        completion(timeline)
         
         var entries: [SimpleEntry] = []
-        for secondOffset in 0..<5 {
-            let entryDate = Calendar.current.date(byAdding: .second, value: secondOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate,displayDate: currentDate)
-            entries.append(entry)
-        }
+//        for secondOffset in 0..<5 {
+//            let entryDate = Calendar.current.date(byAdding: .second, value: secondOffset, to: currentDate)!
+//            let entry = SimpleEntry(date: entryDate,displayDate: currentDate)
+//            entries.append(entry)
+//        }
+        
+        entries.append(SimpleEntry(date: currentDate, displayDate: currentDate))
+        entries.append(SimpleEntry(date: refreshDate, displayDate: currentDate))
         
 //        let entry = SimpleEntry(date: refreshDate, displayDate: refreshDate)
         let timeline = Timeline(entries: entries, policy: .atEnd)
