@@ -62,6 +62,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return false
     }
     
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("테스트:\(URLContexts)")
+        if let url = URLContexts.first?.url {
+//            if url.absoluteString.starts(with: "widget://pr") {
+//                guard let urlComponents = URLComponents(string: url.absoluteString) else { return }
+//                guard let pullRequestUrl = urlComponents.queryItems?.first(where: { $0.name == "url" })?.value else { return }
+//                let prDetailViewController = PRDetailViewController(urlString: pullRequestUrl)
+//                (self.window?.rootViewController as? UINavigationController)?.pushViewController(prDetailViewController, animated: true)
+//            }
+            print("url:\(url)")
+        }
+    }
+    
     
 
     

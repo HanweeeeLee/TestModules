@@ -46,12 +46,76 @@ private struct DeepLinkWidgetEntryView : View {
     var entry: Provider.Entry
     
     var deeplinkURL: URL {
-        URL(string: "widget-DeepLinkWidget://widgetFamily/\(widgetFamily)")!
+        URL(string: "widget-DeepLinkWidget1://widgetFamily/\(widgetFamily)")!
+    }
+    
+    var deeplinkURL2: URL {
+        URL(string: "widget-DeepLinkWidget2://widgetFamily/\(widgetFamily)")!
     }
 
     var body: some View {
-        Text("탭")
-            .widgetURL(deeplinkURL)
+        VStack {
+//            Text("탭")
+//                .widgetURL(deeplinkURL)
+//            Text("탭2")
+//                .widgetURL(deeplinkURL2)
+            VStack(alignment: .leading) {
+//                ForEach(0..<min(maxCount, entry.prList.count), id: \.self) { index in
+//                    let pr = entry.prList[index]
+//                    let url = URL(string: "widget://pr?url=\(pr.url)")!
+//                    Link(destination: url) {
+//                        PRView(pr: pr)
+//                        Divider()
+//                    }
+//                }
+                ForEach(0..<2) {index in
+                    let myUrl = URL(string: "test\(index)")!
+                    Link(destination: myUrl) {
+                        if index == 0 {
+                            View1()
+                        }
+                        else {
+                            View2()
+                        }
+                        Divider()
+                    }
+                }
+            }
+//            .padding(.all, 16)
+        }
+    }
+    
+    struct View1: View {
+        
+        var deeplinkURL: URL {
+            URL(string: "widget-DeepLinkWidget://widgetFamily/\("1")")!
+        }
+        var body: some View {
+            VStack {
+                Link(destination: deeplinkURL, label: { //이거 중/대형만 적용되는듯
+                    Text("탭1")
+                })
+//                            Text("탭")
+//                                .widgetURL(deeplinkURL)
+            }
+            .foregroundColor(.blue)
+        }
+    }
+    struct View2: View {
+        
+        var deeplinkURL: URL {
+            URL(string: "widget-DeepLinkWidget://widgetFamily/\("2")")!
+        }
+        
+        var body: some View {
+            VStack {
+                Link(destination: deeplinkURL, label: {
+                    Text("탭2!")
+                })
+//                            Text("탭2")
+//                                .widgetURL(deeplinkURL2)
+            }
+        }
     }
 }
 
@@ -64,6 +128,6 @@ struct DeepLinkWidget: Widget {
         }
         .configurationDisplayName("DeepLinkWidget")
         .description("Tis is My DeepLinkWidget Widget")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall,.systemMedium])
     }
 }

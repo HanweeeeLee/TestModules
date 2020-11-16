@@ -21,7 +21,8 @@ struct WidgetBundle1: WidgetBundle {
         MyWidgetType2()
         DeepLinkWidget()
         CountdownWidget()
-        Countdown2Widget()
+        EditableWidget()
+//        Countdown2Widget()
     }
 }
 

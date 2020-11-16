@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>MyWidget</string>
+	<string>IntentHandlerUI</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,17 +24,16 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>IntentsRestrictedWhileLocked</key>
-			<array/>
-			<key>IntentsRestrictedWhileProtectedDataUnavailable</key>
-			<array/>
 			<key>IntentsSupported</key>
 			<array>
-				<string>EditableIntent</string>
+				<string>EditableIntentIntent</string>
+				<string>INSendMessageIntent</string>
 			</array>
 		</dict>
+		<key>NSExtensionMainStoryboard</key>
+		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widgetkit-extension</string>
+		<string>com.apple.intents-ui-service</string>
 	</dict>
 </dict>
 </plist>
