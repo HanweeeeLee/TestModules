@@ -29,7 +29,40 @@ extension GithubAPI: TargetType {
     }
     
     var sampleData: Data {
-        return Data() // 테스트용 Mock Data
+        switch self {
+        case .searchUser:
+            return Data(
+                """
+                {
+                "items" : [
+                    {
+                      "avatar_url" : "https://avatars.githubusercontent.com/u/60125719?v=4",
+                      "subscriptions_url" : "https://api.github.com/users/HanweeeeLee/subscriptions",
+                      "url" : "https://api.github.com/users/HanweeeeLee",
+                      "id" : 60125719,
+                      "starred_url" : "https://api.github.com/users/HanweeeeLee/starred{/owner}{/repo}",
+                      "site_admin" : false,
+                      "repos_url" : "https://api.github.com/users/HanweeeeLee/repos",
+                      "login" : "HanweeeeLee",
+                      "node_id" : "MDQ6VXNlcjYwMTI1NzE5",
+                      "organizations_url" : "https://api.github.com/users/HanweeeeLee/orgs",
+                      "received_events_url" : "https://api.github.com/users/HanweeeeLee/received_events",
+                      "type" : "User",
+                      "html_url" : "https://github.com/HanweeeeLee",
+                      "following_url" : "https://api.github.com/users/HanweeeeLee/following{/other_user}",
+                      "events_url" : "https://api.github.com/users/HanweeeeLee/events{/privacy}",
+                      "followers_url" : "https://api.github.com/users/HanweeeeLee/followers",
+                      "gravatar_id" : "",
+                      "gists_url" : "https://api.github.com/users/HanweeeeLee/gists{/gist_id}",
+                      "score" : 1
+                    }
+                  ],
+                  "total_count" : 1,
+                  "incomplete_results" : false
+                }
+                """.utf8
+            )
+        }
     }
     
     var task: Task { // 리퀘스트에 사용되는 파라미터 설정
@@ -48,3 +81,5 @@ extension GithubAPI: TargetType {
     }
     
 }
+
+
