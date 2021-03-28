@@ -1,0 +1,10 @@
+# https://realm.github.io/SwiftLint/rule-directory.html
+
+disabled_rules:
+- line_length
+included:
+excluded:
+- Pods
+
+# 예외를 설정해 줄 수 있다.
+
