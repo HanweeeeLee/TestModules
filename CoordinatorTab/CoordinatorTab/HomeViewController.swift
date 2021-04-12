@@ -7,13 +7,18 @@
 
 import UIKit
 
-protocol HomeViewControllerDelegate: CommonTabProtocol {
-    
-}
-
 class HomeViewController: UIViewController {
-
-    var delegate: HomeViewControllerDelegate?
+    
+    var coordinator: HomeCoordinator
+    
+    init(inputedCoordinator: HomeCoordinator) {
+        self.coordinator = inputedCoordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         print("- \(type(of: self)) deinit")
@@ -22,5 +27,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .brown
+    }
+    @IBAction func pushAction(_ sender: Any) {
+        self.coordinator.push(route: .subHome, animated: true)
     }
 }

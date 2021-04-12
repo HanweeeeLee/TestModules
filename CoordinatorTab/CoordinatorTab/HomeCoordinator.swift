@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol HomeCoordinatorDelegate: class {
-    
-}
-
 class HomeCoordinator: Coordinator {
+    
+    enum Route {
+        case subHome
+        case login
+    }
+    
     var childCoordinators: [Coordinator] = []
     
     var navigationController: UINavigationController
-    
-    var delegate: HomeCoordinatorDelegate?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -27,15 +27,22 @@ class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController: HomeViewController = HomeViewController()
-        viewController.delegate = self
+        let viewController: HomeViewController = HomeViewController(inputedCoordinator: self)
         self.navigationController.viewControllers = [viewController]
-        
     }
-}
-
-extension HomeCoordinator: HomeViewControllerDelegate {
-    func moveTab(to: TabType) {
-        
+    
+    func push(route: Route, animated: Bool) {
+        switch route {
+        case .subHome:
+            let subHomeCoordinator: SubHomeCoodinator = SubHomeCoodinator(navigationController: self.navigationController)
+            let vc: SubHomeViewController = SubHomeViewController(inputedCoordinator: subHomeCoordinator)
+            self.childCoordinators = self.childCoordinators.filter { $0 !== subHomeCoordinator }
+//            self.childCoordinators.append(subHomeCoordinator)
+            self.navigationController.pushViewController(vc, animated: animated)
+            break
+        case .login:
+            //login 화면을 push
+            break
+        }
     }
 }

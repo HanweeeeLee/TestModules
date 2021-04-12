@@ -17,7 +17,7 @@ class CategoryCoordinator: Coordinator {
     
     var navigationController: UINavigationController
     
-    var delegate: CategoryCoordinatorDelegate?
+    var delegate: CategoryCoordinatorDelegate? //있긴 있는데 안씀... 지워도 될듯..?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -28,15 +28,7 @@ class CategoryCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController: CategoryViewController = CategoryViewController()
-        viewController.delegate = self
+        let viewController: CategoryViewController = CategoryViewController(inputedCoordinator: self)
         self.navigationController.viewControllers = [viewController]
-        
-    }
-}
-
-extension CategoryCoordinator: CategoryViewControllerDelegate {
-    func moveTab(to: TabType) {
-        
     }
 }
