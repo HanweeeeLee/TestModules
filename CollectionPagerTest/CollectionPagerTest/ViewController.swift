@@ -75,6 +75,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 //        return cellSize
 //    }
     
+    
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
     {
         // item의 사이즈와 item 간의 간격 사이즈를 구해서 하나의 item 크기로 설정.
