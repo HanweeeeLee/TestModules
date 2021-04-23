@@ -30,13 +30,23 @@
                                     <action selector="showType2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k06-mP-WtS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2E-tk-TQx">
+                                <rect key="frame" x="0.0" y="104" width="414" height="30"/>
+                                <state key="normal" title="Type3"/>
+                                <connections>
+                                    <action selector="showType3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FgX-up-tsD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="C2E-tk-TQx" firstAttribute="top" secondItem="YVL-ru-83G" secondAttribute="bottom" id="3Dr-OF-alU"/>
                             <constraint firstItem="T4o-d7-kCq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Drt-jJ-DN7"/>
                             <constraint firstItem="YVL-ru-83G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="T5o-Nr-7mU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T4o-d7-kCq" secondAttribute="trailing" id="Tmk-sg-3Q4"/>
+                            <constraint firstItem="C2E-tk-TQx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="avx-i2-UB2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C2E-tk-TQx" secondAttribute="trailing" id="b3p-On-0R4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YVL-ru-83G" secondAttribute="trailing" id="fZP-gI-qP7"/>
                             <constraint firstItem="YVL-ru-83G" firstAttribute="top" secondItem="T4o-d7-kCq" secondAttribute="bottom" id="ohe-wu-AA9"/>
                             <constraint firstItem="T4o-d7-kCq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wB5-gX-h1S"/>

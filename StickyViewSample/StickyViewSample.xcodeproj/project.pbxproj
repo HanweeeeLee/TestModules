@@ -18,6 +18,8 @@
 		4FC164F8263283F50047508E /* Type1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC164F6263283F50047508E /* Type1ViewController.xib */; };
 		4FC164FC263284E70047508E /* Type2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC164FA263284E70047508E /* Type2ViewController.swift */; };
 		4FC164FD263284E70047508E /* Type2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC164FB263284E70047508E /* Type2ViewController.xib */; };
+		7825225E2632E69100FA3125 /* Type3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7825225C2632E69100FA3125 /* Type3ViewController.swift */; };
+		7825225F2632E69100FA3125 /* Type3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7825225D2632E69100FA3125 /* Type3ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		4FC164F6263283F50047508E /* Type1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Type1ViewController.xib; sourceTree = "<group>"; };
 		4FC164FA263284E70047508E /* Type2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type2ViewController.swift; sourceTree = "<group>"; };
 		4FC164FB263284E70047508E /* Type2ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Type2ViewController.xib; sourceTree = "<group>"; };
+		7825225C2632E69100FA3125 /* Type3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type3ViewController.swift; sourceTree = "<group>"; };
+		7825225D2632E69100FA3125 /* Type3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Type3ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				4FC164F6263283F50047508E /* Type1ViewController.xib */,
 				4FC164FA263284E70047508E /* Type2ViewController.swift */,
 				4FC164FB263284E70047508E /* Type2ViewController.xib */,
+				7825225C2632E69100FA3125 /* Type3ViewController.swift */,
+				7825225D2632E69100FA3125 /* Type3ViewController.xib */,
 			);
 			path = StickyViewSample;
 			sourceTree = "<group>";
@@ -139,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7825225F2632E69100FA3125 /* Type3ViewController.xib in Resources */,
 				4FC164E926324C470047508E /* LaunchScreen.storyboard in Resources */,
 				4FC164E626324C470047508E /* Assets.xcassets in Resources */,
 				4FC164FD263284E70047508E /* Type2ViewController.xib in Resources */,
@@ -155,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC164E126324C460047508E /* ViewController.swift in Sources */,
+				7825225E2632E69100FA3125 /* Type3ViewController.swift in Sources */,
 				4FC164F2263255650047508E /* HWStickyHeaderView.swift in Sources */,
 				4FC164F7263283F50047508E /* Type1ViewController.swift in Sources */,
 				4FC164FC263284E70047508E /* Type2ViewController.swift in Sources */,
