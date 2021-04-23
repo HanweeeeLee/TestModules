@@ -27,8 +27,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showType3(_ sender: Any) {
+        
         let vc: Type3ViewController = Type3ViewController(nibName: "Type3ViewController", bundle: nil)
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let navi: UINavigationController = UINavigationController(rootViewController: vc)
+        navi.modalPresentationStyle = .fullScreen
+        self.present(navi, animated: true, completion: nil)
     }
 }
