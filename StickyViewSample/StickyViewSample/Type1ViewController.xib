@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Type1ViewController" customModule="StickyViewSample" customModuleProvider="target">
+            <connections>
+                <outlet property="stickyHeaderTopConstraint" destination="LyK-rC-POa" id="d9X-rz-YWW"/>
+                <outlet property="stickyHeaderView" destination="vYJ-lF-5W6" id="rcE-7W-MUQ"/>
+                <outlet property="stickyHeaderViewHeightConstraint" destination="tmr-Bf-HM4" id="vPX-1m-mPu"/>
+                <outlet property="tableView" destination="8NH-dI-BDO" id="zYb-pJ-pze"/>
+                <outlet property="tableViewTopConstraint" destination="C1W-0Z-27t" id="tQr-9o-FGv"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8NH-dI-BDO">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYJ-lF-5W6">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's Sticky Header" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnn-fG-unA">
+                            <rect key="frame" x="0.0" y="15" width="414" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                    <constraints>
+                        <constraint firstItem="cnn-fG-unA" firstAttribute="centerY" secondItem="vYJ-lF-5W6" secondAttribute="centerY" id="OMx-ON-JsA"/>
+                        <constraint firstItem="cnn-fG-unA" firstAttribute="leading" secondItem="vYJ-lF-5W6" secondAttribute="leading" id="Rq8-VU-hWj"/>
+                        <constraint firstAttribute="height" constant="50" id="tmr-Bf-HM4"/>
+                        <constraint firstAttribute="trailing" secondItem="cnn-fG-unA" secondAttribute="trailing" id="trb-Q7-8cS"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8NH-dI-BDO" secondAttribute="bottom" id="15r-go-TnH"/>
+                <constraint firstItem="8NH-dI-BDO" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="4nO-O8-jai"/>
+                <constraint firstItem="vYJ-lF-5W6" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="5Tk-XX-xLT"/>
+                <constraint firstItem="8NH-dI-BDO" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="C1W-0Z-27t"/>
+                <constraint firstItem="vYJ-lF-5W6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LyK-rC-POa"/>
+                <constraint firstItem="8NH-dI-BDO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ml6-0e-Sl1"/>
+                <constraint firstItem="vYJ-lF-5W6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rXS-5G-arK"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="109"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

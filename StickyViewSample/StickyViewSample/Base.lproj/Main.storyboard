@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StickyViewSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4o-d7-kCq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
+                                <state key="normal" title="Type1"/>
+                                <connections>
+                                    <action selector="showType1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fqF-mc-Bfr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVL-ru-83G">
+                                <rect key="frame" x="0.0" y="74" width="414" height="30"/>
+                                <state key="normal" title="Type2"/>
+                                <connections>
+                                    <action selector="showType2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k06-mP-WtS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="T4o-d7-kCq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Drt-jJ-DN7"/>
+                            <constraint firstItem="YVL-ru-83G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="T5o-Nr-7mU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T4o-d7-kCq" secondAttribute="trailing" id="Tmk-sg-3Q4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YVL-ru-83G" secondAttribute="trailing" id="fZP-gI-qP7"/>
+                            <constraint firstItem="YVL-ru-83G" firstAttribute="top" secondItem="T4o-d7-kCq" secondAttribute="bottom" id="ohe-wu-AA9"/>
+                            <constraint firstItem="T4o-d7-kCq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wB5-gX-h1S"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tjI-lj-lM3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="435" y="131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
