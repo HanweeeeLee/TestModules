@@ -14,6 +14,8 @@
                 <outlet property="headerViewHeightConstraint" destination="NHa-fq-ktS" id="6nx-wy-my1"/>
                 <outlet property="headerViewTopConstraint" destination="qPp-3p-Fkf" id="wng-zO-uL9"/>
                 <outlet property="imgView" destination="hL9-yg-svb" id="iGy-0l-7DX"/>
+                <outlet property="imgViewHeightConstraint" destination="JA5-FL-xlB" id="ICF-fZ-wRh"/>
+                <outlet property="imgViewWidthConstraint" destination="58F-Vg-ryI" id="OEQ-sE-ykJ"/>
                 <outlet property="mainContainerView" destination="i5M-Pr-FkT" id="R06-eo-43w"/>
                 <outlet property="tableView" destination="hMx-2K-kRZ" id="OlR-Tn-LNA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -37,11 +39,11 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="hL9-yg-svb" firstAttribute="top" secondItem="R4U-46-WE6" secondAttribute="top" id="Cm3-bW-NNb"/>
-                        <constraint firstAttribute="trailing" secondItem="hL9-yg-svb" secondAttribute="trailing" id="Hcx-Ng-4xW"/>
+                        <constraint firstItem="hL9-yg-svb" firstAttribute="width" secondItem="R4U-46-WE6" secondAttribute="width" id="58F-Vg-ryI"/>
+                        <constraint firstItem="hL9-yg-svb" firstAttribute="height" secondItem="R4U-46-WE6" secondAttribute="height" id="JA5-FL-xlB"/>
                         <constraint firstAttribute="height" constant="300" id="NHa-fq-ktS"/>
-                        <constraint firstAttribute="bottom" secondItem="hL9-yg-svb" secondAttribute="bottom" id="j5F-3R-G2Y"/>
-                        <constraint firstItem="hL9-yg-svb" firstAttribute="leading" secondItem="R4U-46-WE6" secondAttribute="leading" id="qST-5B-Gbq"/>
+                        <constraint firstItem="hL9-yg-svb" firstAttribute="centerY" secondItem="R4U-46-WE6" secondAttribute="centerY" id="cZJ-xd-QfO"/>
+                        <constraint firstItem="hL9-yg-svb" firstAttribute="centerX" secondItem="R4U-46-WE6" secondAttribute="centerX" id="tuL-Dc-xot"/>
                     </constraints>
                 </view>
             </subviews>

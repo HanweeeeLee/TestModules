@@ -13,10 +13,27 @@ class Type3ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var imgViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imgViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerViewTopConstraint: NSLayoutConstraint!
     
     var originHeaderViewHeightConstraint: CGFloat = 0
+    var originImgViewWidthConstraint: CGFloat = 0
+    var originImgViewHeightConstraint: CGFloat = 0
+    
+    var isClearNavigationState: Bool = false {
+        didSet {
+            if oldValue != self.isClearNavigationState {
+                if self.isClearNavigationState {
+                    clearNavigationBar()
+                }
+                else {
+                    nonClearNavigationBar()
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +42,9 @@ class Type3ViewController: UIViewController {
         self.originHeaderViewHeightConstraint = self.headerViewHeightConstraint.constant
         self.tableView.contentInset.top = self.originHeaderViewHeightConstraint
         self.headerView.isUserInteractionEnabled = false
+        self.originImgViewWidthConstraint = self.imgViewWidthConstraint.constant
+        self.originImgViewHeightConstraint = self.imgViewHeightConstraint.constant
+//        self.headerView.clipsToBounds = true
     }
     
     func clearNavigationBar() {
@@ -75,15 +95,20 @@ extension Type3ViewController: UITableViewDelegate, UITableViewDataSource {
         if percent > 1 {
             percent = 1
         }
-        self.headerView.alpha = 1 * (1 - percent)
+        self.headerView.alpha = (1 - percent)
         
         if percent == 1 {
             print("네비게이션 부활")
-            nonClearNavigationBar()
+            self.isClearNavigationState = false
         }
         else {
             print("네비게이션 숨김")
-            clearNavigationBar()
+            self.isClearNavigationState = true
+        }
+        
+        if 0 > yOffset {
+            self.imgViewWidthConstraint.constant = originImgViewWidthConstraint + abs(yOffset)
+            self.imgViewHeightConstraint.constant = originImgViewHeightConstraint + abs(yOffset)
         }
         
     }
