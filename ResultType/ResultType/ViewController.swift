@@ -7,9 +7,20 @@
 
 import UIKit
 
-enum MyErrorCode: Error {
-    case code1
+enum MyErrorCode: Int, Error {
+    case code1 = 0
     case code2
+}
+
+extension MyErrorCode {
+    var codeValue: Int {
+        switch self {
+        case .code1:
+            return 1
+        case .code2:
+            return 2
+        }
+    }
 }
 
 class ViewController: UIViewController {
@@ -29,7 +40,7 @@ class ViewController: UIViewController {
         case .success(let successStr):
             print("\(successStr)")
         case .failure(let code):
-            print("error :\(code)")
+            print("error :\(code.rawValue)")
         }
     }
     
@@ -38,7 +49,7 @@ class ViewController: UIViewController {
         if isSuccess {
             return .success("success!!")
         } else {
-            return .failure(.code1)
+            return .failure(.code2)
         }
         
     }
