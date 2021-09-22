@@ -1,0 +1,11 @@
+{
+  "commitish" : "2.12.4",
+  "iOS" : [
+    {
+      "hash" : "ecab79e88a87fe4dab3271ef3d6b07d849a09b964983c3896b85131ccf862eb3",
+      "name" : "RxFlow",
+      "linking" : "dynamic",
+      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)"
+    }
+  ]
+}

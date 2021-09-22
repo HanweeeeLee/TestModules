@@ -1,0 +1,24 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro']
+        swift-version: ['5.3']
+    steps:
+    - name: Install Swift
+      uses: YOCKOW/Action-setup-swift@main
+      with:
+        swift-version: ${{ matrix.swift-version }}
+    - uses: actions/checkout@master
+    - name: Compile and Test
+      run: |
+          ./xcarthage-bootstrap.sh --platform iOS --cache-builds && xcodebuild clean test -project RxFlow.xcodeproj -scheme RxFlow -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      env: 
+         destination: ${{ matrix.destination }}
+          
