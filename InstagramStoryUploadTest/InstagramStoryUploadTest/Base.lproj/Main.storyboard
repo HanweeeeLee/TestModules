@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="InstagramStoryUploadTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Q7-FR-vLg">
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="3tm-sI-n8V"/>
+                                    <constraint firstAttribute="height" constant="200" id="xg8-53-zt1"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tomato" translatesAutoresizingMaskIntoConstraints="NO" id="Nz4-YO-Uwc">
+                                <rect key="frame" x="132" y="373" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="7q0-pq-hVk"/>
+                                    <constraint firstAttribute="width" constant="150" id="E5j-5S-9er"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-vd-p88">
+                                <rect key="frame" x="0.0" y="558" width="414" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="testStart:" destination="BYZ-38-t0r" eventType="touchUpInside" id="imF-Yg-oFc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fVy-vd-p88" secondAttribute="trailing" id="DDl-Gi-t78"/>
+                            <constraint firstItem="5Q7-FR-vLg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MDm-gN-jO5"/>
+                            <constraint firstItem="5Q7-FR-vLg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bt2-Vb-rfP"/>
+                            <constraint firstItem="fVy-vd-p88" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ebU-NK-HYe"/>
+                            <constraint firstItem="Nz4-YO-Uwc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pz1-bq-3Ee"/>
+                            <constraint firstItem="fVy-vd-p88" firstAttribute="top" secondItem="5Q7-FR-vLg" secondAttribute="bottom" constant="10" id="qQt-26-AJW"/>
+                            <constraint firstItem="Nz4-YO-Uwc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="rvc-M1-vdL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myView" destination="5Q7-FR-vLg" id="Kqv-Mq-R4e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-57" y="89"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tomato" width="340" height="356"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
