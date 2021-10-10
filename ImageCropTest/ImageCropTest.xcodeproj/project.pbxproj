@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,13 @@
 		78958E4F2712AEB3003FF724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78958E4D2712AEB3003FF724 /* Main.storyboard */; };
 		78958E512712AEB5003FF724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78958E502712AEB5003FF724 /* Assets.xcassets */; };
 		78958E542712AEB5003FF724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78958E522712AEB5003FF724 /* LaunchScreen.storyboard */; };
+		78958E632712B63E003FF724 /* PhotoFromAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78958E5D2712B63E003FF724 /* PhotoFromAlbumCell.xib */; };
+		78958E642712B63E003FF724 /* PhotoFromAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78958E5E2712B63E003FF724 /* PhotoFromAlbumCell.swift */; };
+		78958E652712B63E003FF724 /* HWPhotoListFromAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78958E5F2712B63E003FF724 /* HWPhotoListFromAlbumView.xib */; };
+		78958E662712B63E003FF724 /* PhotoFromAlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78958E612712B63E003FF724 /* PhotoFromAlbumModel.swift */; };
+		78958E672712B63E003FF724 /* HWPhotoListFromAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78958E622712B63E003FF724 /* HWPhotoListFromAlbumView.swift */; };
+		78958E6A2712B732003FF724 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78958E682712B732003FF724 /* PhotoViewController.swift */; };
+		78958E6B2712B732003FF724 /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78958E692712B732003FF724 /* PhotoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		78958E502712AEB5003FF724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78958E532712AEB5003FF724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78958E552712AEB5003FF724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78958E5D2712B63E003FF724 /* PhotoFromAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoFromAlbumCell.xib; sourceTree = "<group>"; };
+		78958E5E2712B63E003FF724 /* PhotoFromAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFromAlbumCell.swift; sourceTree = "<group>"; };
+		78958E5F2712B63E003FF724 /* HWPhotoListFromAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HWPhotoListFromAlbumView.xib; sourceTree = "<group>"; };
+		78958E612712B63E003FF724 /* PhotoFromAlbumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFromAlbumModel.swift; sourceTree = "<group>"; };
+		78958E622712B63E003FF724 /* HWPhotoListFromAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HWPhotoListFromAlbumView.swift; sourceTree = "<group>"; };
+		78958E682712B732003FF724 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		78958E692712B732003FF724 /* PhotoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewController.xib; sourceTree = "<group>"; };
 		ADCBFF9A8CDBAE2EB10A3E06 /* Pods-ImageCropTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageCropTest.release.xcconfig"; path = "Target Support Files/Pods-ImageCropTest/Pods-ImageCropTest.release.xcconfig"; sourceTree = "<group>"; };
 		EA28E2EA246A89DC3AC22BC5 /* Pods-ImageCropTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageCropTest.debug.xcconfig"; path = "Target Support Files/Pods-ImageCropTest/Pods-ImageCropTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,7 +70,6 @@
 				EA28E2EA246A89DC3AC22BC5 /* Pods-ImageCropTest.debug.xcconfig */,
 				ADCBFF9A8CDBAE2EB10A3E06 /* Pods-ImageCropTest.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,6 +94,7 @@
 		78958E462712AEB3003FF724 /* ImageCropTest */ = {
 			isa = PBXGroup;
 			children = (
+				78958E5B2712B63E003FF724 /* PhotoAlbumView */,
 				78958E472712AEB3003FF724 /* AppDelegate.swift */,
 				78958E492712AEB3003FF724 /* SceneDelegate.swift */,
 				78958E4B2712AEB3003FF724 /* ViewController.swift */,
@@ -90,6 +104,36 @@
 				78958E552712AEB5003FF724 /* Info.plist */,
 			);
 			path = ImageCropTest;
+			sourceTree = "<group>";
+		};
+		78958E5B2712B63E003FF724 /* PhotoAlbumView */ = {
+			isa = PBXGroup;
+			children = (
+				78958E5F2712B63E003FF724 /* HWPhotoListFromAlbumView.xib */,
+				78958E622712B63E003FF724 /* HWPhotoListFromAlbumView.swift */,
+				78958E5C2712B63E003FF724 /* Cells */,
+				78958E602712B63E003FF724 /* Model */,
+				78958E682712B732003FF724 /* PhotoViewController.swift */,
+				78958E692712B732003FF724 /* PhotoViewController.xib */,
+			);
+			path = PhotoAlbumView;
+			sourceTree = "<group>";
+		};
+		78958E5C2712B63E003FF724 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				78958E5D2712B63E003FF724 /* PhotoFromAlbumCell.xib */,
+				78958E5E2712B63E003FF724 /* PhotoFromAlbumCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		78958E602712B63E003FF724 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				78958E612712B63E003FF724 /* PhotoFromAlbumModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +197,9 @@
 			files = (
 				78958E542712AEB5003FF724 /* LaunchScreen.storyboard in Resources */,
 				78958E512712AEB5003FF724 /* Assets.xcassets in Resources */,
+				78958E632712B63E003FF724 /* PhotoFromAlbumCell.xib in Resources */,
+				78958E6B2712B732003FF724 /* PhotoViewController.xib in Resources */,
+				78958E652712B63E003FF724 /* HWPhotoListFromAlbumView.xib in Resources */,
 				78958E4F2712AEB3003FF724 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,7 +254,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				78958E4C2712AEB3003FF724 /* ViewController.swift in Sources */,
+				78958E662712B63E003FF724 /* PhotoFromAlbumModel.swift in Sources */,
 				78958E482712AEB3003FF724 /* AppDelegate.swift in Sources */,
+				78958E642712B63E003FF724 /* PhotoFromAlbumCell.swift in Sources */,
+				78958E6A2712B732003FF724 /* PhotoViewController.swift in Sources */,
+				78958E672712B63E003FF724 /* HWPhotoListFromAlbumView.swift in Sources */,
 				78958E4A2712AEB3003FF724 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

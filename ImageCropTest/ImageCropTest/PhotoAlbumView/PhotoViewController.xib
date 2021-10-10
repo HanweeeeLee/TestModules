@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoViewController" customModule="ImageCropTest" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="40Q-ef-CUy" id="Jko-e9-Yfg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-ef-CUy">
+                    <rect key="frame" x="0.0" y="84" width="414" height="778"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsB-Xn-9ek">
+                    <rect key="frame" x="0.0" y="45" width="414" height="30"/>
+                    <state key="normal" title="Confirm"/>
+                    <connections>
+                        <action selector="confirm:" destination="-1" eventType="touchUpInside" id="Lnz-4e-M4y"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="ZsB-Xn-9ek" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Evg-XJ-4VH"/>
+                <constraint firstItem="ZsB-Xn-9ek" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="1" id="J0W-bC-ZxB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="40Q-ef-CUy" secondAttribute="bottom" id="KKq-0x-339"/>
+                <constraint firstItem="40Q-ef-CUy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="MB5-SA-SNB"/>
+                <constraint firstItem="40Q-ef-CUy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P3A-FI-ryt"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="40Q-ef-CUy" secondAttribute="trailing" id="WGI-Jr-Uzf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZsB-Xn-9ek" secondAttribute="trailing" id="XFb-KG-jtT"/>
+            </constraints>
+            <point key="canvasLocation" x="38" y="80"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

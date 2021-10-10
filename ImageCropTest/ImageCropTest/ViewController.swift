@@ -7,6 +7,7 @@
 
 import UIKit
 import CropViewController
+import Photos
 
 class ViewController: UIViewController {
     
@@ -24,8 +25,17 @@ class ViewController: UIViewController {
       cropViewController.delegate = self
       present(cropViewController, animated: true, completion: nil)
     }
+    
     @IBAction func testAction(_ sender: Any) {
         presentCropViewController()
+    }
+    @IBAction func photoAlbumAction(_ sender: Any) {
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { [unowned self] (status) in
+            DispatchQueue.main.async { [unowned self] in
+                let vc = PhotoViewController.init(nibName: "PhotoViewController", bundle: nil)
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
     }
     
     

@@ -30,12 +30,22 @@
                                     <constraint firstAttribute="height" constant="100" id="x3W-5W-Jg7"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCZ-ec-9bz">
+                                <rect key="frame" x="0.0" y="473" width="414" height="30"/>
+                                <state key="normal" title="2222"/>
+                                <connections>
+                                    <action selector="photoAlbumAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YeZ-aW-CFV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <constraints>
+                            <constraint firstItem="fCZ-ec-9bz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="87T-eK-NIk"/>
                             <constraint firstItem="6Zo-Lb-BSi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Efb-hT-tYg"/>
+                            <constraint firstItem="fCZ-ec-9bz" firstAttribute="top" secondItem="8Gj-JO-eAG" secondAttribute="bottom" constant="10" id="NxT-sB-xlb"/>
                             <constraint firstItem="8Gj-JO-eAG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Vlh-Qj-1bA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fCZ-ec-9bz" secondAttribute="trailing" id="cv3-hb-OWB"/>
                             <constraint firstItem="8Gj-JO-eAG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="isi-f0-H9v"/>
                             <constraint firstItem="8Gj-JO-eAG" firstAttribute="top" secondItem="6Zo-Lb-BSi" secondAttribute="bottom" constant="20" id="m1g-MC-sj3"/>
                         </constraints>
