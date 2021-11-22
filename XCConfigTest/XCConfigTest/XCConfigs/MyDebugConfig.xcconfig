@@ -1,0 +1,13 @@
+//
+//  MyDebugConfig.xcconfig
+//  XCConfigTest
+//
+//  Created by hanwe lee on 2021/11/22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-XCConfigTest/Pods-XCConfigTest.debug.xcconfig"
+
+ENABLE_BITCODE = NO
