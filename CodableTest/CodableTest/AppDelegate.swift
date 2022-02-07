@@ -2,13 +2,12 @@
 //  AppDelegate.swift
 //  CodableTest
 //
-//  Created by hanwe lee on 2020/06/08.
-//  Copyright © 2020 hanwe lee. All rights reserved.
+//  Created by Aaron Hanwe LEE on 2022/02/07.
 //
 
 import UIKit
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
