@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Mockingbird",
+        "repositoryURL": "https://github.com/birdrides/mockingbird",
+        "state": {
+          "branch": "master",
+          "revision": "5645d27536fb07e74bcede0873eb057354c5fc46",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
