@@ -1,0 +1,16 @@
+PODS:
+  - SwiftyTimer (2.1.0)
+
+DEPENDENCIES:
+  - SwiftyTimer
+
+SPEC REPOS:
+  trunk:
+    - SwiftyTimer
+
+SPEC CHECKSUMS:
+  SwiftyTimer: 02dd6cf10cbc71cbf67cec494f6e5eb782102543
+
+PODFILE CHECKSUM: 8e766d0a91510be805cc2d9c94ec0b8701ba79a0
+
+COCOAPODS: 1.11.2
