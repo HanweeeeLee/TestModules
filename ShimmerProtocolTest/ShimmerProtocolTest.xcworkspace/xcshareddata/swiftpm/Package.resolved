@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "uiview-shimmer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/omerfarukozturk/UIView-Shimmer",
+      "state" : {
+        "revision" : "6b25069ae46e10295dd9f06e821def70ae197698",
+        "version" : "1.0.4"
+      }
+    }
+  ],
+  "version" : 2
+}

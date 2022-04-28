@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (5.6.1)
+  - LoadingShimmer (1.0.3)
+  - Shimmer (1.0.2)
+  - SnapKit (5.6.0)
+  - "UIView+Shimmer (1.0.0)"
+
+DEPENDENCIES:
+  - Alamofire
+  - LoadingShimmer
+  - Shimmer
+  - SnapKit (~> 5.6.0)
+  - "UIView+Shimmer"
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - LoadingShimmer
+    - Shimmer
+    - SnapKit
+    - "UIView+Shimmer"
+
+SPEC CHECKSUMS:
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  LoadingShimmer: dd681218498ec9648f572b845a7299b9c62e8e30
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  "UIView+Shimmer": ed634f95e8f4bda666b28b47bd85a4336a4117d8
+
+PODFILE CHECKSUM: 240e7e5f91a8375a8fb0e9a94ba2bfd5e6d673b4
+
+COCOAPODS: 1.11.2
