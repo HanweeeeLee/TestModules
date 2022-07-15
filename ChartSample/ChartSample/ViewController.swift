@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var chartView2: LineChartView!
     @IBOutlet weak var chartView3: LineChartView!
     
-    let standardValue: [Double] = [0.1, -0.3, 0.2, 0.5, -0.6, 0.9, 1.1, -0.8]
+    let standardValue: [Double] = [0.1, -0.3, 0.2, 0.0, 0.0, 0.5, 0.0, -0.6, 0.9, 1.1, -0.8]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,13 +63,13 @@ class ViewController: UIViewController {
         self.chartView.data = chartData
         
         // 뷰 옵션
-//        self.chartView.doubleTapToZoomEnabled = false
-//        self.chartView.drawGridBackgroundEnabled = false
-//        self.chartView.xAxis.enabled = false // x축
-//        self.chartView.legend.enabled = false // 하단 이름
-//        // 왼쪽 축과 오른쪽 축을 제거하면 뒤의 y축이 다 없어진다.
-//        self.chartView.leftAxis.enabled = false // 왼쪽 축
-//        self.chartView.rightAxis.enabled = false // 오른쪽 축
+        self.chartView.doubleTapToZoomEnabled = false
+        self.chartView.drawGridBackgroundEnabled = false
+        self.chartView.xAxis.enabled = false // x축
+        self.chartView.legend.enabled = false // 하단 이름
+        // 왼쪽 축과 오른쪽 축을 제거하면 뒤의 y축이 다 없어진다.
+        self.chartView.leftAxis.enabled = false // 왼쪽 축
+        self.chartView.rightAxis.enabled = false // 오른쪽 축
         
     }
     
@@ -78,6 +78,13 @@ class ViewController: UIViewController {
         let chartData: LineChartData = LineChartData.init(dataSets: testValue)
         chartView2.backgroundColor = .lightGray
         self.chartView2.data = chartData
+        self.chartView2.doubleTapToZoomEnabled = false
+        self.chartView2.drawGridBackgroundEnabled = false
+        self.chartView2.xAxis.enabled = false // x축
+        self.chartView2.legend.enabled = false // 하단 이름
+        // 왼쪽 축과 오른쪽 축을 제거하면 뒤의 y축이 다 없어진다.
+        self.chartView2.leftAxis.enabled = false // 왼쪽 축
+        self.chartView2.rightAxis.enabled = false // 오른쪽 축
     }
     
     
@@ -108,9 +115,11 @@ class ViewController: UIViewController {
                     dataSet.append(ChartDataEntry(x: Double(inputed.count - 1), y: 0))
                     returnValue.append(dataSet) // 새로운 데이터 셋 더하기
                     currentEntries = [ChartDataEntry]() // 엔트리 초기화
+                    currentEntries?.append(ChartDataEntry(x: Double(i), y: 0))
                     beforeValue = currentValue // beforeValue 변경
                 } else {
                     currentEntries?.append(ChartDataEntry(x: Double(i), y: currentValue))
+                    beforeValue = currentValue // beforeValue 변경
                 }
             } else { // 이전값이 0이 아닌 경우
                 if currentValue == 0 { // 현재 값이 0인 경우
@@ -129,26 +138,25 @@ class ViewController: UIViewController {
                     dataSet.append(ChartDataEntry(x: Double(inputed.count - 1), y: 0))
                     returnValue.append(dataSet) // 새로운 데이터 셋 더하기
                     currentEntries = [ChartDataEntry]() // 엔트리 초기화
+                    currentEntries?.append(ChartDataEntry(x: Double(i), y: 0))
                     beforeValue = currentValue // beforeValue 변경
                 } else {
                     if (beforeValue > 0 && currentValue > 0) || (beforeValue < 0 && currentValue < 0) { // 이전 데이터와 현재의 데이터가 똑같이 양수이거나 음수인 경우
                         currentEntries?.append(ChartDataEntry(x: Double(i), y: currentValue))
-                    } else if beforeValue > 0 && currentValue < 0 { // 이전 데이터는 양수인데 현재 데이터는 음수인 경우
+                    } else {
+                        let boxColor: UIColor = {
+                            var color: UIColor = .black
+                            if beforeValue > 0 && currentValue < 0 { // 이전 데이터는 양수인데 현재 데이터는 음수인 경우
+                                color = upColor
+                            } else {
+                                color = downColor
+                            }
+                            return color
+                        }()
                         let xOffset = getXOffset(before: beforeValue, after: currentValue)
                         currentEntries?.append(ChartDataEntry(x: Double(Double(i) - xOffset), y: 0))
                         guard let entries = currentEntries else { continue }
-                        let dataSet = getDrawDataSet(color: upColor, entries: entries)
-                        dataSet.append(ChartDataEntry(x: Double(inputed.count - 1), y: 0))
-                        returnValue.append(dataSet) // 새로운 데이터 셋 더하기
-                        currentEntries = [ChartDataEntry]() // 엔트리 초기화
-                        currentEntries?.append(ChartDataEntry(x: Double(Double(i) - xOffset), y: 0))
-                        currentEntries?.append(ChartDataEntry(x: Double(i), y: currentValue))
-                        beforeValue = currentValue // beforeValue 변경
-                    } else { // 이전 데이터는 음수인데 현재 데이터는 양수인 경우
-                        let xOffset = getXOffset(before: beforeValue, after: currentValue)
-                        currentEntries?.append(ChartDataEntry(x: Double(Double(i) - xOffset), y: 0))
-                        guard let entries = currentEntries else { continue }
-                        let dataSet = getDrawDataSet(color: downColor, entries: entries)
+                        let dataSet = getDrawDataSet(color: boxColor, entries: entries)
                         dataSet.append(ChartDataEntry(x: Double(inputed.count - 1), y: 0))
                         returnValue.append(dataSet) // 새로운 데이터 셋 더하기
                         currentEntries = [ChartDataEntry]() // 엔트리 초기화
@@ -177,6 +185,9 @@ class ViewController: UIViewController {
                 currentEntries = [ChartDataEntry]() // 엔트리 초기화
                 beforeValue = currentValue // beforeValue 변경
             }
+            let lineEntries = [ChartDataEntry(x: 0, y: 0), ChartDataEntry(x: Double(inputed.count - 1), y: 0)]
+            let lineDataSet = getDrawDataSet(color: zeroColor, entries: lineEntries)
+            returnValue.append(lineDataSet)
         }
         
         return returnValue
