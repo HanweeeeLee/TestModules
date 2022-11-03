@@ -21,7 +21,7 @@ class ViewController: UIViewController {
             $0.width.height.equalTo(300)
             $0.center.equalTo(self.view)
         }
-        self.playerView.play()
+//        self.playerView.play()
         
         
         self.view.addSubview(self.slider)

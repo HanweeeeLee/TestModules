@@ -15,6 +15,12 @@ import CoreGraphics
 
 class WMVideoPlayerView: UIView {
     
+    enum VideoState {
+        case playing
+        case pause
+        case end
+    }
+    
     // MARK: UIProperty
     
     private lazy var videoContainerView = UIView().then {
@@ -38,7 +44,7 @@ class WMVideoPlayerView: UIView {
     private let player = AVPlayer()
     private var playerLayer: AVPlayerLayer?
     
-    var elapsedTimeSecondsFloat: Float64 = 0 {
+    private var elapsedTimeSecondsFloat: Float64 = 0 {
         didSet {
             guard self.elapsedTimeSecondsFloat != oldValue else { return }
             let elapsedSecondsInt = Int(self.elapsedTimeSecondsFloat)
@@ -49,7 +55,7 @@ class WMVideoPlayerView: UIView {
         }
     }
     
-    var totalTimeSecondsFloat: Float64 = 0 {
+    private var totalTimeSecondsFloat: Float64 = 0 {
         didSet {
             guard self.totalTimeSecondsFloat != oldValue else { return }
             let totalSecondsInt = Int(self.totalTimeSecondsFloat)
@@ -59,8 +65,21 @@ class WMVideoPlayerView: UIView {
         }
     }
     
-    var progressValue: Float64? {
+    private var progressValue: Float64? {
         didSet { self.slider.value = Float(self.elapsedTimeSecondsFloat / self.totalTimeSecondsFloat) }
+    }
+    
+    private var videoState: VideoState = .pause {
+        didSet {
+            switch self.videoState {
+            case .pause:
+                self.refreshPauseStateUI()
+            case .playing:
+                self.refreshPlayingStateUI()
+            case .end:
+                self.refreshEndStateUI()
+            }
+        }
     }
     
     // MARK: internal property
@@ -121,12 +140,14 @@ class WMVideoPlayerView: UIView {
         self.playerLayer = playerLayer
         self.videoContainerView.layer.addSublayer(playerLayer)
         addPeriodicTimeObserver()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     @objc private func changeSliderValue() {
         self.elapsedTimeSecondsFloat = Float64(self.slider.value) * self.totalTimeSecondsFloat
         self.player.seek(to: CMTimeMakeWithSeconds(self.elapsedTimeSecondsFloat, preferredTimescale: Int32(NSEC_PER_SEC)))
-        self.player.play()
     }
     
     private func addPeriodicTimeObserver() {
@@ -152,11 +173,51 @@ class WMVideoPlayerView: UIView {
         changeSliderValue()
     }
     
-    // MARK: internal function
+    @objc private func handleApplicationWillResignActive(_ aNotification: Notification) {
+        switch self.videoState {
+        case .playing:
+            pause()
+        case .end, .pause:
+            break
+        }
+    }
+
+    @objc private func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+        switch self.videoState {
+        case .playing:
+            pause()
+        case .end, .pause:
+            break
+        }
+    }
     
-    func play() {
+    private func play() { // play state는 여기서만 set 해주자
+        self.videoState = .playing
         self.player.play()
     }
+    
+    private func pause() { // pause state는 여기서만 set 해주자
+        self.videoState = .pause
+        self.player.pause()
+    }
+    
+    private func end() { // end state는 여기서만 set 해주자
+        self.videoState = .end
+    }
+    
+    private func refreshPlayingStateUI() {
+        // TODO: 개발
+    }
+    
+    private func refreshPauseStateUI() {
+        // TODO: 개발
+    }
+    
+    private func refreshEndStateUI() {
+        // TODO: 개발
+    }
+    
+    // MARK: internal function
     
 }
 
