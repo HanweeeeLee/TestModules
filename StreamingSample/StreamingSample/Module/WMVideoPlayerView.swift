@@ -79,7 +79,6 @@ class WMVideoPlayerView: UIView {
         didSet {
             guard self.elapsedTimeSecondsFloat != oldValue else { return }
             let elapsedSecondsInt = Int(self.elapsedTimeSecondsFloat)
-            print("test: \(elapsedTimeSecondsFloat)")
             let elapsedTimeText = String(format: "%02d:%02d", elapsedSecondsInt.miniuteDigitInt, elapsedSecondsInt.secondsDigitInt)
             print("elapsedTimeText: \(elapsedTimeText)")
             //          self.elapsedTimeLabel.text = elapsedTimeText
@@ -114,16 +113,6 @@ class WMVideoPlayerView: UIView {
         }
     }
     
-    private var isHiddenVideoContainerView: Bool = false {
-        didSet {
-            if self.isHiddenVideoContainerView {
-                self.refreshHideControllerContainerView()
-            } else {
-                self.refreshShowControllerContainerView()
-            }
-        }
-    }
-    
     private var isMute: Bool = true {
         didSet {
             if self.isMute {
@@ -150,15 +139,20 @@ class WMVideoPlayerView: UIView {
         }
     }
     
-    var skipTime: CGFloat = 1 // 앞으로가기 뒤로가기 시간
+    var skipTime: CGFloat = 1 // 앞으로가기 뒤로가기 시간(초)
     
     // MARK: lifeCycle
     
-    init(url: URL) {
+    init(url: URL, showController: Bool = false) {
         self.url = url
         super.init(frame: .zero)
         setupUI()
         setup()
+        if showController {
+            self.innerControllerContainerView.isHidden = false
+        } else {
+            self.innerControllerContainerView.isHidden = true
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -237,21 +231,6 @@ class WMVideoPlayerView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(endVideoNotiRecieve), name: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem)
     }
     
-    @objc private func changeSliderValue() {
-        self.elapsedTimeSecondsFloat = Float64(self.slider.value) * self.totalTimeSecondsFloat
-        self.player.seek(to: CMTimeMakeWithSeconds(self.elapsedTimeSecondsFloat, preferredTimescale: Int32(NSEC_PER_SEC)))
-    }
-    
-    @objc private func controllerContainerViewTap() {
-        if self.videoState != .end {
-            self.isHiddenVideoContainerView = !self.isHiddenVideoContainerView
-        }
-    }
-    
-    @objc private func innerControllerContainerViewTap() {
-        
-    }
-    
     private func addPeriodicTimeObserver() {
         let interval = CMTimeMakeWithSeconds(1, preferredTimescale: Int32(NSEC_PER_SEC))
         self.player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] elapsedTime in
@@ -264,6 +243,93 @@ class WMVideoPlayerView: UIView {
             self?.elapsedTimeSecondsFloat = elapsedTimeSecondsFloat
             self?.totalTimeSecondsFloat = totalTimeSecondsFloat
         }
+    }
+    
+    private func playFromStart() {
+        self.player.seek(to: .zero)
+        play()
+    }
+    
+    private func end() { // end state는 여기서만 set 해주자
+        self.videoState = .end
+        self.innerControllerContainerView.isHidden = false
+        self.innerControllerContainerView.alpha = 1
+    }
+    
+    private func refreshPlayingStateUI() {
+        DispatchQueue.main.async { [weak self] in
+            self?.centerBtn.setTitle("포즈", for: .normal)
+        }
+    }
+    
+    private func refreshPauseStateUI() {
+        DispatchQueue.main.async { [weak self] in
+            self?.centerBtn.setTitle("플레이", for: .normal)
+        }
+    }
+    
+    private func refreshEndStateUI() {
+        DispatchQueue.main.async { [weak self] in
+            self?.centerBtn.setTitle("다시 ㄱ", for: .normal)
+        }
+    }
+    
+    @objc private func endVideoNotiRecieve() {
+        end()
+    }
+    
+    private func refreshHideControllerContainerView(completion: @escaping () -> Void) {
+        DispatchQueue.main.async { [weak self] in
+            self?.innerControllerContainerView.fadeOut(completeHandler: completion)
+        }
+    }
+    
+    private func refreshShowControllerContainerView(completion: @escaping () -> Void) {
+        DispatchQueue.main.async { [weak self] in
+            self?.innerControllerContainerView.fadeIn(completeHandler: completion)
+        }
+    }
+    
+    // MARK: internal function
+    
+    func play() { // play state는 여기서만 set 해주자
+        self.videoState = .playing
+        self.player.play()
+    }
+    
+    func pause() { // pause state는 여기서만 set 해주자
+        self.videoState = .pause
+        self.player.pause()
+    }
+    
+    // MARK: Action
+    
+    @objc private func changeSliderValue() {
+        self.elapsedTimeSecondsFloat = Float64(self.slider.value) * self.totalTimeSecondsFloat
+        self.player.seek(to: CMTimeMakeWithSeconds(self.elapsedTimeSecondsFloat, preferredTimescale: Int32(NSEC_PER_SEC)))
+    }
+    
+    @objc private func controllerContainerViewTap() {
+        print("?")
+        if self.videoState != .end {
+            
+            if self.innerControllerContainerView.isHidden {
+                DispatchQueue.main.async { [weak self] in
+                    self?.innerControllerContainerView.isHidden = false
+                    self?.innerControllerContainerView.fadeIn(duration: 0.1, completeHandler: nil)
+                }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.innerControllerContainerView.fadeOut(duration: 0.1, completeHandler: { [weak self] in
+                        self?.innerControllerContainerView.isHidden = true
+                    })
+                }
+            }
+        }
+    }
+    
+    @objc private func innerControllerContainerViewTap() {
+        
     }
     
     @objc private func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
@@ -290,34 +356,6 @@ class WMVideoPlayerView: UIView {
             pause()
         case .end, .pause:
             break
-        }
-    }
-    
-    private func playFromStart() {
-        self.player.seek(to: .zero)
-        play()
-    }
-    
-    private func end() { // end state는 여기서만 set 해주자
-        self.videoState = .end
-        self.isHiddenVideoContainerView = false
-    }
-    
-    private func refreshPlayingStateUI() {
-        DispatchQueue.main.async { [weak self] in
-            self?.centerBtn.setTitle("포즈", for: .normal)
-        }
-    }
-    
-    private func refreshPauseStateUI() {
-        DispatchQueue.main.async { [weak self] in
-            self?.centerBtn.setTitle("플레이", for: .normal)
-        }
-    }
-    
-    private func refreshEndStateUI() {
-        DispatchQueue.main.async { [weak self] in
-            self?.centerBtn.setTitle("다시 ㄱ", for: .normal)
         }
     }
     
@@ -353,38 +391,6 @@ class WMVideoPlayerView: UIView {
         self.elapsedTimeSecondsFloat = newValue
         changeSliderValue()
     }
-    
-    @objc private func endVideoNotiRecieve() {
-        end()
-    }
-    
-    private func refreshHideControllerContainerView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.innerControllerContainerView.fadeOut(completeHandler: { [weak self] in
-                self?.innerControllerContainerView.isHidden = true
-            })
-        }
-    }
-    
-    private func refreshShowControllerContainerView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.innerControllerContainerView.isHidden = false
-            self?.innerControllerContainerView.fadeIn(completeHandler: nil)
-        }
-    }
-    
-    // MARK: internal function
-    
-    func play() { // play state는 여기서만 set 해주자
-        self.videoState = .playing
-        self.player.play()
-    }
-    
-    func pause() { // pause state는 여기서만 set 해주자
-        self.videoState = .pause
-        self.player.pause()
-    }
-    
 }
 
 extension WMVideoPlayerView: UIGestureRecognizerDelegate {
@@ -426,5 +432,6 @@ extension UIView {
     }
 }
 
-//TODO: 1. 앞, 뒤로가기 2. 다운로드 체크? 3. 외부에서 포즈 또는 플레이처리 4. 무한재생 옵션 5. 타이머두고 컨트롤러 하이드처리
-// -> 1-3-5-2-4 순?
+//TODO: 1. 앞, 뒤로가기 2. 다운로드 체크? 3. 외부에서 포즈 또는 플레이처리 4. 무한재생 옵션 5. 타이머두고 컨트롤러 하이드처리 6. 애니메이션 있는/없는 컨트롤러 히든 분기
+// -> 5-2-4 순?
+// 완료: 1, 3, 6
