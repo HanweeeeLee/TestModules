@@ -10,13 +10,15 @@ import Security
 import Foundation
 //import LocalAuthentication
 
+//https://developer.apple.com/documentation/security/ksecattrtokenidsecureenclave SecureEnclave는 타원곡선 알고리즘 개인키만 저장이 가능한듯
+
 class ViewController: UIViewController {
     
     let module: SecureEnclaveModule = SecureEnclaveModule()
     
     var key: SecKey?
     
-    var keyName: String = "test"
+    var keyName: String = "test1"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +111,7 @@ class ViewController: UIViewController {
                                                       decAlgorithm,
                                                       cipherTextData! as CFData,
                                                       &error) as Data?
-        
+
         print("origin:\(String(data: decTextData!, encoding: .utf8))")
     }
     
@@ -125,8 +127,10 @@ class ViewController: UIViewController {
             return true
         }
         do {
+//            key = try KeychainHelper.makeAndStoreKey(name: keyName,
+//                                                     requiresBiometry: true)
             key = try KeychainHelper.makeAndStoreKey(name: keyName,
-                                                     requiresBiometry: true)
+                                                     requiresBiometry: false)
             return true
         } catch let error {
             UIAlertController.showSimple(title: "Can't create key",
