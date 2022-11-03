@@ -28,8 +28,17 @@ class WMVideoPlayerView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private let controllerContainerView = UIView().then {
+    private lazy var controllerContainerView = UIView().then {
         $0.backgroundColor = .clear
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.controllerContainerViewTap))
+        $0.addGestureRecognizer(tap)
+    }
+    
+    private lazy var innerControllerContainerView = UIView().then {
+        $0.backgroundColor = self.controllerDimmColor
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.innerControllerContainerViewTap))
+        tap.delegate = self
+        $0.addGestureRecognizer(tap)
     }
     
     private lazy var slider = UISlider().then {
@@ -82,11 +91,27 @@ class WMVideoPlayerView: UIView {
         }
     }
     
+    private var isHiddenVideoContainerView: Bool = false {
+        didSet {
+            if self.isHiddenVideoContainerView {
+                self.refreshHideControllerContainerView()
+            } else {
+                self.refreshShowControllerContainerView()
+            }
+        }
+    }
+    
     // MARK: internal property
     
     var videoContainerViewColor: UIColor = .black {
         didSet {
             self.videoContainerView.backgroundColor = self.videoContainerViewColor
+        }
+    }
+    
+    var controllerDimmColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) {
+        didSet {
+            self.controllerContainerView.backgroundColor = self.controllerDimmColor
         }
     }
     
@@ -125,9 +150,14 @@ class WMVideoPlayerView: UIView {
             $0.edges.equalTo(self)
         }
         
-        self.controllerContainerView.addSubview(self.slider)
+        self.controllerContainerView.addSubview(self.innerControllerContainerView)
+        self.innerControllerContainerView.snp.makeConstraints {
+            $0.edges.equalTo(self.controllerContainerView)
+        }
+        
+        self.innerControllerContainerView.addSubview(self.slider)
         self.slider.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalTo(self.controllerContainerView)
+            $0.leading.trailing.bottom.equalTo(self.innerControllerContainerView)
             $0.height.equalTo(20)
         }
     }
@@ -148,6 +178,16 @@ class WMVideoPlayerView: UIView {
     @objc private func changeSliderValue() {
         self.elapsedTimeSecondsFloat = Float64(self.slider.value) * self.totalTimeSecondsFloat
         self.player.seek(to: CMTimeMakeWithSeconds(self.elapsedTimeSecondsFloat, preferredTimescale: Int32(NSEC_PER_SEC)))
+    }
+    
+    @objc private func controllerContainerViewTap() {
+        if self.videoState != .end {
+            self.isHiddenVideoContainerView = !self.isHiddenVideoContainerView
+        }
+    }
+    
+    @objc private func innerControllerContainerViewTap() {
+        
     }
     
     private func addPeriodicTimeObserver() {
@@ -203,6 +243,8 @@ class WMVideoPlayerView: UIView {
     
     private func end() { // end state는 여기서만 set 해주자
         self.videoState = .end
+        self.player.pause()
+        self.isHiddenVideoContainerView = false
     }
     
     private func refreshPlayingStateUI() {
@@ -217,8 +259,25 @@ class WMVideoPlayerView: UIView {
         // TODO: 개발
     }
     
+    private func refreshHideControllerContainerView() {
+        self.innerControllerContainerView.fadeOut(completeHandler: { [weak self] in
+            self?.innerControllerContainerView.isHidden = true
+        })
+    }
+    
+    private func refreshShowControllerContainerView() {
+        self.innerControllerContainerView.isHidden = false
+        self.innerControllerContainerView.fadeIn(completeHandler: nil)
+    }
+    
     // MARK: internal function
     
+}
+
+extension WMVideoPlayerView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
 
 extension Int {
@@ -229,3 +288,28 @@ extension Int {
     self / 60
   }
 }
+
+extension UIView {
+    func fadeOut(duration: TimeInterval = 0.2, completeHandler: (() -> Void)?) {
+        self.alpha = 1.0
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            self?.alpha = 0.0
+        }, completion: { (finished: Bool) -> Void in
+            if finished {
+                completeHandler?()
+            }
+        })
+    }
+
+    func fadeIn(duration: TimeInterval = 0.2, completeHandler: (() -> Void)?) {
+        self.alpha = 0.0
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+            self?.alpha = 1.0
+        }, completion: { (finished: Bool) -> Void in
+            if finished {
+                completeHandler?()
+            }
+        })
+    }
+}
+
