@@ -52,10 +52,27 @@ class WMVideoPlayerView: UIView {
         $0.addTarget(self, action: #selector(centerBtnClicked), for: .touchUpInside)
     }
     
+    private lazy var muteBtn = UIButton().then {
+        $0.setTitle("음소거On", for: .normal)
+        $0.addTarget(self, action: #selector(muteBtnClicked), for: .touchUpInside)
+    }
+    
+    private lazy var forwardBtn = UIButton().then {
+        $0.setTitle(">", for: .normal)
+        $0.addTarget(self, action: #selector(forwardBtnClicked), for: .touchUpInside)
+    }
+    
+    private lazy var backwardBtn = UIButton().then {
+        $0.setTitle("<", for: .normal)
+        $0.addTarget(self, action: #selector(backwardBtnClicked), for: .touchUpInside)
+    }
+    
     // MARK: private property
     
     private let url: URL
-    private let player = AVPlayer()
+    private let player = AVPlayer().then {
+        $0.isMuted = true
+    }
     private var playerLayer: AVPlayerLayer?
     
     private var elapsedTimeSecondsFloat: Float64 = 0 {
@@ -106,6 +123,18 @@ class WMVideoPlayerView: UIView {
         }
     }
     
+    private var isMute: Bool = true {
+        didSet {
+            if self.isMute {
+                self.muteBtn.setTitle("음소거 On", for: .normal)
+                self.player.isMuted = true
+            } else {
+                self.muteBtn.setTitle("음소거 Off", for: .normal)
+                self.player.isMuted = false
+            }
+        }
+    }
+    
     // MARK: internal property
     
     var videoContainerViewColor: UIColor = .black {
@@ -119,6 +148,8 @@ class WMVideoPlayerView: UIView {
             self.controllerContainerView.backgroundColor = self.controllerDimmColor
         }
     }
+    
+    var skipTime: CGFloat = 1 // 앞으로가기 뒤로가기 시간
     
     // MARK: lifeCycle
     
@@ -171,6 +202,24 @@ class WMVideoPlayerView: UIView {
             $0.center.equalTo(self.innerControllerContainerView)
             $0.width.height.equalTo(100)
         }
+        
+        self.innerControllerContainerView.addSubview(self.forwardBtn)
+        self.forwardBtn.snp.makeConstraints {
+            $0.leading.equalTo(self.centerBtn.snp.trailing)
+            $0.centerY.equalTo(self.centerBtn)
+        }
+        
+        self.innerControllerContainerView.addSubview(self.backwardBtn)
+        self.backwardBtn.snp.makeConstraints {
+            $0.trailing.equalTo(self.centerBtn.snp.leading)
+            $0.centerY.equalTo(self.centerBtn)
+        }
+        
+        self.innerControllerContainerView.addSubview(self.muteBtn)
+        self.muteBtn.snp.makeConstraints {
+            $0.leading.top.equalTo(self.innerControllerContainerView)
+            $0.width.height.equalTo(100)
+        }
     }
     
     private func setup() {
@@ -185,10 +234,6 @@ class WMVideoPlayerView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(endVideoNotiRecieve), name: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem)
-
-        func playerDidFinishPlaying(note: NSNotification) {
-            print("Video Finished")
-        }
     }
     
     @objc private func changeSliderValue() {
@@ -264,7 +309,6 @@ class WMVideoPlayerView: UIView {
     
     private func end() { // end state는 여기서만 set 해주자
         self.videoState = .end
-        self.player.pause()
         self.isHiddenVideoContainerView = false
     }
     
@@ -297,19 +341,35 @@ class WMVideoPlayerView: UIView {
         }
     }
     
+    @objc private func muteBtnClicked() {
+        self.isMute = !self.isMute
+    }
+    
+    @objc private func forwardBtnClicked() {
+        // TODO: 구현
+    }
+    
+    @objc private func backwardBtnClicked() {
+        // TODO: 구현
+    }
+    
     @objc private func endVideoNotiRecieve() {
-        self.videoState = .end
+        end()
     }
     
     private func refreshHideControllerContainerView() {
-        self.innerControllerContainerView.fadeOut(completeHandler: { [weak self] in
-            self?.innerControllerContainerView.isHidden = true
-        })
+        DispatchQueue.main.async { [weak self] in
+            self?.innerControllerContainerView.fadeOut(completeHandler: { [weak self] in
+                self?.innerControllerContainerView.isHidden = true
+            })
+        }
     }
     
     private func refreshShowControllerContainerView() {
-        self.innerControllerContainerView.isHidden = false
-        self.innerControllerContainerView.fadeIn(completeHandler: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.innerControllerContainerView.isHidden = false
+            self?.innerControllerContainerView.fadeIn(completeHandler: nil)
+        }
     }
     
     // MARK: internal function
