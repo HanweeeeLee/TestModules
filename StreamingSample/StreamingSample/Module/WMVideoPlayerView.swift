@@ -74,6 +74,7 @@ class WMVideoPlayerView: UIView {
         $0.isMuted = true
     }
     private var playerLayer: AVPlayerLayer?
+    private var videoControllerContainerTimer: Timer?
     
     private var elapsedTimeSecondsFloat: Float64 = 0 {
         didSet {
@@ -149,9 +150,9 @@ class WMVideoPlayerView: UIView {
         setupUI()
         setup()
         if showController {
-            self.innerControllerContainerView.isHidden = false
+            self.setInnerControllerContainerViewIsHidden(false)
         } else {
-            self.innerControllerContainerView.isHidden = true
+            self.setInnerControllerContainerViewIsHidden(true)
         }
     }
     
@@ -247,12 +248,13 @@ class WMVideoPlayerView: UIView {
     
     private func playFromStart() {
         self.player.seek(to: .zero)
+        setInnerControllerContainerViewIsHidden(false)
         play()
     }
     
     private func end() { // end state는 여기서만 set 해주자
         self.videoState = .end
-        self.innerControllerContainerView.isHidden = false
+        self.setInnerControllerContainerViewIsHidden(false)
         self.innerControllerContainerView.alpha = 1
     }
     
@@ -290,6 +292,35 @@ class WMVideoPlayerView: UIView {
         }
     }
     
+    private func setInnerControllerContainerViewIsHidden(_ isHidden: Bool) {
+        if isHidden {
+            self.videoControllerContainerTimer?.invalidate()
+            self.videoControllerContainerTimer = nil
+        } else {
+            videoControllerContainerTimerStart()
+        }
+        self.innerControllerContainerView.isHidden = isHidden
+    }
+    
+    private func videoControllerContainerTimerStart() {
+        self.videoControllerContainerTimer?.invalidate()
+        self.videoControllerContainerTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                                   target: self,
+                                                                   selector: #selector(timerHideController),
+                                                                   userInfo: nil,
+                                                                   repeats: false)
+    }
+    
+    @objc private func timerHideController() {
+        if self.videoState != .end {
+            DispatchQueue.main.async { [weak self] in
+                self?.innerControllerContainerView.fadeOut(duration: 0.1, completeHandler: { [weak self] in
+                    self?.setInnerControllerContainerViewIsHidden(true)
+                })
+            }
+        }
+    }
+    
     // MARK: internal function
     
     func play() { // play state는 여기서만 set 해주자
@@ -310,18 +341,17 @@ class WMVideoPlayerView: UIView {
     }
     
     @objc private func controllerContainerViewTap() {
-        print("?")
         if self.videoState != .end {
             
             if self.innerControllerContainerView.isHidden {
                 DispatchQueue.main.async { [weak self] in
-                    self?.innerControllerContainerView.isHidden = false
+                    self?.setInnerControllerContainerViewIsHidden(false)
                     self?.innerControllerContainerView.fadeIn(duration: 0.1, completeHandler: nil)
                 }
             } else {
                 DispatchQueue.main.async { [weak self] in
                     self?.innerControllerContainerView.fadeOut(duration: 0.1, completeHandler: { [weak self] in
-                        self?.innerControllerContainerView.isHidden = true
+                        self?.setInnerControllerContainerViewIsHidden(true)
                     })
                 }
             }
@@ -432,6 +462,4 @@ extension UIView {
     }
 }
 
-//TODO: 1. 앞, 뒤로가기 2. 다운로드 체크? 3. 외부에서 포즈 또는 플레이처리 4. 무한재생 옵션 5. 타이머두고 컨트롤러 하이드처리 6. 애니메이션 있는/없는 컨트롤러 히든 분기
-// -> 5-2-4 순?
-// 완료: 1, 3, 6
+//TODO: 1. 다운로드 체크? 2. 무한재생 옵션
