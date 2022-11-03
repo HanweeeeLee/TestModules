@@ -79,6 +79,7 @@ class WMVideoPlayerView: UIView {
         didSet {
             guard self.elapsedTimeSecondsFloat != oldValue else { return }
             let elapsedSecondsInt = Int(self.elapsedTimeSecondsFloat)
+            print("test: \(elapsedTimeSecondsFloat)")
             let elapsedTimeText = String(format: "%02d:%02d", elapsedSecondsInt.miniuteDigitInt, elapsedSecondsInt.secondsDigitInt)
             print("elapsedTimeText: \(elapsedTimeText)")
             //          self.elapsedTimeLabel.text = elapsedTimeText
@@ -297,16 +298,6 @@ class WMVideoPlayerView: UIView {
         play()
     }
     
-    private func play() { // play state는 여기서만 set 해주자
-        self.videoState = .playing
-        self.player.play()
-    }
-    
-    private func pause() { // pause state는 여기서만 set 해주자
-        self.videoState = .pause
-        self.player.pause()
-    }
-    
     private func end() { // end state는 여기서만 set 해주자
         self.videoState = .end
         self.isHiddenVideoContainerView = false
@@ -346,11 +337,21 @@ class WMVideoPlayerView: UIView {
     }
     
     @objc private func forwardBtnClicked() {
-        // TODO: 구현
+        var newValue = elapsedTimeSecondsFloat + self.skipTime
+        if newValue > totalTimeSecondsFloat {
+            newValue = totalTimeSecondsFloat
+        }
+        self.elapsedTimeSecondsFloat = newValue
+        changeSliderValue()
     }
     
     @objc private func backwardBtnClicked() {
-        // TODO: 구현
+        var newValue = elapsedTimeSecondsFloat - self.skipTime
+        if 0 > newValue {
+            newValue = 0
+        }
+        self.elapsedTimeSecondsFloat = newValue
+        changeSliderValue()
     }
     
     @objc private func endVideoNotiRecieve() {
@@ -373,6 +374,16 @@ class WMVideoPlayerView: UIView {
     }
     
     // MARK: internal function
+    
+    func play() { // play state는 여기서만 set 해주자
+        self.videoState = .playing
+        self.player.play()
+    }
+    
+    func pause() { // pause state는 여기서만 set 해주자
+        self.videoState = .pause
+        self.player.pause()
+    }
     
 }
 
@@ -415,3 +426,5 @@ extension UIView {
     }
 }
 
+//TODO: 1. 앞, 뒤로가기 2. 다운로드 체크? 3. 외부에서 포즈 또는 플레이처리 4. 무한재생 옵션 5. 타이머두고 컨트롤러 하이드처리
+// -> 1-3-5-2-4 순?
