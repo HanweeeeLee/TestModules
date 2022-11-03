@@ -47,6 +47,11 @@ class WMVideoPlayerView: UIView {
         $0.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    private lazy var centerBtn = UIButton().then {
+        $0.setTitle("플레이", for: .normal)
+        $0.addTarget(self, action: #selector(centerBtnClicked), for: .touchUpInside)
+    }
+    
     // MARK: private property
     
     private let url: URL
@@ -160,6 +165,12 @@ class WMVideoPlayerView: UIView {
             $0.leading.trailing.bottom.equalTo(self.innerControllerContainerView)
             $0.height.equalTo(20)
         }
+        
+        self.innerControllerContainerView.addSubview(self.centerBtn)
+        self.centerBtn.snp.makeConstraints {
+            $0.center.equalTo(self.innerControllerContainerView)
+            $0.width.height.equalTo(100)
+        }
     }
     
     private func setup() {
@@ -173,6 +184,11 @@ class WMVideoPlayerView: UIView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationWillResignActive(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(endVideoNotiRecieve), name: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem)
+
+        func playerDidFinishPlaying(note: NSNotification) {
+            print("Video Finished")
+        }
     }
     
     @objc private func changeSliderValue() {
@@ -231,6 +247,11 @@ class WMVideoPlayerView: UIView {
         }
     }
     
+    private func playFromStart() {
+        self.player.seek(to: .zero)
+        play()
+    }
+    
     private func play() { // play state는 여기서만 set 해주자
         self.videoState = .playing
         self.player.play()
@@ -248,15 +269,36 @@ class WMVideoPlayerView: UIView {
     }
     
     private func refreshPlayingStateUI() {
-        // TODO: 개발
+        DispatchQueue.main.async { [weak self] in
+            self?.centerBtn.setTitle("포즈", for: .normal)
+        }
     }
     
     private func refreshPauseStateUI() {
-        // TODO: 개발
+        DispatchQueue.main.async { [weak self] in
+            self?.centerBtn.setTitle("플레이", for: .normal)
+        }
     }
     
     private func refreshEndStateUI() {
-        // TODO: 개발
+        DispatchQueue.main.async { [weak self] in
+            self?.centerBtn.setTitle("다시 ㄱ", for: .normal)
+        }
+    }
+    
+    @objc private func centerBtnClicked() {
+        switch self.videoState {
+        case .end:
+            playFromStart()
+        case .playing:
+            pause()
+        case .pause:
+            play()
+        }
+    }
+    
+    @objc private func endVideoNotiRecieve() {
+        self.videoState = .end
     }
     
     private func refreshHideControllerContainerView() {
