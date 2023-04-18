@@ -1,0 +1,619 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F3CB731D29EE232500C68DC4 /* MetamaskSDKSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB731C29EE232500C68DC4 /* MetamaskSDKSampleApp.swift */; };
+		F3CB731F29EE232500C68DC4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB731E29EE232500C68DC4 /* ContentView.swift */; };
+		F3CB732129EE232600C68DC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3CB732029EE232600C68DC4 /* Assets.xcassets */; };
+		F3CB732429EE232600C68DC4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3CB732329EE232600C68DC4 /* Preview Assets.xcassets */; };
+		F3CB732E29EE232600C68DC4 /* MetamaskSDKSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB732D29EE232600C68DC4 /* MetamaskSDKSampleTests.swift */; };
+		F3CB733829EE232600C68DC4 /* MetamaskSDKSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB733729EE232600C68DC4 /* MetamaskSDKSampleUITests.swift */; };
+		F3CB733A29EE232600C68DC4 /* MetamaskSDKSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CB733929EE232600C68DC4 /* MetamaskSDKSampleUITestsLaunchTests.swift */; };
+		F3CB734829EE235800C68DC4 /* metamask-ios-sdk in Frameworks */ = {isa = PBXBuildFile; productRef = F3CB734729EE235800C68DC4 /* metamask-ios-sdk */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3CB732A29EE232600C68DC4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3CB731129EE232500C68DC4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3CB731829EE232500C68DC4;
+			remoteInfo = MetamaskSDKSample;
+		};
+		F3CB733429EE232600C68DC4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3CB731129EE232500C68DC4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3CB731829EE232500C68DC4;
+			remoteInfo = MetamaskSDKSample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F3CB731929EE232500C68DC4 /* MetamaskSDKSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetamaskSDKSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3CB731C29EE232500C68DC4 /* MetamaskSDKSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetamaskSDKSampleApp.swift; sourceTree = "<group>"; };
+		F3CB731E29EE232500C68DC4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F3CB732029EE232600C68DC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3CB732329EE232600C68DC4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F3CB732929EE232600C68DC4 /* MetamaskSDKSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetamaskSDKSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3CB732D29EE232600C68DC4 /* MetamaskSDKSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetamaskSDKSampleTests.swift; sourceTree = "<group>"; };
+		F3CB733329EE232600C68DC4 /* MetamaskSDKSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetamaskSDKSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3CB733729EE232600C68DC4 /* MetamaskSDKSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetamaskSDKSampleUITests.swift; sourceTree = "<group>"; };
+		F3CB733929EE232600C68DC4 /* MetamaskSDKSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetamaskSDKSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3CB731629EE232500C68DC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3CB734829EE235800C68DC4 /* metamask-ios-sdk in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3CB732629EE232600C68DC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3CB733029EE232600C68DC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F3CB731029EE232500C68DC4 = {
+			isa = PBXGroup;
+			children = (
+				F3CB731B29EE232500C68DC4 /* MetamaskSDKSample */,
+				F3CB732C29EE232600C68DC4 /* MetamaskSDKSampleTests */,
+				F3CB733629EE232600C68DC4 /* MetamaskSDKSampleUITests */,
+				F3CB731A29EE232500C68DC4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F3CB731A29EE232500C68DC4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3CB731929EE232500C68DC4 /* MetamaskSDKSample.app */,
+				F3CB732929EE232600C68DC4 /* MetamaskSDKSampleTests.xctest */,
+				F3CB733329EE232600C68DC4 /* MetamaskSDKSampleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3CB731B29EE232500C68DC4 /* MetamaskSDKSample */ = {
+			isa = PBXGroup;
+			children = (
+				F3CB731C29EE232500C68DC4 /* MetamaskSDKSampleApp.swift */,
+				F3CB731E29EE232500C68DC4 /* ContentView.swift */,
+				F3CB732029EE232600C68DC4 /* Assets.xcassets */,
+				F3CB732229EE232600C68DC4 /* Preview Content */,
+			);
+			path = MetamaskSDKSample;
+			sourceTree = "<group>";
+		};
+		F3CB732229EE232600C68DC4 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F3CB732329EE232600C68DC4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F3CB732C29EE232600C68DC4 /* MetamaskSDKSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				F3CB732D29EE232600C68DC4 /* MetamaskSDKSampleTests.swift */,
+			);
+			path = MetamaskSDKSampleTests;
+			sourceTree = "<group>";
+		};
+		F3CB733629EE232600C68DC4 /* MetamaskSDKSampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F3CB733729EE232600C68DC4 /* MetamaskSDKSampleUITests.swift */,
+				F3CB733929EE232600C68DC4 /* MetamaskSDKSampleUITestsLaunchTests.swift */,
+			);
+			path = MetamaskSDKSampleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3CB731829EE232500C68DC4 /* MetamaskSDKSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3CB733D29EE232600C68DC4 /* Build configuration list for PBXNativeTarget "MetamaskSDKSample" */;
+			buildPhases = (
+				F3CB731529EE232500C68DC4 /* Sources */,
+				F3CB731629EE232500C68DC4 /* Frameworks */,
+				F3CB731729EE232500C68DC4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetamaskSDKSample;
+			packageProductDependencies = (
+				F3CB734729EE235800C68DC4 /* metamask-ios-sdk */,
+			);
+			productName = MetamaskSDKSample;
+			productReference = F3CB731929EE232500C68DC4 /* MetamaskSDKSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3CB732829EE232600C68DC4 /* MetamaskSDKSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3CB734029EE232600C68DC4 /* Build configuration list for PBXNativeTarget "MetamaskSDKSampleTests" */;
+			buildPhases = (
+				F3CB732529EE232600C68DC4 /* Sources */,
+				F3CB732629EE232600C68DC4 /* Frameworks */,
+				F3CB732729EE232600C68DC4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3CB732B29EE232600C68DC4 /* PBXTargetDependency */,
+			);
+			name = MetamaskSDKSampleTests;
+			productName = MetamaskSDKSampleTests;
+			productReference = F3CB732929EE232600C68DC4 /* MetamaskSDKSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F3CB733229EE232600C68DC4 /* MetamaskSDKSampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3CB734329EE232600C68DC4 /* Build configuration list for PBXNativeTarget "MetamaskSDKSampleUITests" */;
+			buildPhases = (
+				F3CB732F29EE232600C68DC4 /* Sources */,
+				F3CB733029EE232600C68DC4 /* Frameworks */,
+				F3CB733129EE232600C68DC4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3CB733529EE232600C68DC4 /* PBXTargetDependency */,
+			);
+			name = MetamaskSDKSampleUITests;
+			productName = MetamaskSDKSampleUITests;
+			productReference = F3CB733329EE232600C68DC4 /* MetamaskSDKSampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3CB731129EE232500C68DC4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					F3CB731829EE232500C68DC4 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					F3CB732829EE232600C68DC4 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = F3CB731829EE232500C68DC4;
+					};
+					F3CB733229EE232600C68DC4 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = F3CB731829EE232500C68DC4;
+					};
+				};
+			};
+			buildConfigurationList = F3CB731429EE232500C68DC4 /* Build configuration list for PBXProject "MetamaskSDKSample" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3CB731029EE232500C68DC4;
+			packageReferences = (
+				F3CB734629EE235800C68DC4 /* XCRemoteSwiftPackageReference "metamask-ios-sdk" */,
+			);
+			productRefGroup = F3CB731A29EE232500C68DC4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3CB731829EE232500C68DC4 /* MetamaskSDKSample */,
+				F3CB732829EE232600C68DC4 /* MetamaskSDKSampleTests */,
+				F3CB733229EE232600C68DC4 /* MetamaskSDKSampleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3CB731729EE232500C68DC4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3CB732429EE232600C68DC4 /* Preview Assets.xcassets in Resources */,
+				F3CB732129EE232600C68DC4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3CB732729EE232600C68DC4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3CB733129EE232600C68DC4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3CB731529EE232500C68DC4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3CB731F29EE232500C68DC4 /* ContentView.swift in Sources */,
+				F3CB731D29EE232500C68DC4 /* MetamaskSDKSampleApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3CB732529EE232600C68DC4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3CB732E29EE232600C68DC4 /* MetamaskSDKSampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3CB732F29EE232600C68DC4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3CB733A29EE232600C68DC4 /* MetamaskSDKSampleUITestsLaunchTests.swift in Sources */,
+				F3CB733829EE232600C68DC4 /* MetamaskSDKSampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F3CB732B29EE232600C68DC4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3CB731829EE232500C68DC4 /* MetamaskSDKSample */;
+			targetProxy = F3CB732A29EE232600C68DC4 /* PBXContainerItemProxy */;
+		};
+		F3CB733529EE232600C68DC4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3CB731829EE232500C68DC4 /* MetamaskSDKSample */;
+			targetProxy = F3CB733429EE232600C68DC4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F3CB733B29EE232600C68DC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F3CB733C29EE232600C68DC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3CB733E29EE232600C68DC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MetamaskSDKSample/Preview Content\"";
+				DEVELOPMENT_TEAM = CKSUB298CZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hanwe.MetamaskSDKSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3CB733F29EE232600C68DC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MetamaskSDKSample/Preview Content\"";
+				DEVELOPMENT_TEAM = CKSUB298CZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hanwe.MetamaskSDKSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3CB734129EE232600C68DC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hanwe.MetamaskSDKSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetamaskSDKSample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MetamaskSDKSample";
+			};
+			name = Debug;
+		};
+		F3CB734229EE232600C68DC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hanwe.MetamaskSDKSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetamaskSDKSample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MetamaskSDKSample";
+			};
+			name = Release;
+		};
+		F3CB734429EE232600C68DC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hanwe.MetamaskSDKSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MetamaskSDKSample;
+			};
+			name = Debug;
+		};
+		F3CB734529EE232600C68DC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hanwe.MetamaskSDKSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MetamaskSDKSample;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3CB731429EE232500C68DC4 /* Build configuration list for PBXProject "MetamaskSDKSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3CB733B29EE232600C68DC4 /* Debug */,
+				F3CB733C29EE232600C68DC4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3CB733D29EE232600C68DC4 /* Build configuration list for PBXNativeTarget "MetamaskSDKSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3CB733E29EE232600C68DC4 /* Debug */,
+				F3CB733F29EE232600C68DC4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3CB734029EE232600C68DC4 /* Build configuration list for PBXNativeTarget "MetamaskSDKSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3CB734129EE232600C68DC4 /* Debug */,
+				F3CB734229EE232600C68DC4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3CB734329EE232600C68DC4 /* Build configuration list for PBXNativeTarget "MetamaskSDKSampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3CB734429EE232600C68DC4 /* Debug */,
+				F3CB734529EE232600C68DC4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F3CB734629EE235800C68DC4 /* XCRemoteSwiftPackageReference "metamask-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MetaMask/metamask-ios-sdk";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F3CB734729EE235800C68DC4 /* metamask-ios-sdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3CB734629EE235800C68DC4 /* XCRemoteSwiftPackageReference "metamask-ios-sdk" */;
+			productName = "metamask-ios-sdk";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F3CB731129EE232500C68DC4 /* Project object */;
+}
