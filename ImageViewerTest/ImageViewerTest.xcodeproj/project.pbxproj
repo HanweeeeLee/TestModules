@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		F3AEED862D39F4C8002C0390 /* YoutubePlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubePlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3AEEDA42D3E17F9002C0390 /* ImageViewerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageViewerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F3AEED882D39F4C8002C0390 /* YoutubePlayerTest */ = {
+		F3AEEDA62D3E17F9002C0390 /* ImageViewerTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = YoutubePlayerTest;
+			path = ImageViewerTest;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F3AEED832D39F4C8002C0390 /* Frameworks */ = {
+		F3AEEDA12D3E17F9002C0390 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,18 +29,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F3AEED7D2D39F4C8002C0390 = {
+		F3AEED9B2D3E17F9002C0390 = {
 			isa = PBXGroup;
 			children = (
-				F3AEED882D39F4C8002C0390 /* YoutubePlayerTest */,
-				F3AEED872D39F4C8002C0390 /* Products */,
+				F3AEEDA62D3E17F9002C0390 /* ImageViewerTest */,
+				F3AEEDA52D3E17F9002C0390 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F3AEED872D39F4C8002C0390 /* Products */ = {
+		F3AEEDA52D3E17F9002C0390 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F3AEED862D39F4C8002C0390 /* YoutubePlayerTest.app */,
+				F3AEEDA42D3E17F9002C0390 /* ImageViewerTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,64 +48,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F3AEED852D39F4C8002C0390 /* YoutubePlayerTest */ = {
+		F3AEEDA32D3E17F9002C0390 /* ImageViewerTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F3AEED942D39F4CA002C0390 /* Build configuration list for PBXNativeTarget "YoutubePlayerTest" */;
+			buildConfigurationList = F3AEEDB22D3E17FC002C0390 /* Build configuration list for PBXNativeTarget "ImageViewerTest" */;
 			buildPhases = (
-				F3AEED822D39F4C8002C0390 /* Sources */,
-				F3AEED832D39F4C8002C0390 /* Frameworks */,
-				F3AEED842D39F4C8002C0390 /* Resources */,
+				F3AEEDA02D3E17F9002C0390 /* Sources */,
+				F3AEEDA12D3E17F9002C0390 /* Frameworks */,
+				F3AEEDA22D3E17F9002C0390 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F3AEED882D39F4C8002C0390 /* YoutubePlayerTest */,
+				F3AEEDA62D3E17F9002C0390 /* ImageViewerTest */,
 			);
-			name = YoutubePlayerTest;
+			name = ImageViewerTest;
 			packageProductDependencies = (
 			);
-			productName = YoutubePlayerTest;
-			productReference = F3AEED862D39F4C8002C0390 /* YoutubePlayerTest.app */;
+			productName = ImageViewerTest;
+			productReference = F3AEEDA42D3E17F9002C0390 /* ImageViewerTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F3AEED7E2D39F4C8002C0390 /* Project object */ = {
+		F3AEED9C2D3E17F9002C0390 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
-					F3AEED852D39F4C8002C0390 = {
+					F3AEEDA32D3E17F9002C0390 = {
 						CreatedOnToolsVersion = 16.1;
 					};
 				};
 			};
-			buildConfigurationList = F3AEED812D39F4C8002C0390 /* Build configuration list for PBXProject "YoutubePlayerTest" */;
+			buildConfigurationList = F3AEED9F2D3E17F9002C0390 /* Build configuration list for PBXProject "ImageViewerTest" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F3AEED7D2D39F4C8002C0390;
+			mainGroup = F3AEED9B2D3E17F9002C0390;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = F3AEED872D39F4C8002C0390 /* Products */;
+			productRefGroup = F3AEEDA52D3E17F9002C0390 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F3AEED852D39F4C8002C0390 /* YoutubePlayerTest */,
+				F3AEEDA32D3E17F9002C0390 /* ImageViewerTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F3AEED842D39F4C8002C0390 /* Resources */ = {
+		F3AEEDA22D3E17F9002C0390 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +115,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F3AEED822D39F4C8002C0390 /* Sources */ = {
+		F3AEEDA02D3E17F9002C0390 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -125,7 +125,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		F3AEED922D39F4CA002C0390 /* Debug */ = {
+		F3AEEDB02D3E17FC002C0390 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -188,7 +188,7 @@
 			};
 			name = Debug;
 		};
-		F3AEED932D39F4CA002C0390 /* Release */ = {
+		F3AEEDB12D3E17FC002C0390 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,14 +244,14 @@
 			};
 			name = Release;
 		};
-		F3AEED952D39F4CA002C0390 /* Debug */ = {
+		F3AEEDB32D3E17FC002C0390 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"YoutubePlayerTest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ImageViewerTest/Preview Content\"";
 				DEVELOPMENT_TEAM = AR5YLCCV6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -265,7 +265,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wemade.YoutubePlayerTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemade.ImageViewerTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -273,14 +273,14 @@
 			};
 			name = Debug;
 		};
-		F3AEED962D39F4CA002C0390 /* Release */ = {
+		F3AEEDB42D3E17FC002C0390 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"YoutubePlayerTest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ImageViewerTest/Preview Content\"";
 				DEVELOPMENT_TEAM = AR5YLCCV6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -294,7 +294,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wemade.YoutubePlayerTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wemade.ImageViewerTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -305,25 +305,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F3AEED812D39F4C8002C0390 /* Build configuration list for PBXProject "YoutubePlayerTest" */ = {
+		F3AEED9F2D3E17F9002C0390 /* Build configuration list for PBXProject "ImageViewerTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3AEED922D39F4CA002C0390 /* Debug */,
-				F3AEED932D39F4CA002C0390 /* Release */,
+				F3AEEDB02D3E17FC002C0390 /* Debug */,
+				F3AEEDB12D3E17FC002C0390 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F3AEED942D39F4CA002C0390 /* Build configuration list for PBXNativeTarget "YoutubePlayerTest" */ = {
+		F3AEEDB22D3E17FC002C0390 /* Build configuration list for PBXNativeTarget "ImageViewerTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3AEED952D39F4CA002C0390 /* Debug */,
-				F3AEED962D39F4CA002C0390 /* Release */,
+				F3AEEDB32D3E17FC002C0390 /* Debug */,
+				F3AEEDB42D3E17FC002C0390 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F3AEED7E2D39F4C8002C0390 /* Project object */;
+	rootObject = F3AEED9C2D3E17F9002C0390 /* Project object */;
 }
